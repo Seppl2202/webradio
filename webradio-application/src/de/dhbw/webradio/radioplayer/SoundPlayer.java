@@ -138,6 +138,10 @@ public class SoundPlayer implements Runnable {
                 FloatControl gainControl = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
                 line.start();
 
+                WebradioPlayer.getGui().getStreamDetails().changeChannelsText(getAudioFormatChannels());
+                WebradioPlayer.getGui().getStreamDetails().changeFormat(getAudioFormatEncoding());
+                WebradioPlayer.getGui().getStreamDetails().changeSamplerate(getAudioFormatSampleRate());
+
                 System.out.println("audioFormat.getChannels: " + audioFormat.getChannels());
                 System.out.println("audioFormat.getFrameSize: " + audioFormat.getFrameSize());
                 System.out.println("audioFormat.getSampleRate: " + audioFormat.getSampleRate());
@@ -393,7 +397,7 @@ public class SoundPlayer implements Runnable {
     }
 
     public void increaseVolume(int step) {
-            setVolume(getVolume() + step);
+        setVolume(getVolume() + step);
     }
 
 

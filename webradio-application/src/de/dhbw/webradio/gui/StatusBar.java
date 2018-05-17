@@ -3,6 +3,7 @@ package de.dhbw.webradio.gui;
 import de.dhbw.webradio.radioplayer.WebradioPlayer;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 
 public class StatusBar extends JPanel {
@@ -17,8 +18,13 @@ public class StatusBar extends JPanel {
         this.setLayout(new FlowLayout());
         actualStationLabel = new JLabel("Sie hören: aktuell keine Wiedergabe");
         volumeLabel = new JLabel("Lautstärke: ");
+        this.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        this.setPreferredSize(new Dimension(this.getWidth(), 16));
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(actualStationLabel);
         this.add(volumeLabel);
+        actualStationLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        volumeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         this.setVisible(true);
     }
 

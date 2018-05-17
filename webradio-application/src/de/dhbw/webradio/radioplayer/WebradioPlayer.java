@@ -6,13 +6,24 @@ import de.dhbw.webradio.models.Station;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WebradioPlayer {
     private static Gui gui;
     private static SoundPlayer player;
+    private static List<Station> stationList;
+
     public static void main(String[] args) {
-        gui = new Gui();
+        stationList = new ArrayList<>();
+        try {
+            Station s = new Station("FFH", new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3"));
+            stationList.add(s);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         player = new SoundPlayer();
+        gui = new Gui();
 //        SoundPlayer player = new SoundPlayer();
 //        try {
 //            Station station = new Station("FFH", new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3"));
@@ -36,4 +47,8 @@ public class WebradioPlayer {
     public static SoundPlayer getPlayer() {
         return player;
     }
+
+    public static List<Station> getStationList() { return stationList; }
+
+    public static boolean addStation(Station s) { return stationList.add(s); }
 }

@@ -1,12 +1,20 @@
 package de.dhbw.webradio.gui;
 
+import de.dhbw.webradio.models.Station;
+import de.dhbw.webradio.models.StationsTableModel;
+import de.dhbw.webradio.radioplayer.WebradioPlayer;
+
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class Gui extends JFrame {
     private PlayerControlPanel playerControlPanel;
     private JPanel mainPanel;
     private StatusBar statusBar;
+    private StationsTableModel stationsTableModel;
+    private JTable stationsTable;
+    private StreamDetails streamDetails;
     public Gui() {
         initialize();
     }
@@ -20,6 +28,12 @@ public class Gui extends JFrame {
         mainPanel.add(playerControlPanel, BorderLayout.CENTER);
         statusBar = new StatusBar();
         mainPanel.add(statusBar, BorderLayout.SOUTH);
+        stationsTableModel = new StationsTableModel(WebradioPlayer.getStationList());
+        stationsTable = new JTable();
+        stationsTable.setModel(stationsTableModel);
+        mainPanel.add(new JScrollPane(stationsTable), BorderLayout.WEST);
+        streamDetails = new StreamDetails();
+        mainPanel.add(streamDetails, BorderLayout.EAST);
     }
 
     public PlayerControlPanel getPlayerControlPanel() {
@@ -28,5 +42,17 @@ public class Gui extends JFrame {
 
     public StatusBar getStatusBar() {
         return statusBar;
+    }
+
+    public StationsTableModel getStationsTableModel() {
+        return stationsTableModel;
+    }
+
+    public JTable getStationsTable() {
+        return stationsTable;
+    }
+
+    public StreamDetails getStreamDetails() {
+        return streamDetails;
     }
 }
