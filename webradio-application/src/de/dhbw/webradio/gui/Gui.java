@@ -6,6 +6,7 @@ import java.awt.*;
 public class Gui extends JFrame {
     private PlayerControlPanel playerControlPanel;
     private JPanel mainPanel;
+    private StatusBar statusBar;
     public Gui() {
         initialize();
     }
@@ -16,10 +17,16 @@ public class Gui extends JFrame {
         mainPanel = new JPanel(new BorderLayout());
         this.add(mainPanel);
         playerControlPanel = new PlayerControlPanel();
-        mainPanel.add(playerControlPanel, BorderLayout.SOUTH);
+        mainPanel.add(playerControlPanel, BorderLayout.CENTER);
+        statusBar = new StatusBar();
+        mainPanel.add(statusBar, BorderLayout.SOUTH);
     }
 
     public PlayerControlPanel getPlayerControlPanel() {
         return playerControlPanel;
+    }
+
+    public StatusBar getStatusBar() {
+        return statusBar;
     }
 }

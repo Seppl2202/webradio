@@ -12,8 +12,10 @@ public class MuteVolumeListener implements ActionListener {
         SoundPlayer player = WebradioPlayer.getPlayer();
         if (!(player.isMute())) {
             player.setMute(true);
+            WebradioPlayer.getGui().getStatusBar().updateVolume(-1);
         } else {
             player.setMute(false);
+            WebradioPlayer.getGui().getStatusBar().updateVolume(player.getVolume());
         }
         WebradioPlayer.getGui().getPlayerControlPanel().toggleMuteVolumeButton();
     }

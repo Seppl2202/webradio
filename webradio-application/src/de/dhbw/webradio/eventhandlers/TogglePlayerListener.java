@@ -17,6 +17,7 @@ public class TogglePlayerListener implements ActionListener {
         if (player.isPlaying()) {
             player.stop();
             WebradioPlayer.getGui().getPlayerControlPanel().togglePlayButton();
+            WebradioPlayer.getGui().getStatusBar().updateActualStation("aktuell keine Wiedergabe");
         } else {
             if (!(s == null)) {
                 try {
@@ -26,6 +27,8 @@ public class TogglePlayerListener implements ActionListener {
                     player.setUrl(s.getStationURL());
                     player.play();
                     WebradioPlayer.getGui().getPlayerControlPanel().togglePlayButton();
+                    WebradioPlayer.getGui().getStatusBar().updateActualStation(s.getName());
+                    WebradioPlayer.getGui().getStatusBar().updateVolume(player.getVolume());
                 } catch (MalformedURLException mue) {
                     mue.printStackTrace();
                 } catch (Exception ex) {

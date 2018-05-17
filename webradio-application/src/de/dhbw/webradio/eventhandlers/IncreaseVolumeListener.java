@@ -11,5 +11,6 @@ public class IncreaseVolumeListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         SoundPlayer player = WebradioPlayer.getPlayer();
         player.increaseVolume(1);
+        WebradioPlayer.getGui().getStatusBar().updateVolume(player.getVolume());
     }
 }

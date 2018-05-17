@@ -100,7 +100,6 @@ public class SoundPlayer implements Runnable {
     public void setVolume(int volume) {
         if ((volume <= 100) && (volume >= 0)) {
             gainPercent = volume;
-            System.err.println(getVolume());
         }
 
     }
