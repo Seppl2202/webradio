@@ -24,7 +24,6 @@ public class TogglePlayerListener implements ActionListener {
                         throw new MalformedURLException("URL: " + s.getStationURL() + "did not returned status 200");
                     }
                     player.setUrl(s.getStationURL());
-                    player.setVolume(80);
                     player.play();
                     WebradioPlayer.getGui().getPlayerControlPanel().togglePlayButton();
                 } catch (MalformedURLException mue) {
