@@ -10,8 +10,7 @@ import java.net.URL;
 import java.util.Map;
 
 public abstract class AbstractPlayer {
-    public static int BufferSize = 1024; // Anzahl der Daten, die aufeinmal an die Soundkarte geschickt werden.
-    public static byte[] buffer = new byte[BufferSize];
+
     public int gainPercent = 90;  //gibt die Lautstärke in Prozent an.  (0% = -80dB und 100% = 6dB)
     public Boolean stop = false;
     public Boolean loopPlay = false;

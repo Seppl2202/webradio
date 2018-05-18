@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Mp3Player extends AbstractPlayer implements Runnable {
+    private static int BufferSize = 1024; // Anzahl der Daten, die aufeinmal an die Soundkarte geschickt werden.
+    private static byte[] buffer = new byte[BufferSize];
     private Thread runner = new Thread(this); //AbspielThread
-
 
     /**
      * starten der Wiedergabe
