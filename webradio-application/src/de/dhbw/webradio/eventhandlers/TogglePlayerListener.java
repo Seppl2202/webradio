@@ -2,7 +2,7 @@ package de.dhbw.webradio.eventhandlers;
 
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.models.StationsTableModel;
-import de.dhbw.webradio.radioplayer.SoundPlayer;
+import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.WebradioPlayer;
 
 import java.awt.event.ActionEvent;
@@ -13,7 +13,7 @@ public class TogglePlayerListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Station s = WebradioPlayer.getGui().getStationsTableModel().getStationFromIndex(WebradioPlayer.getGui().getStationsTable().getSelectedRow());
-        SoundPlayer player = WebradioPlayer.getPlayer();
+        AbstractPlayer player = WebradioPlayer.getPlayer();
         if (player.isPlaying()) {
             player.stop();
             WebradioPlayer.getGui().getPlayerControlPanel().togglePlayButton();

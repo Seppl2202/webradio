@@ -3,11 +3,10 @@ package de.dhbw.webradio.radioplayer;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
-public class SoundPlayer implements Runnable {
+public class Mp3Player extends AbstractPlayer implements Runnable {
     private static int BufferSize = 1024; // Anzahl der Daten, die aufeinmal an die Soundkarte geschickt werden.
     private static byte[] buffer = new byte[BufferSize];
     private Thread runner = new Thread(this); //AbspielThread
@@ -38,43 +37,6 @@ public class SoundPlayer implements Runnable {
 
 
     /**
-     *
-     * Die Lautstärke "gainLevel" ist logarhytmisch von -80dB bis ca. 6dB. Daher ist die
-     * prozentuale Lautstärkeregelung nicht ganz korrekt.
-     */
-
-
-    /**
-     * gibt die aktuelle Zeit an
-     */
-    public long getActuallySongTime() {
-        return actuallySongTime;
-    }
-
-
-    /**
-     * gibt zur�ck, ob das Musikst�ck wiederholt wird
-     */
-    public boolean isLoopPlay() {
-        return loopPlay;
-    }
-
-    /**
-     * startet eine Endlosschleife
-     */
-    public void setLoopPlay(Boolean loop) {
-        loopPlay = loop;
-    }
-
-    /**
-     * stoppt die Wiedergabe
-     */
-    public void stop() {
-        stop = true;
-        actuallySongTime = 0;
-    }
-
-    /**
      * starten der Wiedergabe
      */
     public void play() {
@@ -85,33 +47,23 @@ public class SoundPlayer implements Runnable {
         }
     }
 
-    /**
-     * gibt die aktuelle Lautst�rke zur�ck
-     */
-    public int getVolume() {
-        return gainPercent;
-    }
-
-    /**
-     * Wert zwischen 0% und 100%
-     *
-     * @param volume
-     */
-    public void setVolume(int volume) {
-        if ((volume <= 100) && (volume >= 0)) {
-            gainPercent = volume;
+    @Override
+    public void setUrl(URL url) {
+        this.song = new File("");
+        this.url = url;
+        if (url != null) {
+            setInputStream();
         }
-
     }
 
-    private void setStream() {
+    @Override
+    public void setInputStream() {
         try {
             ais = AudioSystem.getAudioInputStream(url);
-//			System.out.println("aktuelle Format : " + ais.getFormat());
-        } catch (UnsupportedAudioFileException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -215,7 +167,8 @@ public class SoundPlayer implements Runnable {
         isPlaying = false;
     }
 
-    private void songDatenSammeln() {
+    @Override
+    public void fetchStreamInfo() {
         try {
             resetKorrektur = 0;
             AudioInputStream in = AudioSystem.getAudioInputStream(AudioFormat.Encoding.PCM_SIGNED, AudioSystem.getAudioInputStream(url));
@@ -251,162 +204,6 @@ public class SoundPlayer implements Runnable {
         }
         BufferSize = bitRate / 8 * 1000 / 10; // Buffergr��e auf Anzahl der ben�tigten Bytes pro 1/10s
         buffer = new byte[BufferSize];
+
     }
-
-    /**
-     * Name und Pfad der Sounddatei
-     *
-     * @return
-     */
-    public File getSong() {
-        return song;
-    }
-
-    /**
-     * Name und Pfad der Sounddatei
-     *
-     * @param song
-     * @throws MalformedURLException
-     */
-
-    public void setSong(String song) throws MalformedURLException {
-        this.song = new File(song);
-        this.url = new URL("file:/" + this.song);
-        setStream();
-        songDatenSammeln();
-    }
-
-    /**
-     * die Gesamtl�nge des Musikst�cks
-     *
-     * @return
-     */
-    public long getSongDuration() {
-        return songDuration;
-    }
-
-    /**
-     * setzt den aktuellen Titel zur�ck
-     *
-     * @param reset
-     */
-
-    public void reset(boolean reset) {
-        this.reset = reset;
-    }
-
-    /**
-     * gibt zur�ck, ob gerade ein Titel abgespielt wird
-     *
-     * @return
-     */
-    public Boolean isPlaying() {
-        return isPlaying;
-    }
-
-    /**
-     * gibt zur�ck, ob der Titel pausiert
-     *
-     * @return
-     */
-    public boolean isPause() {
-        return pause;
-    }
-
-    /**
-     * Titel pausieren
-     *
-     * @param pause
-     */
-    public void setPause(boolean pause) {
-        this.pause = pause;
-    }
-
-    /**
-     * gibt zur�ck, ob die Wiedergabe stumm geschaltet ist
-     *
-     * @return
-     */
-    public boolean isMute() {
-        return mute;
-    }
-
-    /**
-     * schaltet die Wiedergabe stumm
-     *
-     * @param mute
-     */
-    public void setMute(boolean mute) {
-        if ((mute) && (!this.mute)) {
-            lautstaerke = this.getVolume();
-            this.setVolume(0);
-        } else {
-            this.setVolume(lautstaerke);
-        }
-        this.mute = mute;
-    }
-
-    public URL getUrl() {
-        return url;
-    }
-
-    public void setUrl(URL url) {
-        this.song = new File("");
-        this.url = url;
-        if (url != null) {
-            setStream();
-        }
-    }
-
-    public int getAudioFormatChannels() {
-        return audioFormatChannels;
-    }
-
-    public float getAudioFormatFrameRate() {
-        return audioFormatFrameRate;
-    }
-
-
-    public int getAudioFormatFrameSize() {
-        return audioFormatFrameSize;
-    }
-
-    public float getAudioFormatSampleRate() {
-        return audioFormatSampleRate;
-    }
-
-    public int getAudioFormatSampleSizeInBits() {
-        return audioFormatSampleSizeInBits;
-    }
-
-
-    public String getAudioFormatEncoding() {
-        return audioFormatEncoding;
-    }
-
-    public Map<String, Object> getAudioFormatproperties() {
-        return audioFormatproperties;
-    }
-
-    public boolean isNetConnection() {
-        if (song.length() == 0 && !(url == null)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public void increaseVolume(int step) {
-        setVolume(getVolume() + step);
-    }
-
-
-    public void decreaseVolume(int step) {
-        setVolume(getVolume() - step);
-    }
-
-    public int getBitRate() {
-        return bitRate;
-    }
-
 }

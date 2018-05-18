@@ -11,7 +11,7 @@ import java.util.List;
 
 public class WebradioPlayer {
     private static Gui gui;
-    private static SoundPlayer player;
+    private static AbstractPlayer player;
     private static List<Station> stationList;
 
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class WebradioPlayer {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        player = new SoundPlayer();
+        player = new Mp3Player();
         gui = new Gui();
 //        SoundPlayer player = new SoundPlayer();
 //        try {
@@ -44,7 +44,7 @@ public class WebradioPlayer {
         return gui;
     }
 
-    public static SoundPlayer getPlayer() {
+    public static AbstractPlayer getPlayer() {
         return player;
     }
 
