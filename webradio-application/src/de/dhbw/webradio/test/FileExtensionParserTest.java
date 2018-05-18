@@ -14,13 +14,14 @@ import static org.junit.Assert.*;
 
 public class FileExtensionParserTest {
 
+    FileExtensionParser fileExtensionParser = new FileExtensionParser();
     @Test
     public void testParsing() throws MalformedURLException{
         URL url = new URL("http://mp3-live.swr.de/swr1bw_m.m3u");
-        assertEquals(FileExtension.M3U, FileExtensionParser.parseFileExtension(url.toString()));
+        assertEquals(FileExtension.M3U, fileExtensionParser.parseFileExtension(url.toString()));
         URL url2 = new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3");
-        assertEquals(FileExtension.MP3, FileExtensionParser.parseFileExtension(url2.toString()));
-        assertEquals(FileExtension.UNSUPPORTED_TYPE, FileExtensionParser.parseFileExtension("aacsdfdsfdsfdss.aac"));
+        assertEquals(FileExtension.MP3, fileExtensionParser.parseFileExtension(url2.toString()));
+        assertEquals(FileExtension.UNSUPPORTED_TYPE, fileExtensionParser.parseFileExtension("aacsdfdsfdsfdss.aac"));
     }
 
 }

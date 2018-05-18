@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="93051cbf-cb4f-4e2c-be0f-8b03cdfea2d6" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/enumerations/FileExtension.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/FileExtensionParser.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/M3uParser.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/FileExtensionParserTest.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/M3uParserTest.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/eventhandlers/DecreaseVolumeListener.java" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/eventhandlers/DecreaseVolumeListener.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/eventhandlers/IncreaseVolumeListener.java" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/eventhandlers/IncreaseVolumeListener.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/eventhandlers/MuteVolumeListener.java" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/eventhandlers/MuteVolumeListener.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/radioplayer/AbstractPlayer.java" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/radioplayer/AbstractPlayer.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/radioplayer/Mp3Player.java" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/radioplayer/Mp3Player.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/webradio-application.iml" afterPath="$PROJECT_DIR$/webradio-application/webradio-application.iml" />
+      <change beforePath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/FileExtensionParser.java" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/FileExtensionParser.java" />
+      <change beforePath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/M3uParser.java" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/M3uParser.java" />
+      <change beforePath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/FileExtensionParserTest.java" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/FileExtensionParserTest.java" />
+      <change beforePath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/M3uParserTest.java" afterPath="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/M3uParserTest.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -42,28 +34,18 @@
       <file leaf-file-name="FileExtensionParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/FileExtensionParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
+            <state relative-caret-position="105">
+              <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FileExtensionParserTest.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FileExtensionParserTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/FileExtensionParserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="M3uParser.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/M3uParser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="34" column="13" lean-forward="false" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+            <state relative-caret-position="388">
+              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -71,11 +53,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="M3uParserTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="M3uParser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/M3uParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="28" column="11" lean-forward="false" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="M3uParserTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/M3uParserTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="38" column="62" lean-forward="false" selection-start-line="38" selection-start-column="62" selection-end-line="38" selection-end-column="62" />
+            <state relative-caret-position="430">
+              <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -188,13 +182,13 @@
         <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/radioplayer/AbstractPlayer.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/radioplayer/Mp3Player.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/enumerations/FileExtension.java" />
-        <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/FileExtensionParser.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/eventhandlers/MuteVolumeListener.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/eventhandlers/DecreaseVolumeListener.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/eventhandlers/IncreaseVolumeListener.java" />
-        <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/FileExtensionParserTest.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/M3uParser.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/M3uParserTest.java" />
+        <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/FileExtensionParser.java" />
+        <option value="$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/FileExtensionParserTest.java" />
       </list>
     </option>
   </component>
@@ -341,7 +335,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.M3uParserTest.parseUrlFromString">
+  <component name="RunManager" selected="JUnit.FileExtensionParserTest.testParsing">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -557,9 +551,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.M3uParserTest.parseUrlFromString" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.M3uParserTest.parseFileToString" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.FileExtensionParserTest.testParsing" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.FileExtensionParserTest.testParsing" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.M3uParserTest.parseUrlFromString" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.M3uParserTest.parseFileToString" />
         <item index="3" class="java.lang.String" itemvalue="Application.WebradioPlayer (1)" />
         <item index="4" class="java.lang.String" itemvalue="Application.WebradioPlayer" />
       </list>
@@ -583,14 +577,11 @@
       <workItem from="1526575934162" duration="3677000" />
       <workItem from="1526626559560" duration="2459000" />
       <workItem from="1526631050146" duration="284000" />
-      <workItem from="1526632592844" duration="3158000" />
+      <workItem from="1526632592844" duration="3299000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="M3uParserTest_parseUrlFromString - 2018.05.18 at 11h 18m 10s.xml">
-      <configuration name="M3uParserTest.parseUrlFromString" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="M3uParserTest_parseUrlFromString - 2018.05.18 at 11h 19m 48s.xml">
       <configuration name="M3uParserTest.parseUrlFromString" configurationId="JUnit" />
     </history-entry>
@@ -618,9 +609,12 @@
     <history-entry file="M3uParserTest_parseUrlFromString - 2018.05.18 at 11h 28m 45s.xml">
       <configuration name="M3uParserTest.parseUrlFromString" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="M3uParserTest_parseUrlFromString - 2018.05.18 at 11h 30m 57s.xml">
+      <configuration name="M3uParserTest.parseUrlFromString" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18350000" />
+    <option name="totallyTimeSpent" value="18491000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
@@ -635,7 +629,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -665,15 +659,15 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/M3uParserTest.java</url>
-          <line>29</line>
-          <properties class="de.dhbw.webradio.test.M3uParserTest" method="parseUrlFromString">
+          <url>file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/FileExtensionParserTest.java</url>
+          <line>18</line>
+          <properties class="de.dhbw.webradio.test.FileExtensionParserTest" method="testParsing">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="9" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="10" />
+      <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1137,26 +1131,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/FileExtensionParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="14" lean-forward="false" selection-start-line="4" selection-start-column="14" selection-end-line="4" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/FileExtensionParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/M3uParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="34" column="13" lean-forward="false" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        <state relative-caret-position="177">
+          <caret line="28" column="11" lean-forward="false" selection-start-line="28" selection-start-column="11" selection-end-line="28" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1165,8 +1143,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/M3uParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="38" column="62" lean-forward="false" selection-start-line="38" selection-start-column="62" selection-end-line="38" selection-end-column="62" />
+        <state relative-caret-position="430">
+          <caret line="33" column="13" lean-forward="false" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/m3uparser/FileExtensionParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webradio-application/src/de/dhbw/webradio/test/FileExtensionParserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

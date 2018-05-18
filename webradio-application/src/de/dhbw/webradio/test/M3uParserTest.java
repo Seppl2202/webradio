@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 public class M3uParserTest {
     File success = new File("C://repository/webradio/webradio-application/src/de/dhbw/webradio/test/testfiles/testm3uparsing_success.m3u");
     File fail = new File("C://repository/webradio/webradio-application/src/de/dhbw/webradio/test/testfiles/testm3uparsing_fail.m3u");
+    M3uParser m3uParser = new M3uParser();
 
     @Test
     public void parseFileToString() {
@@ -20,7 +21,7 @@ public class M3uParserTest {
                 "#EXTINF:-1,SWR1 Baden-Württemberg\r\n" +
                 "http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3\r\n";
         try {
-            assertEquals(expectedText, M3uParser.parseFileToString(success));
+            assertEquals(expectedText, m3uParser.parseFileToString(success));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -31,8 +32,8 @@ public class M3uParserTest {
         String urlSuccess = null;
         String urlFail = null;
         try {
-            urlSuccess = M3uParser.parseUrlFromString(M3uParser.parseFileToString(success));
-            urlFail = M3uParser.parseUrlFromString(M3uParser.parseFileToString(fail));
+            urlSuccess = m3uParser.parseUrlFromString(m3uParser.parseFileToString(success));
+            urlFail = m3uParser.parseUrlFromString(m3uParser.parseFileToString(fail));
         } catch (IOException e) {
             e.printStackTrace();
         }

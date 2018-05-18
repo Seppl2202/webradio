@@ -9,7 +9,7 @@ public class M3uParser {
     private final static String INFO_TOKEN = "#EXTINF:";
     private final static String URL_TOKEN = "http://";
 
-    public static String parseFileToString(File m3ufile) throws IOException {
+    public String parseFileToString(File m3ufile) throws IOException {
 
         StringBuilder fileContent = new StringBuilder((int) m3ufile.length());
         Scanner scanner = new Scanner(m3ufile);
@@ -26,7 +26,7 @@ public class M3uParser {
     }
 
 
-    public static String parseUrlFromString(String s) {
+    public  String parseUrlFromString(String s) {
         String[] splittedLines = s.split("\r\n");
         int urlLine = 0;
         for (int i = 0; i < splittedLines.length; i++) {
