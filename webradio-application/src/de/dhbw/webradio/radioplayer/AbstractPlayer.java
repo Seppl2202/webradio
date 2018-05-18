@@ -10,32 +10,32 @@ import java.net.URL;
 import java.util.Map;
 
 public abstract class AbstractPlayer {
-    private static int BufferSize = 1024; // Anzahl der Daten, die aufeinmal an die Soundkarte geschickt werden.
-    private static byte[] buffer = new byte[BufferSize];
-    private int gainPercent = 90;  //gibt die Lautstärke in Prozent an.  (0% = -80dB und 100% = 6dB)
-    private Boolean stop = false;
-    private Boolean loopPlay = false;
-    private File song = new File("");
-    private URL url = null;
-    private long songDuration = 0;
-    private long actuallySongTime = 0;
-    private int sampleSizeInBits = 0;
-    private long songLaenge = 0;
-    private boolean reset = false;
-    private Boolean isPlaying = false;
-    private long resetKorrektur = 0;
-    private boolean pause = false;
-    private boolean mute = false;
-    private int lautstaerke = gainPercent;
-    private int bitRate = 0;
-    private int audioFormatChannels;
-    private float audioFormatFrameRate;
-    private int audioFormatFrameSize;
-    private float audioFormatSampleRate;
-    private int audioFormatSampleSizeInBits;
-    private String audioFormatEncoding;
-    private Map<String, Object> audioFormatproperties;
-    private AudioInputStream ais = null;
+    public static int BufferSize = 1024; // Anzahl der Daten, die aufeinmal an die Soundkarte geschickt werden.
+    public static byte[] buffer = new byte[BufferSize];
+    public int gainPercent = 90;  //gibt die Lautstärke in Prozent an.  (0% = -80dB und 100% = 6dB)
+    public Boolean stop = false;
+    public Boolean loopPlay = false;
+    public File song = new File("");
+    public URL url = null;
+    public long songDuration = 0;
+    public long actuallySongTime = 0;
+    public int sampleSizeInBits = 0;
+    public long songLaenge = 0;
+    public boolean reset = false;
+    public Boolean isPlaying = false;
+    public long resetKorrektur = 0;
+    public boolean pause = false;
+    public boolean mute = false;
+    public int lautstaerke = gainPercent;
+    public int bitRate = 0;
+    public int audioFormatChannels;
+    public float audioFormatFrameRate;
+    public int audioFormatFrameSize;
+    public float audioFormatSampleRate;
+    public int audioFormatSampleSizeInBits;
+    public String audioFormatEncoding;
+    public Map<String, Object> audioFormatproperties;
+    public AudioInputStream ais = null;
 
     public long getActuallySongTime() {
         return this.actuallySongTime;

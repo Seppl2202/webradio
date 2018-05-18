@@ -4,36 +4,9 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
 
 public class Mp3Player extends AbstractPlayer implements Runnable {
-    private static int BufferSize = 1024; // Anzahl der Daten, die aufeinmal an die Soundkarte geschickt werden.
-    private static byte[] buffer = new byte[BufferSize];
     private Thread runner = new Thread(this); //AbspielThread
-    private int gainPercent = 90;  //gibt die Lautstärke in Prozent an.  (0% = -80dB und 100% = 6dB)
-    private Boolean stop = false;
-    private Boolean loopPlay = false;
-    private File song = new File("");
-    private URL url = null;
-    private long songDuration = 0;
-    private long actuallySongTime = 0;
-    private int sampleSizeInBits = 0;
-    private long songLaenge = 0;
-    private boolean reset = false;
-    private Boolean isPlaying = false;
-    private long resetKorrektur = 0;
-    private boolean pause = false;
-    private boolean mute = false;
-    private int lautstaerke = gainPercent;
-    private int bitRate = 0;
-    private int audioFormatChannels;
-    private float audioFormatFrameRate;
-    private int audioFormatFrameSize;
-    private float audioFormatSampleRate;
-    private int audioFormatSampleSizeInBits;
-    private String audioFormatEncoding;
-    private Map<String, Object> audioFormatproperties;
-    private AudioInputStream ais = null;
 
 
     /**
@@ -90,10 +63,6 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
                 FloatControl gainControl = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
                 line.start();
 
-                WebradioPlayer.getGui().getStreamDetails().changeChannelsText(getAudioFormatChannels());
-                WebradioPlayer.getGui().getStreamDetails().changeFormat(getAudioFormatEncoding());
-                WebradioPlayer.getGui().getStreamDetails().changeSamplerate(getAudioFormatSampleRate());
-
                 System.out.println("audioFormat.getChannels: " + audioFormat.getChannels());
                 System.out.println("audioFormat.getFrameSize: " + audioFormat.getFrameSize());
                 System.out.println("audioFormat.getSampleRate: " + audioFormat.getSampleRate());
@@ -121,7 +90,9 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
                 System.out.println("line.getControls: " + line.getControls());
                 System.out.println("line.getFormat: " + line.getFormat());
                 System.out.println("line.getLineInfo: " + line.getLineInfo());
-
+                WebradioPlayer.getGui().getStreamDetails().changeChannelsText(getAudioFormatChannels());
+                WebradioPlayer.getGui().getStreamDetails().changeFormat(getAudioFormatEncoding());
+                WebradioPlayer.getGui().getStreamDetails().changeSamplerate(getAudioFormatSampleRate());
 
                 songLaenge = song.length();
                 sampleSizeInBits = audioFormat.getSampleSizeInBits();
@@ -187,7 +158,7 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
             sampleSizeInBits = audioFormat.getSampleSizeInBits();
 
             if (in.getFrameLength() == -1) {
-                songDuration = songLaenge / sampleSizeInBits / 1000; // berechnung f�r mp3
+                songDuration = songLaenge / sampleSizeInBits / 1000; // berechnung für mp3
                 bitRate = audioFormat.getSampleSizeInBits() * audioFormat.getFrameSize() * audioFormat.getChannels();
             } else {
                 songDuration = in.getFrameLength() / (long) audioFormat.getFrameRate(); // berechnung f�r wav
