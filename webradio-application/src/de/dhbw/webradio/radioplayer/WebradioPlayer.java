@@ -2,6 +2,8 @@ package de.dhbw.webradio.radioplayer;
 
 
 import de.dhbw.webradio.gui.Gui;
+import de.dhbw.webradio.m3uparser.FileExtensionParser;
+import de.dhbw.webradio.m3uparser.M3uParser;
 import de.dhbw.webradio.models.Station;
 
 import java.net.MalformedURLException;
@@ -19,25 +21,13 @@ public class WebradioPlayer {
         try {
             Station s = new Station("FFH", new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3"));
             stationList.add(s);
+            Station s2 = new Station("SWR 1", new URL("http://mp3-live.swr.de/swr1bw_m.m3u"));
+            stationList.add(s2);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         player = new Mp3Player();
         gui = new Gui();
-//        SoundPlayer player = new SoundPlayer();
-//        try {
-//            Station station = new Station("FFH", new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3"));
-//            if(!station.isURLValid()) {
-//                throw new MalformedURLException("URL: " + station.getStationURL() + "did not returned status 200");
-//            }
-//            player.setUrl(station.getStationURL());
-//            player.setVolume(80);
-//            player.play();
-//        } catch (MalformedURLException mue) {
-//            mue.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
     }
 
     public static Gui getGui() {
@@ -51,4 +41,5 @@ public class WebradioPlayer {
     public static List<Station> getStationList() { return stationList; }
 
     public static boolean addStation(Station s) { return stationList.add(s); }
+
 }

@@ -1,7 +1,11 @@
 package de.dhbw.webradio.m3uparser;
 
+import org.apache.commons.io.FileUtils;
+
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
 
 public class M3uParser {
@@ -25,15 +29,33 @@ public class M3uParser {
         }
     }
 
+    public String parseFileFromUrlToString(URL url) throws IOException {
+        File f = File.createTempFile("temp", ".m3u");
+        FileUtils.copyURLToFile(url, f);
+        return parseFileToString(f);
+    }
 
-    public  String parseUrlFromString(String s) {
+
+    /**
+     * @param s the string to be parsed
+     * @return an array of m3u informations. 0: the mp3 url, 1: the additional information of the #EXTINF
+     * @throws UnsupportedAudioFileException if the passed string does not match the specified extended m3u syntax.
+     * See @https://de.wikipedia.org/wiki/M3U#Erweiterte_M3U for further information
+     */
+    public String[] parseUrlFromString(String s) throws UnsupportedAudioFileException {
         String[] splittedLines = s.split("\r\n");
         int urlLine = 0;
+        if (!(splittedLines[0].contains(START_TOKEN))) {
+            throw new UnsupportedAudioFileException("File did not contain a valid extended M3U syntax");
+        }
         for (int i = 0; i < splittedLines.length; i++) {
             if (splittedLines[i].contains(URL_TOKEN)) {
                 urlLine = i;
             }
         }
-        return splittedLines[urlLine];
+        String[] finalInfo = new String[2];
+        finalInfo[0] = splittedLines[urlLine];
+        finalInfo[1] = splittedLines[urlLine - 1].substring(7); //#EXTINF tags ends at the seventh letter
+        return finalInfo;
     }
 }

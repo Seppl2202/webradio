@@ -7,6 +7,7 @@ import java.net.URL;
 public class Station {
     private String name;
     private URL stationURL;
+    private String m3uStationName;
 
     public Station(String name, URL stationURL) {
         this.name = name;
@@ -39,5 +40,13 @@ public class Station {
             return false;
         }
         return true;
+    }
+
+    public String getM3uStationName() {
+        return m3uStationName;
+    }
+
+    public void setM3uStationName(String m3uStationName) {
+        this.m3uStationName = m3uStationName;
     }
 }

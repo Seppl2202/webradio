@@ -35,8 +35,6 @@ public class PlayerControlPanel extends JPanel {
     public void togglePlayButton() {
         if(this.togglePlayerButton.getText().equalsIgnoreCase("Start")) {
             this.togglePlayerButton.setText("Stop");
-        } else {
-            this.togglePlayerButton.setText("Start");
         }
     }
 
@@ -46,5 +44,9 @@ public class PlayerControlPanel extends JPanel {
         } else {
             this.muteVolumeButton.setText("Lautlos");
         }
+    }
+
+    public JButton getTogglePlayerButton() {
+        return togglePlayerButton;
     }
 }

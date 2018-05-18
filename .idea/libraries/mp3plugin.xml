@@ -1,7 +1,8 @@
 <component name="libraryTable">
   <library name="mp3plugin">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/webradio-application/external/mp3plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/external/mp3plugin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/external/commons-io-2.6/commons-io-2.6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

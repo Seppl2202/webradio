@@ -51,6 +51,7 @@ public abstract class AbstractPlayer {
     public void stop() {
         stop = true;
         actuallySongTime = 0;
+        WebradioPlayer.getGui().resetComponents();
     }
 
     public int getVolume() {

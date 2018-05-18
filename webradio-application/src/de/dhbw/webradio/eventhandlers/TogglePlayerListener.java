@@ -13,18 +13,16 @@ public class TogglePlayerListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Station s = WebradioPlayer.getGui().getStationsTableModel().getStationFromIndex(WebradioPlayer.getGui().getStationsTable().getSelectedRow());
-        AbstractPlayer player = WebradioPlayer.getPlayer();
+        PlayerSelectionController psc = new PlayerSelectionController(s);
+        AbstractPlayer player = psc.getPlayerForFileType();
         if (player.isPlaying()) {
             player.stop();
-            WebradioPlayer.getGui().getPlayerControlPanel().togglePlayButton();
-            WebradioPlayer.getGui().getStatusBar().updateActualStation("aktuell keine Wiedergabe");
         } else {
             if (!(s == null)) {
                 try {
                     if (!s.isURLValid()) {
                         throw new MalformedURLException("URL: " + s.getStationURL() + "did not returned status 200");
                     }
-                    player.setUrl(s.getStationURL());
                     player.play();
                     WebradioPlayer.getGui().getPlayerControlPanel().togglePlayButton();
                     WebradioPlayer.getGui().getStatusBar().updateActualStation(s.getName());

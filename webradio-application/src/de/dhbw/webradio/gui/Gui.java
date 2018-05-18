@@ -1,11 +1,9 @@
 package de.dhbw.webradio.gui;
 
-import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.models.StationsTableModel;
 import de.dhbw.webradio.radioplayer.WebradioPlayer;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class Gui extends JFrame {
@@ -15,6 +13,7 @@ public class Gui extends JFrame {
     private StationsTableModel stationsTableModel;
     private JTable stationsTable;
     private StreamDetails streamDetails;
+
     public Gui() {
         initialize();
     }
@@ -54,5 +53,14 @@ public class Gui extends JFrame {
 
     public StreamDetails getStreamDetails() {
         return streamDetails;
+    }
+
+    public void resetComponents() {
+        statusBar.updateAdditionalM3uInfo("Keine Informationen verfügbar");
+        statusBar.updateActualStation("Aktuell keine Wiedergabe");
+        streamDetails.changeSamplerate(0);
+        streamDetails.changeChannelsText(0);
+        streamDetails.changeFormat("Keine Wiederegabe");
+        playerControlPanel.getTogglePlayerButton().setText("Start");
     }
 }
