@@ -1,5 +1,6 @@
 package de.dhbw.webradio.m3uparser;
 
+import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import org.apache.commons.io.FileUtils;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -42,7 +43,7 @@ public class M3uParser {
      * @throws UnsupportedAudioFileException if the passed string does not match the specified extended m3u syntax.
      * See @https://de.wikipedia.org/wiki/M3U#Erweiterte_M3U for further information
      */
-    public String[] parseUrlFromString(String s) throws UnsupportedAudioFileException {
+    public String[] parseUrlFromString(String s) throws UnsupportedAudioFileException, NoURLTagFoundException {
         String[] splittedLines = s.split("\r\n");
         int urlLine = 0;
         if (!(splittedLines[0].contains(START_TOKEN))) {
@@ -54,6 +55,9 @@ public class M3uParser {
             }
         }
         String[] finalInfo = new String[2];
+        if(urlLine == 0) {
+            throw new NoURLTagFoundException(s);
+        }
         finalInfo[0] = splittedLines[urlLine];
         finalInfo[1] = splittedLines[urlLine - 1].substring(7); //#EXTINF tags ends at the seventh letter
         return finalInfo;

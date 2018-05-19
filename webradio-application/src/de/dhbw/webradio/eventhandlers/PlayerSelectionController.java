@@ -1,6 +1,7 @@
 package de.dhbw.webradio.eventhandlers;
 
 import de.dhbw.webradio.enumerations.FileExtension;
+import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
 import de.dhbw.webradio.m3uparser.M3uParser;
 import de.dhbw.webradio.models.Station;
@@ -48,6 +49,8 @@ public class PlayerSelectionController {
                 e.printStackTrace();
             } catch (UnsupportedAudioFileException ex) {
                 ex.printStackTrace();
+            } catch (NoURLTagFoundException nufe) {
+                nufe.printStackTrace();
             }
             WebradioPlayer.getGui().getStatusBar().updateAdditionalM3uInfo(m3uInfo[1]);
             player.setUrl(mp3url);

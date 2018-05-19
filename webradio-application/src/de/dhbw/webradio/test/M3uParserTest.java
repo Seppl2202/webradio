@@ -1,13 +1,17 @@
 package de.dhbw.webradio.test;
 
+import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.m3uparser.M3uParser;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.rmi.server.ExportException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,7 +25,6 @@ public class M3uParserTest {
 
     @Test
     public void parseFileToString() {
-
         String parsedText = null;
 
         try {
@@ -34,19 +37,31 @@ public class M3uParserTest {
     @Test
     public void parseUrlFromString() {
         String urlInfoSuccess[] = null;
-        String urlInfoFail[] = null;
         try {
             urlInfoSuccess = m3uParser.parseUrlFromString(m3uParser.parseFileToString(success));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException uafe) {
+            uafe.printStackTrace();
+        } catch (NoURLTagFoundException nufe) {
+            nufe.printStackTrace();
+        }
+        //test m3u with valid EXTINF tag and corresponding URL
+        assertEquals("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3", urlInfoSuccess[0]);
+    }
+
+    @Test(expected = NoURLTagFoundException.class)
+    public void parseURLFromString() {
+        String urlInfoFail[] = null;
+        try {
             urlInfoFail = m3uParser.parseUrlFromString(m3uParser.parseFileToString(fail));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (UnsupportedAudioFileException uafe) {
             uafe.printStackTrace();
+        } catch (NoURLTagFoundException nufe) {
+            nufe.printStackTrace();
         }
-        //test m3u with valid EXTINF tag and corresponding URL
-        assertEquals("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3", urlInfoSuccess[0]);
-        //test m3u without EXTINF tag
-        assertEquals("#EXTM3U", urlInfoFail[0]);
     }
 
     @Test
