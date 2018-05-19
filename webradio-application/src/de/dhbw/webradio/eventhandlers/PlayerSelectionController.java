@@ -34,7 +34,10 @@ public class PlayerSelectionController {
             //get fake player, to be implemented as builder pattern later
             player = WebradioPlayer.getPlayer();
             player.setUrl(station.getStationURL());
-            WebradioPlayer.getGui().getStatusBar().updateAdditionalM3uInfo("Keine Informationen verfügbar.");
+            WebradioPlayer.getGui().getStreamDetails().updateM3uUrl("Aktuell wird kein M3U-Stream wiedergegben");
+            WebradioPlayer.getGui().getStreamDetails().updateM3uInfo("Kein M3U-Stream verfügbar");
+            WebradioPlayer.getGui().getStreamDetails().updateStreamUrl(station.getStationURL().toString());
+            WebradioPlayer.getGui().getStreamDetails().updateStationName(station.getName());
             return player;
         } else if (getFileExtension().equals(FileExtension.M3U)) {
             URL mp3url = null;
@@ -53,6 +56,10 @@ public class PlayerSelectionController {
                 nufe.printStackTrace();
             }
             WebradioPlayer.getGui().getStatusBar().updateAdditionalM3uInfo(m3uInfo[1]);
+            WebradioPlayer.getGui().getStreamDetails().updateM3uInfo(m3uInfo[1]);
+            WebradioPlayer.getGui().getStreamDetails().updateM3uUrl(station.getStationURL().toString());
+            WebradioPlayer.getGui().getStreamDetails().updateStreamUrl(mp3url.toString());
+            WebradioPlayer.getGui().getStreamDetails().updateStationName(station.getName());
             player.setUrl(mp3url);
         }
         return player;

@@ -14,6 +14,8 @@ public class Gui extends JFrame {
     private JTable stationsTable;
     private StreamDetails streamDetails;
     private MenuBar menuBar;
+    private JTabbedPane streamAudioDetails;
+    private AudioDetails audioDetails;
 
     public Gui() {
         initialize();
@@ -25,7 +27,6 @@ public class Gui extends JFrame {
         mainPanel = new JPanel(new BorderLayout());
         this.add(mainPanel);
         playerControlPanel = new PlayerControlPanel();
-        mainPanel.add(playerControlPanel, BorderLayout.CENTER);
         statusBar = new StatusBar();
         mainPanel.add(statusBar, BorderLayout.SOUTH);
         stationsTableModel = new StationsTableModel(WebradioPlayer.getStationList());
@@ -33,9 +34,14 @@ public class Gui extends JFrame {
         stationsTable.setModel(stationsTableModel);
         mainPanel.add(new JScrollPane(stationsTable), BorderLayout.WEST);
         streamDetails = new StreamDetails();
-        mainPanel.add(streamDetails, BorderLayout.EAST);
         menuBar = new MenuBar();
         mainPanel.add(menuBar, BorderLayout.NORTH);
+        audioDetails = new AudioDetails();
+        streamAudioDetails = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.WRAP_TAB_LAYOUT);
+        streamAudioDetails.add("Player-Steuerung", playerControlPanel);
+        streamAudioDetails.add("Stream-Details", streamDetails);
+        streamAudioDetails.add("Audio-Details", audioDetails);
+        mainPanel.add(streamAudioDetails, BorderLayout.CENTER);
     }
 
     public PlayerControlPanel getPlayerControlPanel() {
@@ -61,9 +67,17 @@ public class Gui extends JFrame {
     public void resetComponents() {
         statusBar.updateAdditionalM3uInfo("Keine Informationen verfügbar");
         statusBar.updateActualStation("Aktuell keine Wiedergabe");
-        streamDetails.changeSamplerate(0);
-        streamDetails.changeChannelsText(0);
-        streamDetails.changeFormat("Keine Wiederegabe");
+        audioDetails.changeSamplerate(0);
+        audioDetails.changeChannelsText(0);
+        audioDetails.changeFormat("Aktuell keine Wiederegabe");
         playerControlPanel.getTogglePlayerButton().setText("Start");
+        streamDetails.updateM3uInfo("Aktuell keine Wiedergabe");
+        streamDetails.updateStationName("Aktuell keine Wiedergabe");
+        streamDetails.updateM3uUrl("Aktuell keine Wiedergabe");
+        streamDetails.updateStreamUrl("Aktuell keine Wiedergabe");
+    }
+
+    public AudioDetails getAudioDetails() {
+        return audioDetails;
     }
 }

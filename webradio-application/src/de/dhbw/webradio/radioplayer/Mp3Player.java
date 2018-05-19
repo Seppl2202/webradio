@@ -91,9 +91,9 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
                 System.out.println("line.getControls: " + line.getControls());
                 System.out.println("line.getFormat: " + line.getFormat());
                 System.out.println("line.getLineInfo: " + line.getLineInfo());
-                WebradioPlayer.getGui().getStreamDetails().changeChannelsText(getAudioFormatChannels());
-                WebradioPlayer.getGui().getStreamDetails().changeFormat(getAudioFormatEncoding());
-                WebradioPlayer.getGui().getStreamDetails().changeSamplerate(getAudioFormatSampleRate());
+                WebradioPlayer.getGui().getAudioDetails().changeChannelsText(getAudioFormatChannels());
+                WebradioPlayer.getGui().getAudioDetails().changeFormat(getAudioFormatEncoding());
+                WebradioPlayer.getGui().getAudioDetails().changeSamplerate(getAudioFormatSampleRate());
 
                 songLaenge = song.length();
                 sampleSizeInBits = audioFormat.getSampleSizeInBits();

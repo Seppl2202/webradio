@@ -17,7 +17,7 @@ public class StatusBar extends JPanel {
         this.setLayout(new FlowLayout());
         actualStationLabel = new JLabel("Sie hören: aktuell keine Wiedergabe");
         volumeLabel = new JLabel("Lautstärke: ");
-        additionalm3uInfo = new JLabel("Informationen aus M3U-Datei: Keine Informationen verfügbar");
+        additionalm3uInfo = new JLabel("Titelinformation aus M3U-Datei: Keine Informationen verfügbar");
         this.setBorder(new BevelBorder(BevelBorder.LOWERED));
         this.setPreferredSize(new Dimension(this.getWidth(), 16));
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -43,6 +43,6 @@ public class StatusBar extends JPanel {
     }
 
     public void updateAdditionalM3uInfo(String info) {
-        additionalm3uInfo.setText("Informationen aus M3U-Datei: " + info);
+        additionalm3uInfo.setText("Titelinformation aus M3U-Datei: " + info);
     }
 }

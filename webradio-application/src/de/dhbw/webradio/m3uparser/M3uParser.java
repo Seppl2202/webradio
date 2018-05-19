@@ -14,6 +14,13 @@ public class M3uParser {
     private final static String INFO_TOKEN = "#EXTINF:";
     private final static String URL_TOKEN = "http://";
 
+
+    /**
+     *
+     * @param m3ufile the temporary downloaded m3ufile
+     * @return a string of the parsed text. no check for syntax! syntax check is done in parseURL
+     * @throws IOException if the file does not exists or any file system error occurs
+     */
     public String parseFileToString(File m3ufile) throws IOException {
 
         StringBuilder fileContent = new StringBuilder((int) m3ufile.length());
