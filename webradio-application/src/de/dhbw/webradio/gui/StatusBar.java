@@ -23,6 +23,7 @@ public class StatusBar extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.add(actualStationLabel);
         this.add(volumeLabel);
+        this.add(additionalm3uInfo);
         actualStationLabel.setHorizontalAlignment(SwingConstants.LEFT);
         volumeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 

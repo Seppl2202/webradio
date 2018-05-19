@@ -2,16 +2,13 @@ package de.dhbw.webradio.test;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.m3uparser.M3uParser;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.rmi.server.ExportException;
 
 import static org.junit.Assert.assertEquals;
 
@@ -76,7 +73,32 @@ public class M3uParserTest {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
         assertEquals(expectedText, s);
+    }
+
+    @Test
+    public void testM3uInfo() {
+        String s = null;
+        try {
+            URL url = new URL("http://mp3-live.swr.de/swr1bw_m.m3u");
+            s = m3uParser.parseFileFromUrlToString(url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        String[] finalInfo = new String[2];
+        try {
+            finalInfo = m3uParser.parseUrlFromString(s);
+        } catch (UnsupportedAudioFileException uafe) {
+            uafe.printStackTrace();
+        } catch (NoURLTagFoundException nufe) {
+            nufe.printStackTrace();
+        }
+        //testb m3u media name parsing
+        assertEquals("SWR1 Baden-Württemberg", finalInfo[1]);
+
+
     }
 }

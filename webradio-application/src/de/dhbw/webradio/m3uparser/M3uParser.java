@@ -59,7 +59,7 @@ public class M3uParser {
             throw new NoURLTagFoundException(s);
         }
         finalInfo[0] = splittedLines[urlLine];
-        finalInfo[1] = splittedLines[urlLine - 1].substring(7); //#EXTINF tags ends at the seventh letter
+        finalInfo[1] = splittedLines[urlLine - 1].split(",")[1]; //#EXTINF, song length (-1= ignore). split at comma to get media name
         return finalInfo;
     }
 }
