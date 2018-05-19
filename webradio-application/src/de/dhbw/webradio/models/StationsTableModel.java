@@ -55,4 +55,10 @@ public class StationsTableModel extends AbstractTableModel {
     public Station getStationFromIndex(int row) {
         return stationList.get(row);
     }
+
+    //editing cells is forbidden
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return false;
+    }
 }

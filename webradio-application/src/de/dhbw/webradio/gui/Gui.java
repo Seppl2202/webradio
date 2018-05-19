@@ -13,6 +13,7 @@ public class Gui extends JFrame {
     private StationsTableModel stationsTableModel;
     private JTable stationsTable;
     private StreamDetails streamDetails;
+    private MenuBar menuBar;
 
     public Gui() {
         initialize();
@@ -33,6 +34,8 @@ public class Gui extends JFrame {
         mainPanel.add(new JScrollPane(stationsTable), BorderLayout.WEST);
         streamDetails = new StreamDetails();
         mainPanel.add(streamDetails, BorderLayout.EAST);
+        menuBar = new MenuBar();
+        mainPanel.add(menuBar, BorderLayout.NORTH);
     }
 
     public PlayerControlPanel getPlayerControlPanel() {
