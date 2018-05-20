@@ -13,8 +13,8 @@ import java.net.URL;
 import static org.junit.Assert.assertEquals;
 
 public class M3uParserTest {
-    File success = new File("C://repository/webradio/webradio-application/src/de/dhbw/webradio/test/testfiles/testm3uparsing_success.m3u");
-    File fail = new File("C://repository/webradio/webradio-application/src/de/dhbw/webradio/test/testfiles/testm3uparsing_fail.m3u");
+    File success = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_success.m3u");
+    File fail = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_fail.m3u");
     M3uParser m3uParser = new M3uParser();
     String expectedText = "#EXTM3U\r\n" +
             "#EXTINF:-1,SWR1 Baden-Württemberg\r\n" +
