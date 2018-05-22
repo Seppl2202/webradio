@@ -12,6 +12,9 @@ import java.net.URL;
 
 public class PlayerFactory implements Factory {
     public AbstractPlayer get(Station s) {
+        if (s == null) {
+            throw new IllegalArgumentException("No station was passed. \r\n PlayerFactory needs a station to determine file extension");
+        }
         FileExtensionParser fileExtensionParser = new FileExtensionParser();
         URL stationURL = s.getStationURL();
         FileExtension urlExtension = fileExtensionParser.parseFileExtension(stationURL.toString());
