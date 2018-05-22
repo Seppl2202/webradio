@@ -3,7 +3,6 @@ package de.dhbw.webradio.radioplayer;
 
 import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.models.Station;
-import de.dhbw.webradio.settings.GeneralSettings;
 import de.dhbw.webradio.settings.SettingsParser;
 
 import java.io.File;
@@ -33,7 +32,6 @@ public class WebradioPlayer {
         settings = new HashMap<String, Object>();
         SettingsParser settingsParser = new SettingsParser();
         settings.put("general", settingsParser.parsegeneralSettings(new File("C:\\repository\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml")));
-        player = new Mp3Player();
         gui = new Gui();
     }
 
@@ -43,6 +41,10 @@ public class WebradioPlayer {
 
     public static AbstractPlayer getPlayer() {
         return player;
+    }
+
+    public static void setPlayer(AbstractPlayer newPlayer) {
+        player = newPlayer;
     }
 
     public static List<Station> getStationList() {
