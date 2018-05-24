@@ -1,0 +1,146 @@
+package de.dhbw.webradio.radioplayer;
+
+import de.dhbw.webradio.gui.GUIHandler;
+
+import java.io.FilterInputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class IcyInputStreamReader extends FilterInputStream implements Runnable {
+    private URLConnection connection;
+    private int metaDataInterval = -1;
+    private int toRead = -1;
+    private Map<String, String> id3Values;
+
+    public IcyInputStreamReader(URL icyURL) throws IOException {
+        super(null);
+        connection = icyURL.openConnection();
+        connection.addRequestProperty("Icy-MetaData", "1");
+        in = connection.getInputStream();
+        id3Values = new HashMap<String, String>();
+
+    }
+
+    public static void main(String[] args) {
+        try {
+
+
+            IcyInputStreamReader reader = new IcyInputStreamReader(new URL("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3"));
+            while (reader.read() != -1) {
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void readHeader() {
+        for (Map.Entry<String, List<String>> header : connection.getHeaderFields().entrySet()) {
+            if ("icy-metaint".equalsIgnoreCase(header.getKey())) {
+                metaDataInterval = Integer.parseInt(header.getValue().get(0));
+                toRead = metaDataInterval;
+            }
+            if (header.getKey() != null && header.getKey().toLowerCase().startsWith("icy-")) {
+                for (String s : header.getValue()) {
+                    fireEventNewMetaData(header.getKey(), s);
+                }
+            }
+        }
+    }
+
+    @Override
+    public int read() throws IOException {
+        if (toRead == 0) {
+            readIcyInfo();
+            toRead = metaDataInterval;
+        }
+
+        toRead--;
+        if (toRead < 0) {
+            toRead = -1;
+        }
+        int val = in.read();
+        return val;
+    }
+
+    @Override
+    public int read(byte[] b) throws IOException {
+        return read(b, 0, b.length);
+    }
+
+    @Override
+    public int read(byte[] b, int off, int len) throws IOException {
+        int size = off + len;
+        for (int i = off; i < size; i++) {
+            int d = read();
+            if (d == -1) {
+                return i - off;
+            } else {
+                b[i] = (byte) d;
+            }
+        }
+        return len;
+    }
+
+    private void readIcyInfo() throws IOException {
+        int value = in.read();
+        int size = value * 16;
+        StringBuffer s = new StringBuffer();
+        while (size-- > 0) {
+            s.append((char) in.read());
+        }
+
+        if (s.length() > 0) {
+            // TODO: s parsen
+            fireEventNewMetaData("Length:" + s.length() + ",", s.toString());
+        }
+    }
+
+    private void fireEventNewMetaData(String key, String value) {
+        //to do: log received metadata
+        if (!(key.contains("Length"))) {
+            id3Values.put(key, value);
+        } else {
+            /*
+                split the title information
+             */
+            String mapArray[] = value.split("=");
+            String mapKey = mapArray[0];
+            String mapValue = mapArray[1].replaceAll("'", "").replaceAll(";", "");
+            id3Values.put(mapKey, mapValue);
+            GUIHandler.getInstance().notifyNewIcyData(this);
+            System.err.println(getActualTitle());
+        }
+    }
+
+    public String getActualTitle() {
+        return id3Values.get("StreamTitle");
+    }
+
+    public String getStationName() {
+        return id3Values.get("icy-name");
+    }
+
+    public String getDescription() {
+        return id3Values.get("icy-description");
+    }
+
+    public String getGenre() {
+        return id3Values.get("icy-genre");
+    }
+
+    public void run() {
+        readHeader();
+        try {
+            int i = 0;
+            while ((i = read()) != -1) {
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

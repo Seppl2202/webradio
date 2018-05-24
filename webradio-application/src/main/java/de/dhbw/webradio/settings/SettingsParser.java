@@ -19,8 +19,6 @@ public class SettingsParser {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
             settings = mapper.readValue(file, Settings.class);
-            System.err.println(settings.getGeneralSettings().getAttributes().toString());
-            System.err.println(settings.getRecordSettings().getAttributes().toString());
         } catch (IOException e) {
             e.printStackTrace();
         }

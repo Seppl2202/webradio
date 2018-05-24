@@ -1,5 +1,6 @@
 package de.dhbw.webradio.eventhandlers;
 
+import de.dhbw.webradio.gui.GUIHandler;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.WebradioPlayer;
 
@@ -7,15 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MuteVolumeListener implements ActionListener {
-    @Override
     public void actionPerformed(ActionEvent e) {
         AbstractPlayer player = WebradioPlayer.getPlayer();
         if (!(player.isMute())) {
             player.setMute(true);
-            WebradioPlayer.getGui().getStatusBar().updateVolume(-1);
+            GUIHandler.getInstance().mutePlayer();
         } else {
             player.setMute(false);
-            WebradioPlayer.getGui().getStatusBar().updateVolume(player.getVolume());
+            GUIHandler.getInstance().updatePlayerVolume(player);
         }
         WebradioPlayer.getGui().getPlayerControlPanel().toggleMuteVolumeButton();
     }
