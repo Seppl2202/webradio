@@ -1,7 +1,7 @@
 package de.dhbw.webradio.gui;
 
 import de.dhbw.webradio.models.StationsTableModel;
-import de.dhbw.webradio.radioplayer.WebradioPlayer;
+import de.dhbw.webradio.WebradioPlayer;
 
 import javax.swing.*;
 import java.awt.*;

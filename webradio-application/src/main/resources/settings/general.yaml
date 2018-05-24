@@ -1,3 +1,8 @@
 ---
-bufferSize: 1024
-initialVolume: 90
+generalSettings:
+  attributes:
+    bufferSize: 1024
+    initialVolume: 90
+recordSettings:
+  attributes:
+    filePath:

@@ -1,7 +1,7 @@
 package de.dhbw.webradio.eventhandlers;
 
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
-import de.dhbw.webradio.radioplayer.WebradioPlayer;
+import de.dhbw.webradio.WebradioPlayer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

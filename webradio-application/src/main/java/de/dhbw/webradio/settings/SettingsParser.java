@@ -8,18 +8,22 @@ import java.io.IOException;
 
 public class SettingsParser {
 
+    private Settings settings;
+
     public SettingsParser() {
 
     }
 
-    public GeneralSettings parsegeneralSettings(File file) {
-        GeneralSettings generalSettings = null;
+    public Settings parsegeneralSettings(File file) {
+        Settings Settings = null;
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
-            generalSettings = mapper.readValue(file, GeneralSettings.class);
+            settings = mapper.readValue(file, Settings.class);
+            System.err.println(settings.getGeneralSettings().getAttributes().toString());
+            System.err.println(settings.getRecordSettings().getAttributes().toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return generalSettings;
+        return settings;
     }
 }
