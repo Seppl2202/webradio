@@ -16,8 +16,10 @@ public class MenuBar extends JPanel {
         menuBar = new JMenuBar();
         JMenu file = new JMenu("Datei");
         JMenu settings = new JMenu("Einstellungen");
+        JMenu stationList = new JMenu("Senderliste");
         menuBar.add(file);
         menuBar.add(settings);
+        menuBar.add(stationList);
         JMenuItem exitProgram = new JMenuItem("Beenden");
         file.add(exitProgram);
         JMenuItem generalSettings = new JMenuItem("Allgemeine Einstellungen");
@@ -25,6 +27,8 @@ public class MenuBar extends JPanel {
         JMenuItem generalRecordingSettings = new JMenuItem("Einstellungen Audioaufnahme");
         settings.add(generalSettings);
         settings.add(generalRecordingSettings);
+        JMenuItem addStationItem = new JMenuItem("Sender hinzufügen");
+        stationList.add(addStationItem);
         this.add(menuBar);
         //change default center alignment to left alignment
         this.setLayout(new FlowLayout(FlowLayout.LEFT));

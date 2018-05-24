@@ -18,6 +18,13 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
     private Map<String, String> id3Values;
     private boolean interrupted;
 
+    /**
+     * instanciates the icyReader class.
+     * see @https://cast.readme.io/docs/icy for detailed informatoin about ICY and its specification
+     * @param icyURL the mp3 stream url
+     * @throws IOException if reading the icy stream fails
+     */
+
     public IcyInputStreamReader(URL icyURL) throws IOException {
         super(null);
         connection = icyURL.openConnection();
@@ -130,7 +137,6 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
             int i = 0;
             while ((i = read()) != -1) {
                 if(interrupted) {
-                    System.err.println("interupted");
                     break;
                 }
             }

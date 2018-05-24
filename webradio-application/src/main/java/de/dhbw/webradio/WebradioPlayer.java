@@ -26,6 +26,8 @@ public class WebradioPlayer {
             stationList.add(s);
             Station s2 = new Station("SWR 1", new URL("http://mp3-live.swr.de/swr1bw_m.m3u"));
             stationList.add(s2);
+            Station s3 = new Station("DasDing", new URL("http://mp3-live.dasding.de/dasding_m.m3u"));
+            stationList.add(s3);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

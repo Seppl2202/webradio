@@ -11,8 +11,7 @@ public class Gui extends JFrame {
     private PlayerControlPanel playerControlPanel;
     private JPanel mainPanel;
     private StatusBar statusBar;
-    private StationsTableModel stationsTableModel;
-    private JTable stationsTable;
+    private StationsTable stationsTable;
     private StreamDetails streamDetails;
     private MenuBar menuBar;
     private JTabbedPane streamAudioDetails;
@@ -34,9 +33,7 @@ public class Gui extends JFrame {
         playerControlPanel = new PlayerControlPanel();
         statusBar = new StatusBar();
         mainPanel.add(statusBar, BorderLayout.SOUTH);
-        stationsTableModel = new StationsTableModel(WebradioPlayer.getStationList());
-        stationsTable = new JTable();
-        stationsTable.setModel(stationsTableModel);
+        stationsTable = new StationsTable();
         mainPanel.add(new JScrollPane(stationsTable), BorderLayout.WEST);
         streamDetails = new StreamDetails();
         menuBar = new MenuBar();
@@ -58,11 +55,11 @@ public class Gui extends JFrame {
     }
 
     public StationsTableModel getStationsTableModel() {
-        return stationsTableModel;
+        return stationsTable.getTableModel();
     }
 
     public JTable getStationsTable() {
-        return stationsTable;
+        return stationsTable.getStationsTable();
     }
 
     public StreamDetails getStreamDetails() {

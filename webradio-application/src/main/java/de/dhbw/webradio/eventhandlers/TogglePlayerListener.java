@@ -2,6 +2,7 @@ package de.dhbw.webradio.eventhandlers;
 
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.gui.GUIHandler;
+import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
@@ -19,8 +20,15 @@ public class TogglePlayerListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
 
+
         PlayerFactory playerFactory = new PlayerFactory();
-        s = WebradioPlayer.getGui().getStationsTableModel().getStationFromIndex(WebradioPlayer.getGui().getStationsTable().getSelectedRow());
+        if (Gui.getInstance().getStationsTable().getRowSorter() != null) {
+            int selectedRow = Gui.getInstance().getStationsTable().getSelectedRow();
+            int realRow = Gui.getInstance().getStationsTable().getRowSorter().convertRowIndexToModel(selectedRow);
+            s = Gui.getInstance().getStationsTableModel().getStationFromIndex(realRow);
+        } else {
+            s = Gui.getInstance().getStationsTableModel().getStationFromIndex(Gui.getInstance().getStationsTable().getSelectedRow());
+        }
         AbstractPlayer actualPlayer = WebradioPlayer.getPlayer();
         //if no player was created yet, directly create a new one
         if (actualPlayer == null) {
