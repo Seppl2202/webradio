@@ -18,11 +18,13 @@ public class GUIHandler {
     public void notifyNewIcyData(IcyInputStreamReader reader) {
         Gui.getInstance().getStatusBar().updateActualStation(reader.getStationName());
         Gui.getInstance().getStatusBar().updateAdditionalM3uInfo(reader.getActualTitle());
+        Gui.getInstance().getStreamDetails().updateM3uUrl(reader.getStationName() + ": " + reader.getStationUrl());
+        Gui.getInstance().getStreamDetails().updateM3uInfo(reader.getActualTitle());
     }
 
     public void updateGui(Station station, IcyInputStreamReader icyReader, AbstractPlayer player) {
-        Gui.getInstance().getStreamDetails().updateM3uUrl("Aktuell wird kein M3U-Stream wiedergegben");
-        Gui.getInstance().getStreamDetails().updateM3uInfo("Kein M3U-Stream verfügbar");
+        Gui.getInstance().getStreamDetails().updateM3uUrl(icyReader.getStationName() + ": " + icyReader.getStationUrl());
+        Gui.getInstance().getStreamDetails().updateM3uInfo(icyReader.getActualTitle());
         Gui.getInstance().getStreamDetails().updateStreamUrl(station.getStationURL().toString());
         Gui.getInstance().getStreamDetails().updateStationName(station.getName());
         Gui.getInstance().getStatusBar().updateActualStation(icyReader.getStationName());
@@ -49,7 +51,6 @@ public class GUIHandler {
         Gui.getInstance().getAudioDetails().changeSamplerate(0);
         Gui.getInstance().getAudioDetails().changeChannelsText(0);
         Gui.getInstance().getAudioDetails().changeFormat("Aktuell keine Wiederegabe");
-        Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setText("Start");
         Gui.getInstance().getStreamDetails().updateM3uInfo("Aktuell keine Wiedergabe");
         Gui.getInstance().getStreamDetails().updateStationName("Aktuell keine Wiedergabe");
         Gui.getInstance().getStreamDetails().updateM3uUrl("Aktuell keine Wiedergabe");
@@ -63,5 +64,11 @@ public class GUIHandler {
         } else {
             Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setText("Start");
         }
+    }
+
+    public void updateAudioDetails(AbstractPlayer player) {
+        Gui.getInstance().getAudioDetails().changeChannelsText(player.getAudioFormatChannels());
+        Gui.getInstance().getAudioDetails().changeFormat(player.getAudioFormatEncoding());
+        Gui.getInstance().getAudioDetails().changeSamplerate(player.getAudioFormatSampleRate());
     }
 }

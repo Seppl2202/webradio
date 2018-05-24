@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="93051cbf-cb4f-4e2c-be0f-8b03cdfea2d6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/WebradioPlayer.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/WebradioPlayer.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/TogglePlayerListener.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/TogglePlayerListener.java" />
       <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/GUIHandler.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/GUIHandler.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/Gui.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/Gui.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/AbstractPlayer.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/AbstractPlayer.java" />
       <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/IcyInputStreamReader.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/IcyInputStreamReader.java" />
+      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/Mp3Player.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/Mp3Player.java" />
     </list>
     <ignored path="$PROJECT_DIR$/webradio-application/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -26,17 +23,9 @@
       <file leaf-file-name="WebradioPlayer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/WebradioPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="399">
-              <caret line="34" column="31" lean-forward="false" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+            <state relative-caret-position="105">
+              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding>
-                <element signature="e#1479#1480#0" expanded="true" />
-                <element signature="e#1513#1514#0" expanded="true" />
-                <element signature="e#1565#1566#0" expanded="true" />
-                <element signature="e#1599#1600#0" expanded="true" />
-                <element signature="e#1650#1651#0" expanded="true" />
-                <element signature="e#1691#1692#0" expanded="true" />
-                <element signature="e#1735#1736#0" expanded="true" />
-                <element signature="e#1766#1767#0" expanded="true" />
                 <element signature="e#1823#1824#0" expanded="true" />
                 <element signature="e#1873#1874#0" expanded="true" />
               </folding>
@@ -44,22 +33,45 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TogglePlayerListener.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/TogglePlayerListener.java">
+      <file leaf-file-name="Mp3Player.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/Mp3Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="30" column="59" lean-forward="false" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
+            <state relative-caret-position="3171">
+              <caret line="157" column="35" lean-forward="false" selection-start-line="157" selection-start-column="35" selection-end-line="157" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IncreaseVolumeListener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/IncreaseVolumeListener.java">
+      <file leaf-file-name="SettingsWriter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/settings/SettingsWriter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="13" column="58" lean-forward="false" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="58" />
+            <state relative-caret-position="63">
+              <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SettingsParser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/settings/SettingsParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GeneralSettingsWindow.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/GeneralSettingsWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="861">
+              <caret line="50" column="25" lean-forward="false" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
+              <folding>
+                <element signature="e#1686#1687#0" expanded="true" />
+                <element signature="e#1758#1759#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -67,51 +79,24 @@
       <file leaf-file-name="GUIHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/GUIHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="29" column="72" lean-forward="false" selection-start-line="29" selection-start-column="72" selection-end-line="29" selection-end-column="72" />
+            <state relative-caret-position="490">
+              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#348#349#0" expanded="true" />
                 <element signature="e#381#382#0" expanded="true" />
-                <element signature="e#1615#1616#0" expanded="true" />
-                <element signature="e#1680#1681#0" expanded="true" />
+                <element signature="e#1833#1834#0" expanded="true" />
+                <element signature="e#1898#1899#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractPlayer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/AbstractPlayer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="172" column="48" lean-forward="false" selection-start-line="172" selection-start-column="48" selection-end-line="172" selection-end-column="48" />
-              <folding>
-                <element signature="e#4127#4128#0" expanded="true" />
-                <element signature="e#4191#4192#0" expanded="true" />
-                <element signature="e#4233#4234#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Gui.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/Gui.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-              <folding>
-                <element signature="e#676#677#0" expanded="true" />
-                <element signature="e#702#703#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IcyInputStreamReader.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="IcyInputStreamReader.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/IcyInputStreamReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="133" column="53" lean-forward="false" selection-start-line="133" selection-start-column="53" selection-end-line="133" selection-end-column="53" />
+            <state relative-caret-position="427">
+              <caret line="132" column="50" lean-forward="false" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="50" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3248#3249#0" expanded="true" />
@@ -122,446 +107,47 @@
                 <element signature="e#3478#3479#0" expanded="true" />
                 <element signature="e#3510#3511#0" expanded="true" />
                 <element signature="e#3559#3560#0" expanded="true" />
-                <element signature="e#3897#3898#0" expanded="true" />
+                <element signature="e#3596#3597#0" expanded="true" />
+                <element signature="e#3643#3644#0" expanded="true" />
+                <element signature="e#4053#4054#0" expanded="true" />
+                <element signature="e#4099#4100#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JAVA/de.dhbw.webradio" pinned="false" current-in-tab="false">
-        <entry file="uml://JAVA/de.dhbw.webradio">
-          <provider selected="true" editor-type-id="UmlEditorProvider">
-            <state>
-              <ID>JAVA</ID>
-              <OriginalElement>de.dhbw.webradio</OriginalElement>
-              <nodes>
-                <node x="1007.2202380952386" y="578.0">de.dhbw.webradio.gui.PlayerControlPanel</node>
-                <node x="1751.4155952380968" y="354.0">de.dhbw.webradio.gui.GUIHandler</node>
-                <node x="755.1235660173164" y="725.0">de.dhbw.webradio.gui.Gui</node>
-                <node x="838.4568993506497" y="578.0">de.dhbw.webradio.gui.MenuBar</node>
-                <node x="1070.9702380952385" y="237.0">de.dhbw.webradio.radioplayer.Factory</node>
-                <node x="1537.7202380952385" y="471.0">de.dhbw.webradio.eventhandlers.MuteVolumeListener</node>
-                <node x="2101.516423160174" y="471.0">de.dhbw.webradio.eventhandlers.DecreaseVolumeListener</node>
-                <node x="202.0" y="974.0">de.dhbw.webradio.gui.StationsTable</node>
-                <node x="287.59523809523864" y="578.0">de.dhbw.webradio.gui.AudioDetails</node>
-                <node x="1215.2202380952385" y="578.0">de.dhbw.webradio.gui.StreamDetails</node>
-                <node x="63.845238095238756" y="725.0">de.dhbw.webradio.settings.SettingsParser</node>
-                <node x="0.0" y="974.0">de.dhbw.webradio.settings.SettingsWriter</node>
-                <node x="897.0801190476187" y="354.0">de.dhbw.webradio.radioplayer.PlayerFactory</node>
-                <node x="771.4568993506497" y="471.0">de.dhbw.webradio.eventhandlers.GeneralSettingsEventHandler</node>
-                <node x="1443.9702380952385" y="237.0">de.dhbw.webradio.radioplayer.Mp3Player</node>
-                <node x="221.59523809523864" y="354.0">de.dhbw.webradio.gui.GeneralSettingsWindow</node>
-                <node x="437.4328625541134" y="0.0">de.dhbw.webradio.models.Station</node>
-                <node x="456.59523809523864" y="578.0">de.dhbw.webradio.models.StationsTableModel</node>
-                <node x="810.5411958874467" y="0.0">de.dhbw.webradio.exceptions.NoURLTagFoundException</node>
-                <node x="26.59523809523853" y="471.0">de.dhbw.webradio.settings.RecordSettings</node>
-                <node x="400.0" y="974.0">de.dhbw.webradio.logger.Logger</node>
-                <node x="708.9702380952386" y="237.0">de.dhbw.webradio.m3uparser.M3uParser</node>
-                <node x="1862.5164231601734" y="471.0">de.dhbw.webradio.eventhandlers.IncreaseVolumeListener</node>
-                <node x="723.7485660173164" y="892.0">de.dhbw.webradio.WebradioPlayer</node>
-                <node x="196.34416666666823" y="237.0">de.dhbw.webradio.settings.GeneralSettings</node>
-                <node x="118.59523809523876" y="578.0">de.dhbw.webradio.settings.Settings</node>
-                <node x="693.4568993506497" y="578.0">de.dhbw.webradio.gui.StatusBar</node>
-                <node x="1133.1568993506496" y="471.0">de.dhbw.webradio.eventhandlers.TogglePlayerListener</node>
-                <node x="1145.1661958874467" y="0.0">de.dhbw.webradio.enumerations.FileExtension</node>
-                <node x="1213.9702380952385" y="237.0">de.dhbw.webradio.radioplayer.IcyInputStreamReader</node>
-                <node x="1759.7911958874467" y="0.0">de.dhbw.webradio.radioplayer.AbstractPlayer</node>
-                <node x="861.9702380952386" y="237.0">de.dhbw.webradio.m3uparser.FileExtensionParser</node>
-              </nodes>
-              <notes />
-              <edges>
-                <edge source="de.dhbw.webradio.eventhandlers.DecreaseVolumeListener" target="de.dhbw.webradio.WebradioPlayer">
-                  <point x="56.5" y="18.5" />
-                  <point x="2271.016423160174" y="832.0" />
-                  <point x="856.5342803030306" y="832.0" />
-                  <point x="48.28571428571422" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.GUIHandler" target="de.dhbw.webradio.WebradioPlayer">
-                  <point x="0.0" y="18.5" />
-                  <point x="1821.4155952380968" y="812.0" />
-                  <point x="840.4390422077926" y="812.0" />
-                  <point x="32.19047619047615" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.IncreaseVolumeListener" target="de.dhbw.webradio.radioplayer.AbstractPlayer">
-                  <point x="54.75" y="-18.5" />
-                  <point x="2026.7664231601734" y="97.0" />
-                  <point x="1858.5411958874467" y="97.0" />
-                  <point x="19.75" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.MuteVolumeListener" target="de.dhbw.webradio.WebradioPlayer">
-                  <point x="49.75" y="18.5" />
-                  <point x="1686.9702380952385" y="538.0" />
-                  <point x="1787.2667857142874" y="538.0" />
-                  <point x="1787.2667857142874" y="802.0" />
-                  <point x="832.3914231601735" y="802.0" />
-                  <point x="24.14285714285711" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.Gui" target="de.dhbw.webradio.WebradioPlayer">
-                  <point x="31.875" y="18.5" />
-                  <point x="829.4985660173164" y="782.0" />
-                  <point x="816.2961850649355" y="782.0" />
-                  <point x="8.047619047619037" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.WebradioPlayer" target="de.dhbw.webradio.models.Station">
-                  <point x="-80.47619047619037" y="-18.5" />
-                  <point x="727.772375541126" y="872.0" />
-                  <point x="0.0" y="872.0" />
-                  <point x="0.0" y="197.0" />
-                  <point x="442.9328625541134" y="197.0" />
-                  <point x="-49.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.GeneralSettingsWindow" target="de.dhbw.webradio.settings.GeneralSettings">
-                  <point x="-55.5" y="-18.5" />
-                  <point x="277.09523809523864" y="334.0" />
-                  <point x="300.71916666666823" y="334.0" />
-                  <point x="20.875" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.settings.SettingsParser" target="de.dhbw.webradio.settings.Settings">
-                  <point x="-39.0" y="-18.5" />
-                  <point x="102.84523809523876" y="705.0" />
-                  <point x="162.09523809523876" y="705.0" />
-                  <point x="-14.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.Gui" target="de.dhbw.webradio.gui.AudioDetails">
-                  <point x="-40.0" y="-18.5" />
-                  <point x="757.6235660173164" y="705.0" />
-                  <point x="312.428571428572" y="705.0" />
-                  <point x="-49.666666666666686" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.TogglePlayerListener" target="de.dhbw.webradio.gui.GUIHandler">
-                  <point x="89.33333333333326" y="-18.5" />
-                  <point x="1322.9902326839829" y="441.0" />
-                  <point x="1765.4155952380968" y="441.0" />
-                  <point x="-56.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.PlayerFactory" target="de.dhbw.webradio.models.Station">
-                  <point x="-67.95000000000005" y="-18.5" />
-                  <point x="904.6301190476187" y="334.0" />
-                  <point x="698.4702380952386" y="334.0" />
-                  <point x="698.4702380952386" y="177.0" />
-                  <point x="519.9328625541134" y="177.0" />
-                  <point x="27.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.models.StationsTableModel" target="de.dhbw.webradio.models.Station">
-                  <point x="49.0" y="-18.5" />
-                  <point x="603.5952380952386" y="558.0" />
-                  <point x="580.9568993506497" y="558.0" />
-                  <point x="580.9568993506497" y="207.0" />
-                  <point x="486.9328625541134" y="207.0" />
-                  <point x="-5.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.Factory" target="de.dhbw.webradio.radioplayer.AbstractPlayer">
-                  <point x="27.75" y="-18.5" />
-                  <point x="1154.2202380952385" y="167.0" />
-                  <point x="1766.37452922078" y="167.0" />
-                  <point x="-72.41666666666674" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.DecreaseVolumeListener" target="de.dhbw.webradio.gui.GUIHandler">
-                  <point x="-56.5" y="-18.5" />
-                  <point x="2158.016423160174" y="441.0" />
-                  <point x="1877.4155952380968" y="441.0" />
-                  <point x="56.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.GUIHandler" target="de.dhbw.webradio.models.Station">
-                  <point x="17.5" y="-18.5" />
-                  <point x="1838.9155952380968" y="334.0" />
-                  <point x="1850.9155952380968" y="334.0" />
-                  <point x="1850.9155952380968" y="117.0" />
-                  <point x="541.9328625541134" y="117.0" />
-                  <point x="49.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.PlayerFactory" target="de.dhbw.webradio.exceptions.NoURLTagFoundException">
-                  <point x="-22.649999999999864" y="-18.5" />
-                  <point x="949.9301190476189" y="304.0" />
-                  <point x="851.4702380952386" y="304.0" />
-                  <point x="851.4702380952386" y="147.0" />
-                  <point x="990.5411958874467" y="147.0" />
-                  <point x="60.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.AbstractPlayer" target="de.dhbw.webradio.WebradioPlayer">
-                  <point x="72.41666666666652" y="18.5" />
-                  <point x="1911.2078625541133" y="57.0" />
-                  <point x="2362.1592803030308" y="57.0" />
-                  <point x="2362.1592803030308" y="872.0" />
-                  <point x="888.7247564935068" y="872.0" />
-                  <point x="80.47619047619037" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.PlayerFactory" target="de.dhbw.webradio.m3uparser.FileExtensionParser">
-                  <point x="-7.5499999999999545" y="-18.5" />
-                  <point x="965.0301190476188" y="294.0" />
-                  <point x="909.2202380952386" y="294.0" />
-                  <point x="-47.25" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.IncreaseVolumeListener" target="de.dhbw.webradio.gui.GUIHandler">
-                  <point x="-54.75" y="-18.5" />
-                  <point x="1917.2664231601734" y="451.0" />
-                  <point x="1849.4155952380968" y="451.0" />
-                  <point x="28.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.m3uparser.FileExtensionParser" target="de.dhbw.webradio.enumerations.FileExtension">
-                  <point x="0.0" y="-18.5" />
-                  <point x="956.4702380952386" y="157.0" />
-                  <point x="1182.4161958874467" y="157.0" />
-                  <point x="-37.25" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.TogglePlayerListener" target="de.dhbw.webradio.models.Station">
-                  <point x="-89.33333333333326" y="-18.5" />
-                  <point x="1144.3235660173164" y="441.0" />
-                  <point x="639.2202380952386" y="441.0" />
-                  <point x="639.2202380952386" y="197.0" />
-                  <point x="497.9328625541134" y="197.0" />
-                  <point x="5.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.PlayerControlPanel" target="de.dhbw.webradio.eventhandlers.DecreaseVolumeListener">
-                  <point x="70.5" y="-18.5" />
-                  <point x="1171.7202380952385" y="558.0" />
-                  <point x="2158.016423160174" y="558.0" />
-                  <point x="-56.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.Mp3Player" target="de.dhbw.webradio.radioplayer.AbstractPlayer">
-                  <point x="33.25" y="-18.5" />
-                  <point x="1543.7202380952385" y="207.0" />
-                  <point x="1819.0411958874467" y="207.0" />
-                  <point x="-19.75" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.PlayerControlPanel" target="de.dhbw.webradio.eventhandlers.MuteVolumeListener">
-                  <point x="-23.5" y="-18.5" />
-                  <point x="1077.7202380952385" y="538.0" />
-                  <point x="1587.4702380952385" y="538.0" />
-                  <point x="-49.75" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.WebradioPlayer" target="de.dhbw.webradio.gui.Gui">
-                  <point x="0.0" y="-18.5" />
-                  <point x="10.625" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.PlayerFactory" target="de.dhbw.webradio.enumerations.FileExtension">
-                  <point x="37.75" y="-18.5" />
-                  <point x="1010.3301190476187" y="314.0" />
-                  <point x="1192.4702380952385" y="314.0" />
-                  <point x="1192.4702380952385" y="157.0" />
-                  <point x="1256.9161958874467" y="157.0" />
-                  <point x="37.25" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.PlayerFactory" target="de.dhbw.webradio.radioplayer.AbstractPlayer">
-                  <point x="52.84999999999991" y="-18.5" />
-                  <point x="1025.4301190476185" y="324.0" />
-                  <point x="1203.4702380952385" y="324.0" />
-                  <point x="1203.4702380952385" y="177.0" />
-                  <point x="1779.5411958874467" y="177.0" />
-                  <point x="-59.25" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.Gui" target="de.dhbw.webradio.gui.StatusBar">
-                  <point x="-10.0" y="-18.5" />
-                  <point x="787.6235660173164" y="645.0" />
-                  <point x="714.2902326839829" y="645.0" />
-                  <point x="-41.66666666666674" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.WebradioPlayer" target="de.dhbw.webradio.settings.Settings">
-                  <point x="-56.33333333333326" y="-18.5" />
-                  <point x="751.9152326839832" y="842.0" />
-                  <point x="53.34523809523853" y="842.0" />
-                  <point x="53.34523809523853" y="695.0" />
-                  <point x="133.09523809523876" y="695.0" />
-                  <point x="-43.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.MenuBar" target="de.dhbw.webradio.eventhandlers.GeneralSettingsEventHandler">
-                  <point x="0.0" y="-18.5" />
-                  <point x="0.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.PlayerFactory" target="de.dhbw.webradio.m3uparser.M3uParser">
-                  <point x="-37.75" y="-18.5" />
-                  <point x="934.8301190476187" y="314.0" />
-                  <point x="807.9702380952386" y="314.0" />
-                  <point x="33.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.WebradioPlayer" target="de.dhbw.webradio.settings.SettingsParser">
-                  <point x="-48.28571428571422" y="-18.5" />
-                  <point x="759.9628517316022" y="832.0" />
-                  <point x="102.84523809523876" y="832.0" />
-                  <point x="-39.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.DecreaseVolumeListener" target="de.dhbw.webradio.radioplayer.AbstractPlayer">
-                  <point x="56.5" y="-18.5" />
-                  <point x="2271.016423160174" y="87.0" />
-                  <point x="1871.7078625541133" y="87.0" />
-                  <point x="32.916666666666515" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.IncreaseVolumeListener" target="de.dhbw.webradio.WebradioPlayer">
-                  <point x="54.75" y="18.5" />
-                  <point x="2026.7664231601734" y="822.0" />
-                  <point x="848.4866612554116" y="822.0" />
-                  <point x="40.238095238095184" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.TogglePlayerListener" target="de.dhbw.webradio.WebradioPlayer">
-                  <point x="50.25" y="18.5" />
-                  <point x="1283.9068993506496" y="528.0" />
-                  <point x="1381.7202380952385" y="528.0" />
-                  <point x="1381.7202380952385" y="792.0" />
-                  <point x="824.3438041125545" y="792.0" />
-                  <point x="16.095238095238074" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.TogglePlayerListener" target="de.dhbw.webradio.radioplayer.IcyInputStreamReader">
-                  <point x="0.0" y="-18.5" />
-                  <point x="1233.6568993506496" y="324.0" />
-                  <point x="1234.8702380952386" y="324.0" />
-                  <point x="-83.60000000000002" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.Gui" target="de.dhbw.webradio.gui.StreamDetails">
-                  <point x="35.0" y="-18.5" />
-                  <point x="832.6235660173164" y="695.0" />
-                  <point x="1293.2202380952385" y="695.0" />
-                  <point x="0.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.GUIHandler" target="de.dhbw.webradio.radioplayer.AbstractPlayer">
-                  <point x="52.5" y="-18.5" />
-                  <point x="1873.9155952380968" y="334.0" />
-                  <point x="1948.1414231601734" y="334.0" />
-                  <point x="1948.1414231601734" y="107.0" />
-                  <point x="1845.3745292207802" y="107.0" />
-                  <point x="6.583333333333485" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.Gui" target="de.dhbw.webradio.models.StationsTableModel">
-                  <point x="-15.0" y="-18.5" />
-                  <point x="782.6235660173164" y="655.0" />
-                  <point x="619.928571428572" y="655.0" />
-                  <point x="65.33333333333331" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.WebradioPlayer" target="de.dhbw.webradio.radioplayer.AbstractPlayer">
-                  <point x="64.3809523809523" y="-18.5" />
-                  <point x="872.6295183982687" y="852.0" />
-                  <point x="2346.0640422077927" y="852.0" />
-                  <point x="2346.0640422077927" y="77.0" />
-                  <point x="1884.8745292207802" y="77.0" />
-                  <point x="46.083333333333485" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.m3uparser.M3uParser" target="de.dhbw.webradio.exceptions.NoURLTagFoundException">
-                  <point x="0.0" y="-18.5" />
-                  <point x="774.9702380952386" y="137.0" />
-                  <point x="870.5411958874467" y="137.0" />
-                  <point x="-60.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.PlayerFactory" target="de.dhbw.webradio.radioplayer.Mp3Player">
-                  <point x="67.95000000000005" y="-18.5" />
-                  <point x="1040.5301190476189" y="334.0" />
-                  <point x="1477.2202380952385" y="334.0" />
-                  <point x="-33.25" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.settings.Settings" target="de.dhbw.webradio.settings.GeneralSettings">
-                  <point x="14.5" y="-18.5" />
-                  <point x="191.09523809523876" y="558.0" />
-                  <point x="200.09523809523864" y="558.0" />
-                  <point x="200.09523809523864" y="324.0" />
-                  <point x="217.21916666666823" y="324.0" />
-                  <point x="-62.625" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.TogglePlayerListener" target="de.dhbw.webradio.radioplayer.AbstractPlayer">
-                  <point x="67.0" y="-18.5" />
-                  <point x="1300.6568993506496" y="431.0" />
-                  <point x="1433.4702380952385" y="431.0" />
-                  <point x="1433.4702380952385" y="187.0" />
-                  <point x="1792.7078625541135" y="187.0" />
-                  <point x="-46.08333333333326" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.GUIHandler" target="de.dhbw.webradio.radioplayer.IcyInputStreamReader">
-                  <point x="-52.5" y="-18.5" />
-                  <point x="1768.9155952380968" y="324.0" />
-                  <point x="1360.2702380952387" y="324.0" />
-                  <point x="41.799999999999955" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.IcyInputStreamReader" target="de.dhbw.webradio.gui.GUIHandler">
-                  <point x="83.60000000000002" y="18.5" />
-                  <point x="1402.0702380952387" y="314.0" />
-                  <point x="1803.9155952380968" y="314.0" />
-                  <point x="-17.5" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.PlayerControlPanel" target="de.dhbw.webradio.eventhandlers.IncreaseVolumeListener">
-                  <point x="23.5" y="-18.5" />
-                  <point x="1124.7202380952385" y="548.0" />
-                  <point x="1917.2664231601734" y="548.0" />
-                  <point x="-54.75" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.GeneralSettingsWindow" target="de.dhbw.webradio.WebradioPlayer">
-                  <point x="-55.5" y="18.5" />
-                  <point x="277.09523809523864" y="802.0" />
-                  <point x="784.1057088744593" y="802.0" />
-                  <point x="-24.14285714285711" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.PlayerControlPanel" target="de.dhbw.webradio.eventhandlers.TogglePlayerListener">
-                  <point x="-70.5" y="-18.5" />
-                  <point x="1030.7202380952385" y="528.0" />
-                  <point x="1183.4068993506496" y="528.0" />
-                  <point x="-50.25" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.Gui" target="de.dhbw.webradio.gui.MenuBar">
-                  <point x="5.0" y="-18.5" />
-                  <point x="802.6235660173164" y="635.0" />
-                  <point x="868.9568993506497" y="635.0" />
-                  <point x="-30.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.PlayerFactory" target="de.dhbw.webradio.radioplayer.Factory">
-                  <point x="22.65000000000009" y="-18.5" />
-                  <point x="995.2301190476188" y="304.0" />
-                  <point x="1126.4702380952385" y="304.0" />
-                  <point x="0.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.TogglePlayerListener" target="de.dhbw.webradio.radioplayer.PlayerFactory">
-                  <point x="-44.66666666666663" y="-18.5" />
-                  <point x="1188.9902326839829" y="421.0" />
-                  <point x="934.8301190476187" y="421.0" />
-                  <point x="-37.75" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.MuteVolumeListener" target="de.dhbw.webradio.radioplayer.AbstractPlayer">
-                  <point x="-49.75" y="-18.5" />
-                  <point x="1587.4702380952385" y="217.0" />
-                  <point x="1832.2078625541133" y="217.0" />
-                  <point x="-6.583333333333485" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.settings.Settings" target="de.dhbw.webradio.settings.RecordSettings">
-                  <point x="-43.5" y="-18.5" />
-                  <point x="133.09523809523876" y="558.0" />
-                  <point x="67.34523809523853" y="558.0" />
-                  <point x="-40.75" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.gui.Gui" target="de.dhbw.webradio.gui.PlayerControlPanel">
-                  <point x="25.0" y="-18.5" />
-                  <point x="822.6235660173164" y="675.0" />
-                  <point x="1163.8869047619053" y="675.0" />
-                  <point x="62.66666666666663" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.Mp3Player" target="de.dhbw.webradio.WebradioPlayer">
-                  <point x="33.25" y="18.5" />
-                  <point x="1543.7202380952385" y="304.0" />
-                  <point x="2338.016423160174" y="304.0" />
-                  <point x="2338.016423160174" y="842.0" />
-                  <point x="864.5818993506497" y="842.0" />
-                  <point x="56.33333333333326" y="-18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.radioplayer.Factory" target="de.dhbw.webradio.models.Station">
-                  <point x="-27.75" y="-18.5" />
-                  <point x="1098.7202380952385" y="127.0" />
-                  <point x="530.9328625541134" y="127.0" />
-                  <point x="38.5" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.MuteVolumeListener" target="de.dhbw.webradio.gui.GUIHandler">
-                  <point x="49.75" y="-18.5" />
-                  <point x="1686.9702380952385" y="451.0" />
-                  <point x="1793.4155952380968" y="451.0" />
-                  <point x="-28.0" y="18.5" />
-                </edge>
-                <edge source="de.dhbw.webradio.eventhandlers.GeneralSettingsEventHandler" target="de.dhbw.webradio.gui.GeneralSettingsWindow">
-                  <point x="0.0" y="-18.5" />
-                  <point x="899.4568993506497" y="451.0" />
-                  <point x="388.09523809523864" y="451.0" />
-                  <point x="55.5" y="18.5" />
-                </edge>
-              </edges>
-              <settings layout="Hierarchic Group" zoom="0.8663120567375885" x="997.0364306180925" y="410.03643061809254" />
-              <SelectedNodes>
-                <node>de.dhbw.webradio.gui.StatusBar</node>
-              </SelectedNodes>
-              <Categories />
-              <SCOPE>All</SCOPE>
-              <VISIBILITY>private</VISIBILITY>
+      <file leaf-file-name="TogglePlayerListener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/TogglePlayerListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="30" column="49" lean-forward="true" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbstractPlayer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/AbstractPlayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="54" column="38" lean-forward="false" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
+              <folding>
+                <element signature="e#4095#4096#0" expanded="true" />
+                <element signature="e#4127#4128#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StreamDetails.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/StreamDetails.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="777">
+              <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+              <folding>
+                <element signature="e#1074#1075#0" expanded="true" />
+                <element signature="e#1118#1119#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -623,7 +209,6 @@
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/WebradioPlayer.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/PlayerFactory.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/logger/Logger.java" />
-        <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/Mp3Player.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/test/java/de/dhbw/webradio/test/SettingsParserTest.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/resources/settings/general.yaml" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/settings/Settings.java" />
@@ -641,10 +226,11 @@
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/settings/SettingsParser.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/WebradioPlayer.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/Gui.java" />
-        <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/GUIHandler.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/AbstractPlayer.java" />
-        <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/IcyInputStreamReader.java" />
+        <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/Mp3Player.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/TogglePlayerListener.java" />
+        <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/GUIHandler.java" />
+        <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/IcyInputStreamReader.java" />
       </list>
     </option>
   </component>
@@ -682,10 +268,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -1131,6 +717,8 @@
       <workItem from="1527151585528" duration="122000" />
       <workItem from="1527153526330" duration="9188000" />
       <workItem from="1527166390488" duration="1992000" />
+      <workItem from="1527179133946" duration="737000" />
+      <workItem from="1527182467140" duration="393000" />
     </task>
     <servers />
   </component>
@@ -1167,11 +755,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49145000" />
+    <option name="totallyTimeSpent" value="50462000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1186,7 +773,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26530612" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2728249" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24973147" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1296,13 +883,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/StreamDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="42" column="41" lean-forward="false" selection-start-line="42" selection-start-column="41" selection-end-line="42" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/AudioDetails.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
@@ -1351,9 +931,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="11" column="5" lean-forward="false" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1368,9 +945,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1378,7 +952,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="27" column="54" lean-forward="false" selection-start-line="27" selection-start-column="54" selection-end-line="27" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1386,15 +959,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/Mp3Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1533">
-          <caret line="78" column="78" lean-forward="false" selection-start-line="78" selection-start-column="78" selection-end-line="78" selection-end-column="78" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1402,13 +966,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="26" column="60" lean-forward="false" selection-start-line="26" selection-start-column="60" selection-end-line="26" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#279#280#0" expanded="false" />
-            <element signature="e#317#318#0" expanded="false" />
-            <element signature="e#382#383#0" expanded="false" />
-            <element signature="e#426#427#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1430,15 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="6" column="49" lean-forward="false" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
-          <folding>
-            <element signature="e#235#236#0" expanded="false" />
-            <element signature="e#306#307#0" expanded="false" />
-            <element signature="e#360#361#0" expanded="false" />
-            <element signature="e#409#410#0" expanded="false" />
-            <element signature="e#446#447#0" expanded="false" />
-            <element signature="e#514#515#0" expanded="false" />
-            <element signature="e#566#567#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1446,13 +994,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#276#277#0" expanded="false" />
-            <element signature="e#309#310#0" expanded="false" />
-            <element signature="e#374#375#0" expanded="false" />
-            <element signature="e#418#419#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1460,13 +1001,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="6" column="73" lean-forward="false" selection-start-line="6" selection-start-column="73" selection-end-line="6" selection-end-column="73" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#279#280#0" expanded="false" />
-            <element signature="e#317#318#0" expanded="false" />
-            <element signature="e#382#383#0" expanded="false" />
-            <element signature="e#426#427#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1474,11 +1008,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="9" column="25" lean-forward="false" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#283#284#0" expanded="false" />
-            <element signature="e#326#327#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1570,19 +1099,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="23" column="75" lean-forward="false" selection-start-line="23" selection-start-column="75" selection-end-line="23" selection-end-column="75" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/ID3TagParser.java" />
     <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/GeneralSettingsWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-138">
-          <caret line="42" column="42" lean-forward="false" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
+        <state relative-caret-position="861">
+          <caret line="50" column="25" lean-forward="false" selection-start-line="50" selection-start-column="25" selection-end-line="50" selection-end-column="25" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1686#1687#0" expanded="false" />
-            <element signature="e#1758#1759#0" expanded="false" />
+            <element signature="e#1686#1687#0" expanded="true" />
+            <element signature="e#1758#1759#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1598,17 +1125,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="798">
           <caret line="46" column="5" lean-forward="false" selection-start-line="46" selection-start-column="5" selection-end-line="46" selection-end-column="5" />
-          <folding>
-            <element signature="e#1488#1489#0" expanded="false" />
-            <element signature="e#1557#1558#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/settings/SettingsWriter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="27" lean-forward="false" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        <state relative-caret-position="63">
+          <caret line="3" column="1" lean-forward="false" selection-start-line="3" selection-start-column="1" selection-end-line="3" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -1625,15 +1148,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
           <caret line="13" column="58" lean-forward="false" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/settings/SettingsParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="20" column="62" lean-forward="false" selection-start-line="20" selection-start-column="62" selection-end-line="20" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2071,7 +1585,7 @@
               <point x="55.5" y="18.5" />
             </edge>
           </edges>
-          <settings layout="Hierarchic Group" zoom="0.8663120567375885" x="997.0364306180925" y="410.03643061809254" />
+          <settings layout="Hierarchic Group" zoom="0.8663120567375885" x="997.0" y="410.0" />
           <SelectedNodes>
             <node>de.dhbw.webradio.gui.StatusBar</node>
           </SelectedNodes>
@@ -2083,17 +1597,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/WebradioPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="34" column="31" lean-forward="false" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+        <state relative-caret-position="105">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
           <folding>
-            <element signature="e#1479#1480#0" expanded="true" />
-            <element signature="e#1513#1514#0" expanded="true" />
-            <element signature="e#1565#1566#0" expanded="true" />
-            <element signature="e#1599#1600#0" expanded="true" />
-            <element signature="e#1650#1651#0" expanded="true" />
-            <element signature="e#1691#1692#0" expanded="true" />
-            <element signature="e#1735#1736#0" expanded="true" />
-            <element signature="e#1766#1767#0" expanded="true" />
             <element signature="e#1823#1824#0" expanded="true" />
             <element signature="e#1873#1874#0" expanded="true" />
           </folding>
@@ -2104,7 +1610,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2112,7 +1617,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2120,43 +1624,73 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="9" column="37" lean-forward="false" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="37" />
-          <folding>
-            <element signature="e#676#677#0" expanded="true" />
-            <element signature="e#702#703#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/GUIHandler.java">
+    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/settings/SettingsParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="29" column="72" lean-forward="false" selection-start-line="29" selection-start-column="72" selection-end-line="29" selection-end-column="72" />
+        <state relative-caret-position="420">
+          <caret line="24" column="24" lean-forward="false" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/Mp3Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3171">
+          <caret line="157" column="35" lean-forward="false" selection-start-line="157" selection-start-column="35" selection-end-line="157" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/StreamDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="777">
+          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#348#349#0" expanded="true" />
-            <element signature="e#381#382#0" expanded="true" />
-            <element signature="e#1615#1616#0" expanded="true" />
-            <element signature="e#1680#1681#0" expanded="true" />
+            <element signature="e#1074#1075#0" expanded="true" />
+            <element signature="e#1118#1119#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/AbstractPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="172" column="48" lean-forward="false" selection-start-line="172" selection-start-column="48" selection-end-line="172" selection-end-column="48" />
+        <state relative-caret-position="241">
+          <caret line="54" column="38" lean-forward="false" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
           <folding>
+            <element signature="e#4095#4096#0" expanded="true" />
             <element signature="e#4127#4128#0" expanded="true" />
-            <element signature="e#4191#4192#0" expanded="true" />
-            <element signature="e#4233#4234#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/gui/GUIHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#348#349#0" expanded="true" />
+            <element signature="e#381#382#0" expanded="true" />
+            <element signature="e#1833#1834#0" expanded="true" />
+            <element signature="e#1898#1899#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/TogglePlayerListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="30" column="49" lean-forward="true" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/IcyInputStreamReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="133" column="53" lean-forward="false" selection-start-line="133" selection-start-column="53" selection-end-line="133" selection-end-column="53" />
+        <state relative-caret-position="427">
+          <caret line="132" column="50" lean-forward="false" selection-start-line="132" selection-start-column="50" selection-end-line="132" selection-end-column="50" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3248#3249#0" expanded="true" />
@@ -2167,16 +1701,11 @@
             <element signature="e#3478#3479#0" expanded="true" />
             <element signature="e#3510#3511#0" expanded="true" />
             <element signature="e#3559#3560#0" expanded="true" />
-            <element signature="e#3897#3898#0" expanded="true" />
+            <element signature="e#3596#3597#0" expanded="true" />
+            <element signature="e#3643#3644#0" expanded="true" />
+            <element signature="e#4053#4054#0" expanded="true" />
+            <element signature="e#4099#4100#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/TogglePlayerListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="30" column="59" lean-forward="false" selection-start-line="30" selection-start-column="59" selection-end-line="30" selection-end-column="59" />
-          <folding />
         </state>
       </provider>
     </entry>

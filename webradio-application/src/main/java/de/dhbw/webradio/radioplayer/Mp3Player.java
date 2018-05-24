@@ -1,6 +1,7 @@
 package de.dhbw.webradio.radioplayer;
 
 import de.dhbw.webradio.WebradioPlayer;
+import de.dhbw.webradio.gui.GUIHandler;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -93,9 +94,8 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
                 System.out.println("line.getControls: " + line.getControls());
                 System.out.println("line.getFormat: " + line.getFormat());
                 System.out.println("line.getLineInfo: " + line.getLineInfo());
-                WebradioPlayer.getGui().getAudioDetails().changeChannelsText(getAudioFormatChannels());
-                WebradioPlayer.getGui().getAudioDetails().changeFormat(getAudioFormatEncoding());
-                WebradioPlayer.getGui().getAudioDetails().changeSamplerate(getAudioFormatSampleRate());
+                GUIHandler.getInstance().updateAudioDetails(this);
+
 
                 songLaenge = song.length();
                 sampleSizeInBits = audioFormat.getSampleSizeInBits();

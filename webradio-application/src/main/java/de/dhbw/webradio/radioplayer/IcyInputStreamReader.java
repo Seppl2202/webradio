@@ -120,11 +120,19 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
         return id3Values.get("icy-genre");
     }
 
+    public String getStationUrl() {
+        return id3Values.get("icy-url");
+    }
+
     public void run() {
         readHeader();
         try {
             int i = 0;
-            while ((i = read()) != -1 || interrupted) {
+            while ((i = read()) != -1) {
+                if(interrupted) {
+                    System.err.println("interupted");
+                    break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
