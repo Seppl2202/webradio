@@ -1,49 +1,67 @@
 package de.dhbw.webradio.gui;
 
-import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
 
 public class GUIHandler {
-    private static GUIHandler guiHandler;
+    private static GUIHandler guiHandler = new GUIHandler();
 
     private GUIHandler() {
 
     }
 
     public static GUIHandler getInstance() {
-        if (guiHandler == null) {
-            return new GUIHandler();
-        }
         return guiHandler;
     }
 
     public void notifyNewIcyData(IcyInputStreamReader reader) {
-        WebradioPlayer.getGui().getStatusBar().updateActualStation(reader.getStationName());
-        WebradioPlayer.getGui().getStatusBar().updateAdditionalM3uInfo(reader.getActualTitle());
-        System.err.println("new data arrvived: "  + reader.getActualTitle());
+        Gui.getInstance().getStatusBar().updateActualStation(reader.getStationName());
+        Gui.getInstance().getStatusBar().updateAdditionalM3uInfo(reader.getActualTitle());
     }
 
-    public void updateGui(Station station, IcyInputStreamReader icyReader) {
-        WebradioPlayer.getGui().getStreamDetails().updateM3uUrl("Aktuell wird kein M3U-Stream wiedergegben");
-        WebradioPlayer.getGui().getStreamDetails().updateM3uInfo("Kein M3U-Stream verfügbar");
-        WebradioPlayer.getGui().getStreamDetails().updateStreamUrl(station.getStationURL().toString());
-        WebradioPlayer.getGui().getStreamDetails().updateStationName(station.getName());
-        WebradioPlayer.getGui().getStatusBar().updateActualStation(icyReader.getStationName());
-        WebradioPlayer.getGui().getStatusBar().updateAdditionalM3uInfo(icyReader.getActualTitle());
+    public void updateGui(Station station, IcyInputStreamReader icyReader, AbstractPlayer player) {
+        Gui.getInstance().getStreamDetails().updateM3uUrl("Aktuell wird kein M3U-Stream wiedergegben");
+        Gui.getInstance().getStreamDetails().updateM3uInfo("Kein M3U-Stream verfügbar");
+        Gui.getInstance().getStreamDetails().updateStreamUrl(station.getStationURL().toString());
+        Gui.getInstance().getStreamDetails().updateStationName(station.getName());
+        Gui.getInstance().getStatusBar().updateActualStation(icyReader.getStationName());
+        Gui.getInstance().getStatusBar().updateAdditionalM3uInfo(icyReader.getActualTitle());
+        Gui.getInstance().getStatusBar().updateVolume(player.getVolume());
     }
 
     public void updatePlayerDetails(AbstractPlayer player) {
-        WebradioPlayer.getGui().getPlayerControlPanel().togglePlayButton();
-        WebradioPlayer.getGui().getStatusBar().updateVolume(player.getVolume());
+        Gui.getInstance().getPlayerControlPanel().togglePlayButton();
+        Gui.getInstance().getStatusBar().updateVolume(player.getVolume());
     }
 
     public void mutePlayer() {
-        WebradioPlayer.getGui().getStatusBar().updateVolume(-1);
+        Gui.getInstance().getStatusBar().updateVolume(-1);
     }
 
     public void updatePlayerVolume(AbstractPlayer player) {
-        WebradioPlayer.getGui().getStatusBar().updateVolume(player.getVolume());
+        Gui.getInstance().getStatusBar().updateVolume(player.getVolume());
+    }
+
+    public void resetComponents() {
+        Gui.getInstance().getStatusBar().updateAdditionalM3uInfo("Keine Informationen verfügbar");
+        Gui.getInstance().getStatusBar().updateActualStation("Aktuell keine Wiedergabe");
+        Gui.getInstance().getAudioDetails().changeSamplerate(0);
+        Gui.getInstance().getAudioDetails().changeChannelsText(0);
+        Gui.getInstance().getAudioDetails().changeFormat("Aktuell keine Wiederegabe");
+        Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setText("Start");
+        Gui.getInstance().getStreamDetails().updateM3uInfo("Aktuell keine Wiedergabe");
+        Gui.getInstance().getStreamDetails().updateStationName("Aktuell keine Wiedergabe");
+        Gui.getInstance().getStreamDetails().updateM3uUrl("Aktuell keine Wiedergabe");
+        Gui.getInstance().getStreamDetails().updateStreamUrl("Aktuell keine Wiedergabe");
+        togglePlayButton();
+    }
+
+    public void togglePlayButton() {
+        if (Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().getText().equalsIgnoreCase("start")) {
+            Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setText("Stop");
+        } else {
+            Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setText("Start");
+        }
     }
 }

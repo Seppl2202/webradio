@@ -28,6 +28,7 @@ public class TogglePlayerListener implements ActionListener {
         }
         if (actualPlayer.isPlaying()) {
             actualPlayer.stop();
+            actualPlayer.getIcyReader().setInterrupted(true);
         } else {
             if (!(s == null)) {
                 try {
@@ -51,16 +52,18 @@ public class TogglePlayerListener implements ActionListener {
         }
         WebradioPlayer.setPlayer(player);
         player.play();
-        IcyInputStreamReader icyReader = parseIcyInputFromPlayer(player.getUrl());
-        GUIHandler.getInstance().updateGui(s, reader);
+        IcyInputStreamReader icyReader = parseIcyInputFromPlayer(player.getUrl(), player);
+        GUIHandler.getInstance().updateGui(s, reader, player);
+        GUIHandler.getInstance().togglePlayButton();
     }
 
-    private IcyInputStreamReader parseIcyInputFromPlayer(URL url) {
+    private IcyInputStreamReader parseIcyInputFromPlayer(URL url, AbstractPlayer player) {
         reader = null;
         try {
             reader = new IcyInputStreamReader(url);
             Thread t = new Thread(reader);
             t.start();
+            player.setIcyReader(reader);
         } catch (IOException e) {
             e.printStackTrace();
         }

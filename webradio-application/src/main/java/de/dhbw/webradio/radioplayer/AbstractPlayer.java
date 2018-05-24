@@ -1,6 +1,7 @@
 package de.dhbw.webradio.radioplayer;
 
 import de.dhbw.webradio.WebradioPlayer;
+import de.dhbw.webradio.gui.GUIHandler;
 
 import javax.sound.sampled.AudioInputStream;
 import java.io.File;
@@ -34,6 +35,7 @@ public abstract class AbstractPlayer {
     public String audioFormatEncoding;
     public Map<String, Object> audioFormatproperties;
     public AudioInputStream ais = null;
+    private IcyInputStreamReader icyReader;
 
     public long getActuallySongTime() {
         return this.actuallySongTime;
@@ -50,7 +52,7 @@ public abstract class AbstractPlayer {
     public void stop() {
         stop = true;
         actuallySongTime = 0;
-        WebradioPlayer.getGui().resetComponents();
+        GUIHandler.getInstance().resetComponents();
     }
 
     public int getVolume() {
@@ -166,5 +168,13 @@ public abstract class AbstractPlayer {
 
     public int getBitRate() {
         return bitRate;
+    }
+
+    public IcyInputStreamReader getIcyReader() {
+        return icyReader;
+    }
+
+    public void setIcyReader(IcyInputStreamReader icyReader) {
+        this.icyReader = icyReader;
     }
 }

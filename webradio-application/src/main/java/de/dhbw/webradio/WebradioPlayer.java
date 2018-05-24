@@ -32,7 +32,7 @@ public class WebradioPlayer {
         SettingsParser settingsParser = new SettingsParser();
         settings = settingsParser.parsegeneralSettings(new File("C:\\repository\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml"));
         ;
-        gui = new Gui();
+        gui = Gui.getInstance();
     }
 
     public static Gui getGui() {

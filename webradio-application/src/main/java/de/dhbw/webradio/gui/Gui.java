@@ -1,12 +1,13 @@
 package de.dhbw.webradio.gui;
 
-import de.dhbw.webradio.models.StationsTableModel;
 import de.dhbw.webradio.WebradioPlayer;
+import de.dhbw.webradio.models.StationsTableModel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Gui extends JFrame {
+    public static Gui gui = new Gui();
     private PlayerControlPanel playerControlPanel;
     private JPanel mainPanel;
     private StatusBar statusBar;
@@ -17,8 +18,12 @@ public class Gui extends JFrame {
     private JTabbedPane streamAudioDetails;
     private AudioDetails audioDetails;
 
-    public Gui() {
+    private Gui() {
         initialize();
+    }
+
+    public static Gui getInstance() {
+        return gui;
     }
 
     private void initialize() {
@@ -65,16 +70,7 @@ public class Gui extends JFrame {
     }
 
     public void resetComponents() {
-        statusBar.updateAdditionalM3uInfo("Keine Informationen verfügbar");
-        statusBar.updateActualStation("Aktuell keine Wiedergabe");
-        audioDetails.changeSamplerate(0);
-        audioDetails.changeChannelsText(0);
-        audioDetails.changeFormat("Aktuell keine Wiederegabe");
-        playerControlPanel.getTogglePlayerButton().setText("Start");
-        streamDetails.updateM3uInfo("Aktuell keine Wiedergabe");
-        streamDetails.updateStationName("Aktuell keine Wiedergabe");
-        streamDetails.updateM3uUrl("Aktuell keine Wiedergabe");
-        streamDetails.updateStreamUrl("Aktuell keine Wiedergabe");
+
     }
 
     public AudioDetails getAudioDetails() {

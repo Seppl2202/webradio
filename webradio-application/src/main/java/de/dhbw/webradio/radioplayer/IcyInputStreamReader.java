@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 public class IcyInputStreamReader extends FilterInputStream implements Runnable {
+    private static IcyInputStreamReader reader;
     private URLConnection connection;
     private int metaDataInterval = -1;
     private int toRead = -1;
     private Map<String, String> id3Values;
+    private boolean interrupted;
 
     public IcyInputStreamReader(URL icyURL) throws IOException {
         super(null);
@@ -22,20 +24,6 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
         connection.addRequestProperty("Icy-MetaData", "1");
         in = connection.getInputStream();
         id3Values = new HashMap<String, String>();
-
-    }
-
-    public static void main(String[] args) {
-        try {
-
-
-            IcyInputStreamReader reader = new IcyInputStreamReader(new URL("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3"));
-            while (reader.read() != -1) {
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     protected void readHeader() {
@@ -110,10 +98,9 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
              */
             String mapArray[] = value.split("=");
             String mapKey = mapArray[0];
-            String mapValue = mapArray[1].replaceAll("'", "").replaceAll(";", "");
+            String mapValue = mapArray[1].replaceAll("'", "").replaceAll(";", "").replaceAll("StreamUrl", "");
             id3Values.put(mapKey, mapValue);
             GUIHandler.getInstance().notifyNewIcyData(this);
-            System.err.println(getActualTitle());
         }
     }
 
@@ -137,10 +124,14 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
         readHeader();
         try {
             int i = 0;
-            while ((i = read()) != -1) {
+            while ((i = read()) != -1 || interrupted) {
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setInterrupted(boolean interrupted) {
+        this.interrupted = interrupted;
     }
 }
