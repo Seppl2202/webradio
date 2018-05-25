@@ -18,4 +18,9 @@ public class M3UInfo {
     public String getTitleInfo() {
         return titleInfo;
     }
+
+    @Override
+    public String toString() {
+        return getTitleInfo();
+    }
 }

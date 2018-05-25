@@ -1,11 +1,14 @@
 package de.dhbw.webradio.test;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
+import de.dhbw.webradio.gui.SelectStreamDialog;
 import de.dhbw.webradio.m3uparser.M3uParser;
 import de.dhbw.webradio.models.M3UInfo;
+import de.dhbw.webradio.radioplayer.PlayerFactory;
 import org.junit.Test;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -99,7 +102,7 @@ public class M3uParserTest {
         } catch (NoURLTagFoundException nufe) {
             nufe.printStackTrace();
         }
-        //testb m3u media name parsing
+        //test m3u media name parsing
         assertEquals("SWR1 Baden-Württemberg", info.get(0).getTitleInfo());
     }
 
@@ -120,5 +123,41 @@ public class M3uParserTest {
             e.printStackTrace();
         }
         assertEquals(23, info.size());
+        //test multiple stream selection window
+        JList list = new JList<>(info.toArray());
+        SelectStreamDialog dialog = new SelectStreamDialog("Bitte wählen Sie einen Stream aus", "Bitte wählen:", list);
+        dialog.setOnOk(e -> System.err.println("Gewählt: " + dialog.getSelectedItem().getUrl()));
+        dialog.show();
+    }
+    @Test
+    /**
+     * Tests the multiple stream selection
+     */
+    public void testMultipleStreamPlayerCreation() {
+        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testMultiple.m3u");
+        String parsedFile = null;
+        List<M3UInfo> info = null;
+        M3UInfo selected = null;
+        try {
+            parsedFile = m3uParser.parseFileToString(f);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            info = m3uParser.parseUrlFromString(parsedFile);
+        } catch (UnsupportedAudioFileException e) {
+        } catch (NoURLTagFoundException e) {
+            e.printStackTrace();
+        }
+        PlayerFactory playerFactory = new PlayerFactory();
+        try {
+             selected = playerFactory.getUserSelection(parsedFile, m3uParser);
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (NoURLTagFoundException e) {
+            e.printStackTrace();
+        }
+        assertEquals("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3", selected.getUrl().toString());
+        assertEquals("SWR1 Baden-Württemberg 2", selected.getTitleInfo());
     }
 }
