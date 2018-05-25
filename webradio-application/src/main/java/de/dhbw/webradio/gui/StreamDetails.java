@@ -5,7 +5,7 @@ import java.awt.*;
 import java.net.URL;
 
 public class StreamDetails extends JPanel {
-    private final String M3UTEXT = "Titelinformationen aus M3U-Datei: ";
+    private final String M3UTEXT = "Titelinformationen: ";
     private final String M3UURL = "URL des Senders: ";
     private final String STREAMURL = "URL des Audiostreams: ";
     private final String STATIONNAME = "Sendername Ihrer Liste: ";

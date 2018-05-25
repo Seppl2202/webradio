@@ -2,6 +2,7 @@ package de.dhbw.webradio.test;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.m3uparser.M3uParser;
+import de.dhbw.webradio.models.M3UInfo;
 import org.junit.Test;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -9,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,9 +36,9 @@ public class M3uParserTest {
 
     @Test
     public void parseUrlFromString() {
-        String urlInfoSuccess[] = null;
+        List<M3UInfo> info = new ArrayList<>();
         try {
-            urlInfoSuccess = m3uParser.parseUrlFromString(m3uParser.parseFileToString(success));
+            info = m3uParser.parseUrlFromString(m3uParser.parseFileToString(success));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (UnsupportedAudioFileException uafe) {
@@ -44,14 +47,14 @@ public class M3uParserTest {
             nufe.printStackTrace();
         }
         //test m3u with valid EXTINF tag and corresponding URL
-        assertEquals("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3", urlInfoSuccess[0]);
+        assertEquals("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3", info.get(0).getUrl().toString());
     }
 
     @Test(expected = NoURLTagFoundException.class)
     public void parseURLFromString() {
-        String urlInfoFail[] = null;
+        List<M3UInfo> info = new ArrayList<>();
         try {
-            urlInfoFail = m3uParser.parseUrlFromString(m3uParser.parseFileToString(fail));
+            info = m3uParser.parseUrlFromString(m3uParser.parseFileToString(fail));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (UnsupportedAudioFileException uafe) {
@@ -88,17 +91,34 @@ public class M3uParserTest {
             ex.printStackTrace();
         }
 
-        String[] finalInfo = new String[2];
+        List<M3UInfo> info = new ArrayList<>();
         try {
-            finalInfo = m3uParser.parseUrlFromString(s);
+            info = m3uParser.parseUrlFromString(s);
         } catch (UnsupportedAudioFileException uafe) {
             uafe.printStackTrace();
         } catch (NoURLTagFoundException nufe) {
             nufe.printStackTrace();
         }
         //testb m3u media name parsing
-        assertEquals("SWR1 Baden-Württemberg", finalInfo[1]);
+        assertEquals("SWR1 Baden-Württemberg", info.get(0).getTitleInfo());
+    }
 
-
+    @Test
+    public void testMultipleM3uInfo() {
+        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\bigfmWebradio.m3u8");
+        String parsedFile = null;
+        List<M3UInfo> info = null;
+        try {
+            parsedFile = m3uParser.parseFileToString(f);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            info = m3uParser.parseUrlFromString(parsedFile);
+        } catch (UnsupportedAudioFileException e) {
+        } catch (NoURLTagFoundException e) {
+            e.printStackTrace();
+        }
+        assertEquals(23, info.size());
     }
 }

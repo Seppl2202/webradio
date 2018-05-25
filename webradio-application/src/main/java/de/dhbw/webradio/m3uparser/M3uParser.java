@@ -1,12 +1,16 @@
 package de.dhbw.webradio.m3uparser;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
+import de.dhbw.webradio.models.M3UInfo;
 import org.apache.commons.io.FileUtils;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class M3uParser {
@@ -16,7 +20,6 @@ public class M3uParser {
 
 
     /**
-     *
      * @param m3ufile the temporary downloaded m3ufile
      * @return a string of the parsed text. no check for syntax! syntax check is done in parseURL
      * @throws IOException if the file does not exists or any file system error occurs
@@ -48,10 +51,11 @@ public class M3uParser {
      * @param s the string to be parsed
      * @return an array of m3u informations. 0: the mp3 url, 1: the additional information of the #EXTINF
      * @throws UnsupportedAudioFileException if the passed string does not match the specified extended m3u syntax.
-     * See @https://de.wikipedia.org/wiki/M3U#Erweiterte_M3U for further information
+     *                                       See @https://de.wikipedia.org/wiki/M3U#Erweiterte_M3U for further information
      */
-    public String[] parseUrlFromString(String s) throws UnsupportedAudioFileException, NoURLTagFoundException {
+    public List<M3UInfo> parseUrlFromString(String s) throws UnsupportedAudioFileException, NoURLTagFoundException {
         String[] splittedLines = s.split("\r\n");
+        List<M3UInfo> m3UInfos = new ArrayList<>();
         int urlLine = 0;
         if (!(splittedLines[0].contains(START_TOKEN))) {
             throw new UnsupportedAudioFileException("File did not contain a valid extended M3U syntax");
@@ -59,14 +63,18 @@ public class M3uParser {
         for (int i = 0; i < splittedLines.length; i++) {
             if (splittedLines[i].contains(URL_TOKEN)) {
                 urlLine = i;
+                try {
+                    URL url = new URL(splittedLines[urlLine]);
+                    String title = splittedLines[urlLine - 1].split(",")[1];
+                    m3UInfos.add(new M3UInfo(url, title));
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        String[] finalInfo = new String[2];
-        if(urlLine == 0) {
+        if (urlLine == 0) {
             throw new NoURLTagFoundException(s);
         }
-        finalInfo[0] = splittedLines[urlLine];
-        finalInfo[1] = splittedLines[urlLine - 1].split(",")[1]; //#EXTINF, song length (-1= ignore). split at comma to get media name
-        return finalInfo;
+        return m3UInfos;
     }
 }

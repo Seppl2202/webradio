@@ -97,11 +97,12 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
 
     private void fireEventNewMetaData(String key, String value) {
         //to do: log received metadata
+        //add header key-values to map
         if (!(key.contains("Length"))) {
             id3Values.put(key, value);
         } else {
             /*
-                split the title information
+                split the title information and add it to map. key=StreamTitle
              */
             String mapArray[] = value.split("=");
             String mapKey = mapArray[0];

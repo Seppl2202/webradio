@@ -19,20 +19,12 @@ public class TogglePlayerListener implements ActionListener {
     private Station s;
 
     public void actionPerformed(ActionEvent e) {
-
-
         PlayerFactory playerFactory = new PlayerFactory();
-        if (Gui.getInstance().getStationsTable().getRowSorter() != null) {
-            int selectedRow = Gui.getInstance().getStationsTable().getSelectedRow();
-            int realRow = Gui.getInstance().getStationsTable().getRowSorter().convertRowIndexToModel(selectedRow);
-            s = Gui.getInstance().getStationsTableModel().getStationFromIndex(realRow);
-        } else {
-            s = Gui.getInstance().getStationsTableModel().getStationFromIndex(Gui.getInstance().getStationsTable().getSelectedRow());
-        }
+        s = getStation();
         AbstractPlayer actualPlayer = WebradioPlayer.getPlayer();
         //if no player was created yet, directly create a new one
         if (actualPlayer == null) {
-            createPlayer(playerFactory, s);
+            createPlayerAndUpdateGui(playerFactory, s);
         }
         if (actualPlayer.isPlaying()) {
             actualPlayer.stop();
@@ -43,7 +35,7 @@ public class TogglePlayerListener implements ActionListener {
                     if (!s.isURLValid()) {
                         throw new MalformedURLException("URL: " + s.getStationURL() + "did not returned status 200");
                     }
-                    createPlayer(playerFactory, s);
+                    createPlayerAndUpdateGui(playerFactory, s);
                 } catch (MalformedURLException mue) {
                     mue.printStackTrace();
                 } catch (Exception ex) {
@@ -53,7 +45,16 @@ public class TogglePlayerListener implements ActionListener {
         }
     }
 
-    private void createPlayer(PlayerFactory playerFactory, Station s) {
+    private Station getStation() {
+        if (Gui.getInstance().getStationsTable().getRowSorter() != null) {
+            int selectedRow = Gui.getInstance().getStationsTable().getSelectedRow();
+            int realRow = Gui.getInstance().getStationsTable().getRowSorter().convertRowIndexToModel(selectedRow);
+            return Gui.getInstance().getStationsTableModel().getStationFromIndex(realRow);
+        }
+        return Gui.getInstance().getStationsTableModel().getStationFromIndex(Gui.getInstance().getStationsTable().getSelectedRow());
+    }
+
+    private void createPlayerAndUpdateGui(PlayerFactory playerFactory, Station s) {
         AbstractPlayer player = playerFactory.get(s);
         if (player == null) {
             throw new IllegalArgumentException("Station " + s + "did not contain a valid file extension");

@@ -4,11 +4,13 @@ import de.dhbw.webradio.enumerations.FileExtension;
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
 import de.dhbw.webradio.m3uparser.M3uParser;
+import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.models.Station;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 public class PlayerFactory implements Factory {
     public AbstractPlayer get(Station s) {
@@ -27,9 +29,9 @@ public class PlayerFactory implements Factory {
             String m3uFileContent;
             try {
                 m3uFileContent = m3uParser.parseFileFromUrlToString(stationURL);
-                String[] m3uStreamInformation = m3uParser.parseUrlFromString(m3uFileContent);
+                List<M3UInfo> m3uStreamInformation = m3uParser.parseUrlFromString(m3uFileContent);
                 AbstractPlayer player = new Mp3Player();
-                player.setUrl(new URL(m3uStreamInformation[0]));
+                player.setUrl(new URL(m3uStreamInformation.get(0).getUrl().toString()));
                 return player;
             } catch (IOException e) {
                 e.printStackTrace();

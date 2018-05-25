@@ -28,6 +28,7 @@ public class MenuBar extends JPanel {
         settings.add(generalSettings);
         settings.add(generalRecordingSettings);
         JMenuItem addStationItem = new JMenuItem("Sender hinzufügen");
+        addStationItem.addActionListener(e -> new AddStationWindow());
         stationList.add(addStationItem);
         this.add(menuBar);
         //change default center alignment to left alignment
