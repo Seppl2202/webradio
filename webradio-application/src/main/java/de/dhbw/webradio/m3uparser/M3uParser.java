@@ -46,6 +46,12 @@ public class M3uParser {
         return parseFileToString(f);
     }
 
+    public List<M3UInfo> parseUrlFromString(String s) throws NoURLTagFoundException, UnsupportedAudioFileException, MalformedURLException {
+        if (s.contains(START_TOKEN)) {
+            return parseUrlFromEM3UString(s);
+        }
+        return parseUrlFromSM3U(s);
+    }
 
     /**
      * @param s the string to be parsed
@@ -53,7 +59,7 @@ public class M3uParser {
      * @throws UnsupportedAudioFileException if the passed string does not match the specified extended m3u syntax.
      *                                       See @https://de.wikipedia.org/wiki/M3U#Erweiterte_M3U for further information
      */
-    public List<M3UInfo> parseUrlFromString(String s) throws UnsupportedAudioFileException, NoURLTagFoundException {
+    private List<M3UInfo> parseUrlFromEM3UString(String s) throws UnsupportedAudioFileException, NoURLTagFoundException {
         String[] splittedLines = s.split("\r\n");
         List<M3UInfo> m3UInfos = new ArrayList<>();
         int urlLine = 0;
@@ -76,5 +82,18 @@ public class M3uParser {
             throw new NoURLTagFoundException(s);
         }
         return m3UInfos;
+    }
+
+    private List<M3UInfo> parseUrlFromSM3U(String s) throws MalformedURLException, NoURLTagFoundException {
+        List<M3UInfo> m3uInfos = new ArrayList<>();
+        String[] splittedLines = s.split("\r\n");
+        for (int i = 0; i < splittedLines.length; i++) {
+            M3UInfo info = new M3UInfo(new URL(splittedLines[i]), "Nicht verfügbar");
+            m3uInfos.add(info);
+        }
+        if(m3uInfos.size() == 0) {
+            throw new NoURLTagFoundException("Simple M3U did not contain valid URLs");
+        }
+        return m3uInfos;
     }
 }

@@ -36,6 +36,13 @@ public class Station {
         connection.connect();
         int statusCode = connection.getResponseCode();
 
+        if (statusCode == 301 || statusCode == 302 || statusCode == 303) {
+            String newURL = connection.getHeaderField("Location");
+            connection = (HttpURLConnection) new URL(newURL).openConnection();
+            statusCode = connection.getResponseCode();
+            System.err.println("Followed redirect from: " + stationURL.toString() + " to: " + newURL);
+            this.stationURL = new URL(newURL);
+        }
         if (!(statusCode == 200)) {
             return false;
         }

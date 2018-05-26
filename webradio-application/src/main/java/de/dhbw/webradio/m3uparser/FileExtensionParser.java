@@ -6,7 +6,7 @@ public class FileExtensionParser {
     public  FileExtension parseFileExtension(String filename) {
         if (filename.endsWith(".mp3")) {
             return FileExtension.MP3;
-        } else if (filename.endsWith(".m3u")) {
+        } else if (filename.endsWith(".m3u") || filename.endsWith(".m3u8")) {
             return FileExtension.M3U;
         }
         return FileExtension.UNSUPPORTED_TYPE;

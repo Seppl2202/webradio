@@ -11,6 +11,7 @@ import de.dhbw.webradio.models.Station;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class PlayerFactory implements Factory {
         return null;
     }
 
-    public M3UInfo getUserSelection(String m3uFileContent, M3uParser m3uParser) throws UnsupportedAudioFileException, NoURLTagFoundException {
+    public M3UInfo getUserSelection(String m3uFileContent, M3uParser m3uParser) throws UnsupportedAudioFileException, NoURLTagFoundException, MalformedURLException {
 
         List<M3UInfo> m3uStreamInformation = m3uParser.parseUrlFromString(m3uFileContent);
         if (m3uStreamInformation.size() == 1) {

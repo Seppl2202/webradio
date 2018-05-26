@@ -101,6 +101,8 @@ public class M3uParserTest {
             uafe.printStackTrace();
         } catch (NoURLTagFoundException nufe) {
             nufe.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
         //test m3u media name parsing
         assertEquals("SWR1 Baden-Württemberg", info.get(0).getTitleInfo());
@@ -121,6 +123,8 @@ public class M3uParserTest {
         } catch (UnsupportedAudioFileException e) {
         } catch (NoURLTagFoundException e) {
             e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
         assertEquals(23, info.size());
         //test multiple stream selection window
@@ -129,6 +133,7 @@ public class M3uParserTest {
         dialog.setOnOk(e -> System.err.println("Gewählt: " + dialog.getSelectedItem().getUrl()));
         dialog.show();
     }
+
     @Test
     /**
      * Tests the multiple stream selection
@@ -148,16 +153,55 @@ public class M3uParserTest {
         } catch (UnsupportedAudioFileException e) {
         } catch (NoURLTagFoundException e) {
             e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
         PlayerFactory playerFactory = new PlayerFactory();
         try {
-             selected = playerFactory.getUserSelection(parsedFile, m3uParser);
+            selected = playerFactory.getUserSelection(parsedFile, m3uParser);
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (NoURLTagFoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         assertEquals("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3", selected.getUrl().toString());
         assertEquals("SWR1 Baden-Württemberg 2", selected.getTitleInfo());
     }
+
+    @Test
+    public void testSM3UParsing() {
+        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\youfm_2.m3u");
+        String parsedFile = null;
+        List<M3UInfo> info = null;
+        M3UInfo selected = null;
+        try {
+            parsedFile = m3uParser.parseFileToString(f);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            info = m3uParser.parseUrlFromString(parsedFile);
+        } catch (UnsupportedAudioFileException e) {
+        } catch (NoURLTagFoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        PlayerFactory playerFactory = new PlayerFactory();
+        try {
+            selected = playerFactory.getUserSelection(parsedFile, m3uParser);
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (NoURLTagFoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        assertEquals(1, info.size());
+        assertEquals("http://hr-youfm-live.cast.addradio.de/hr/youfm/live/mp3/128/stream.mp3", info.get(0).getUrl().toString());
+        assertEquals("Nicht verfügbar", info.get(0).getTitleInfo());
+    }
 }
+

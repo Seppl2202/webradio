@@ -21,6 +21,14 @@ public class WebradioPlayer {
 
     public static void main(String[] args) {
         stationList = new ArrayList();
+        addStations();
+        SettingsParser settingsParser = new SettingsParser();
+        settings = settingsParser.parsegeneralSettings(new File("C:\\repository\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml"));
+        ;
+        gui = Gui.getInstance();
+    }
+
+    private static void addStations() {
         try {
             Station s = new Station("FFH", new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3"));
             stationList.add(s);
@@ -28,13 +36,11 @@ public class WebradioPlayer {
             stationList.add(s2);
             Station s3 = new Station("DasDing", new URL("http://mp3-live.dasding.de/dasding_m.m3u"));
             stationList.add(s3);
+            Station s4 = new Station("YouFM", new URL("http://metafiles.gl-systemhaus.de/hr/youfm_2.m3u"));
+            stationList.add(s4);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        SettingsParser settingsParser = new SettingsParser();
-        settings = settingsParser.parsegeneralSettings(new File("C:\\repository\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml"));
-        ;
-        gui = Gui.getInstance();
     }
 
     public static Gui getGui() {
@@ -64,4 +70,5 @@ public class WebradioPlayer {
     public static void setSettings(Settings settings) {
         WebradioPlayer.settings = settings;
     }
+
 }
