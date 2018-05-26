@@ -1,8 +1,10 @@
 package de.dhbw.webradio.eventhandlers;
 
 import de.dhbw.webradio.WebradioPlayer;
+import de.dhbw.webradio.enumerations.FileExtension;
 import de.dhbw.webradio.gui.AddStationWindow;
 import de.dhbw.webradio.gui.Gui;
+import de.dhbw.webradio.m3uparser.FileExtensionParser;
 import de.dhbw.webradio.models.Station;
 
 import javax.swing.*;
@@ -59,8 +61,13 @@ public class AddStationEventHandler implements ActionListener {
     }
 
     private boolean checkStation(Station s) {
+        FileExtensionParser parser = new FileExtensionParser();
         try {
-            System.err.println(s.isURLValid());
+        if(parser.parseFileExtension(s.getStationURL().toString()).equals(FileExtension.UNSUPPORTED_TYPE)) {
+            JOptionPane.showMessageDialog(null, "Dieses Dateiformat wird nicht unterstützt. \r\n" +
+                    "Folgende Formate werden unterstützt:\r\n" +
+                    "MP3, M3U");
+        }
             return s.isURLValid();
         } catch (IOException e) {
             JOptionPane.showMessageDialog(window, "Die URL konnte nicht erreicht werden. Bitte prüfen!", "Verbindungsfehler", JOptionPane.ERROR_MESSAGE);

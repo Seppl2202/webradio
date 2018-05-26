@@ -6,13 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="93051cbf-cb4f-4e2c-be0f-8b03cdfea2d6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/WebradioPlayer.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/WebradioPlayer.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/m3uparser/FileExtensionParser.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/m3uparser/FileExtensionParser.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/m3uparser/M3uParser.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/m3uparser/M3uParser.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/models/Station.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/models/Station.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/PlayerFactory.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/radioplayer/PlayerFactory.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/test/java/de/dhbw/webradio/test/M3uParserTest.java" afterPath="$PROJECT_DIR$/webradio-application/src/test/java/de/dhbw/webradio/test/M3uParserTest.java" />
-      <change beforePath="$PROJECT_DIR$/webradio-application/src/test/java/de/dhbw/webradio/test/testfiles/testm3uparsing_success.m3u" afterPath="$PROJECT_DIR$/webradio-application/src/test/java/de/dhbw/webradio/test/testfiles/testm3uparsing_success.m3u" />
+      <change beforePath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/AddStationEventHandler.java" afterPath="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/AddStationEventHandler.java" />
     </list>
     <ignored path="$PROJECT_DIR$/webradio-application/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Station.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Station.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/models/Station.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="42" column="51" lean-forward="false" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
+            <state relative-caret-position="406">
+              <caret line="41" column="54" lean-forward="true" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -79,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AddStationEventHandler.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AddStationEventHandler.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/AddStationEventHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="63" column="26" lean-forward="true" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
+            <state relative-caret-position="243">
+              <caret line="66" column="48" lean-forward="true" selection-start-line="66" selection-start-column="48" selection-end-line="66" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -206,8 +200,8 @@
         <option value="$PROJECT_DIR$/webradio-application/src/test/java/de/dhbw/webradio/test/M3uParserTest.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/WebradioPlayer.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/m3uparser/FileExtensionParser.java" />
-        <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/AddStationEventHandler.java" />
         <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/models/Station.java" />
+        <option value="$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/AddStationEventHandler.java" />
       </list>
     </option>
   </component>
@@ -749,11 +743,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64452000" />
+    <option name="totallyTimeSpent" value="64797000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -856,7 +849,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/AddStationEventHandler.java</url>
-          <line>55</line>
+          <line>57</line>
           <properties />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
@@ -880,7 +873,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/AddStationEventHandler.java</url>
-          <line>30</line>
+          <line>32</line>
           <properties />
           <option name="timeStamp" value="56" />
         </line-breakpoint>
@@ -1811,18 +1804,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/AddStationEventHandler.java">
+    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/models/Station.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="63" column="26" lean-forward="true" selection-start-line="63" selection-start-column="26" selection-end-line="63" selection-end-column="26" />
+        <state relative-caret-position="406">
+          <caret line="41" column="54" lean-forward="true" selection-start-line="41" selection-start-column="54" selection-end-line="41" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/models/Station.java">
+    <entry file="file://$PROJECT_DIR$/webradio-application/src/main/java/de/dhbw/webradio/eventhandlers/AddStationEventHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="42" column="51" lean-forward="false" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
+        <state relative-caret-position="243">
+          <caret line="66" column="48" lean-forward="true" selection-start-line="66" selection-start-column="48" selection-end-line="66" selection-end-column="48" />
           <folding />
         </state>
       </provider>
