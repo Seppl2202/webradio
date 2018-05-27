@@ -26,20 +26,22 @@ public class TogglePlayerListener implements ActionListener {
         if (actualPlayer == null) {
             createPlayerAndUpdateGui(playerFactory, s);
         }
-        if (actualPlayer.isPlaying()) {
-            actualPlayer.stop();
-            actualPlayer.getIcyReader().setInterrupted(true);
-        } else {
-            if (!(s == null)) {
-                try {
-                    if (!s.isURLValid()) {
-                        throw new MalformedURLException("URL: " + s.getStationURL() + "did not returned status 200");
+        if (!(actualPlayer == null)) {
+            if (actualPlayer.isPlaying() && !(actualPlayer == null)) {
+                actualPlayer.stop();
+                actualPlayer.getIcyReader().setInterrupted(true);
+            } else {
+                if (!(s == null)) {
+                    try {
+                        if (!s.isURLValid()) {
+                            throw new MalformedURLException("URL: " + s.getStationURL() + "did not returned status 200");
+                        }
+                        createPlayerAndUpdateGui(playerFactory, s);
+                    } catch (MalformedURLException mue) {
+                        mue.printStackTrace();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
                     }
-                    createPlayerAndUpdateGui(playerFactory, s);
-                } catch (MalformedURLException mue) {
-                    mue.printStackTrace();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
                 }
             }
         }

@@ -33,9 +33,15 @@ public class PlayerFactory implements Factory {
                 M3uParser m3uParser = new M3uParser();
                 m3uFileContent = m3uParser.parseFileFromUrlToString(stationURL);
                 M3UInfo userSelectedStream = getUserSelection(m3uFileContent, m3uParser);
-                AbstractPlayer player = new Mp3Player();
-                player.setUrl(new URL(userSelectedStream.getUrl().toString()));
-                return player;
+                if (fileExtensionParser.parseFileExtension(userSelectedStream.getUrl().toString()).equals(FileExtension.MP3)) {
+                    AbstractPlayer player = new Mp3Player();
+                    player.setUrl(new URL(userSelectedStream.getUrl().toString()));
+                    return player;
+                } else if (fileExtensionParser.parseFileExtension(userSelectedStream.getUrl().toString()).equals(FileExtension.AAC)) {
+                    AbstractPlayer aacPlayer = new AACPlayer();
+                    aacPlayer.setUrl(userSelectedStream.getUrl());
+                    return aacPlayer;
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (UnsupportedAudioFileException e) {
