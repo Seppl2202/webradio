@@ -38,6 +38,8 @@ public class WebradioPlayer {
             stationList.add(s3);
             Station s4 = new Station("YouFM", new URL("http://metafiles.gl-systemhaus.de/hr/youfm_2.m3u"));
             stationList.add(s4);
+            Station s5 = new Station("bigFM", new URL("http://static.bigfm.de/sites/default/files/playlist/bigFM%20WEBRADIO%20(WinAmp).m3u8"));
+            stationList.add(s5);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

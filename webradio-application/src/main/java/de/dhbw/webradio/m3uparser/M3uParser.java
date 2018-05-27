@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -40,8 +41,20 @@ public class M3uParser {
         }
     }
 
-    public String parseFileFromUrlToString(URL url) throws IOException {
+    public String parseFileFromUrlToString(URL passedUrl) throws IOException {
+        URL url = passedUrl;
         File f = File.createTempFile("temp", ".m3u");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.connect();
+        int statusCode = connection.getResponseCode();
+        if (statusCode == 301 || statusCode == 302 || statusCode == 303) {
+            String newURL = connection.getHeaderField("Location");
+            connection = (HttpURLConnection) new URL(newURL).openConnection();
+            statusCode = connection.getResponseCode();
+            if (statusCode == 200) {
+                url = new URL(newURL);
+            }
+        }
         FileUtils.copyURLToFile(url, f);
         return parseFileToString(f);
     }
@@ -91,7 +104,7 @@ public class M3uParser {
             M3UInfo info = new M3UInfo(new URL(splittedLines[i]), "Nicht verfügbar");
             m3uInfos.add(info);
         }
-        if(m3uInfos.size() == 0) {
+        if (m3uInfos.size() == 0) {
             throw new NoURLTagFoundException("Simple M3U did not contain valid URLs");
         }
         return m3uInfos;
