@@ -21,6 +21,7 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
     /**
      * instanciates the icyReader class.
      * see @https://cast.readme.io/docs/icy for detailed informatoin about ICY and its specification
+     *
      * @param icyURL the mp3 stream url
      * @throws IOException if reading the icy stream fails
      */
@@ -98,6 +99,7 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
     private void fireEventNewMetaData(String key, String value) {
         //to do: log received metadata
         //add header key-values to map
+        System.err.println("new data:" + key + value);
         if (!(key.contains("Length"))) {
             id3Values.put(key, value);
         } else {
@@ -137,7 +139,7 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
         try {
             int i = 0;
             while ((i = read()) != -1) {
-                if(interrupted) {
+                if (interrupted) {
                     break;
                 }
             }
