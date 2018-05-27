@@ -6,6 +6,7 @@ import de.dhbw.webradio.gui.GUIHandler;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Mp3Player extends AbstractPlayer implements Runnable {
@@ -19,7 +20,6 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
     public void play() {
         stop = false;
         if (!runner.isAlive()) {
-            runner = new Thread(this);
             runner.start();
         }
     }
@@ -29,6 +29,7 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
         this.song = new File("");
         this.url = url;
         if (url != null) {
+            System.err.println("called set url");
             setInputStream();
         }
     }
@@ -179,5 +180,12 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
         BufferSize = bitRate / 8 * 1000 / 10; // Buffergr��e auf Anzahl der ben�tigten Bytes pro 1/10s
         buffer = new byte[BufferSize];
 
+    }
+
+    public static void main(String[] args) throws MalformedURLException {
+        AbstractPlayer player = new Mp3Player();
+        player.setUrl(new URL("http://hr-youfm-live.cast.addradio.de/hr/youfm/live/mp3/128/stream.mp3"));
+        player.setVolume(90);
+        player.play();
     }
 }

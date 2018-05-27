@@ -11,31 +11,31 @@ import java.util.Map;
 
 public abstract class AbstractPlayer {
 
-    public int gainPercent = 90;  //gibt die Lautstärke in Prozent an.  (0% = -80dB und 100% = 6dB)
-    public Boolean stop = false;
-    public Boolean loopPlay = false;
-    public File song = new File("");
-    public URL url = null;
-    public long songDuration = 0;
-    public long actuallySongTime = 0;
-    public int sampleSizeInBits = 0;
-    public long songLaenge = 0;
-    public boolean reset = false;
-    public Boolean isPlaying = false;
-    public long resetKorrektur = 0;
-    public boolean pause = false;
-    public boolean mute = false;
-    public int lautstaerke = gainPercent;
-    public int bitRate = 0;
-    public int audioFormatChannels;
-    public float audioFormatFrameRate;
-    public int audioFormatFrameSize;
-    public float audioFormatSampleRate;
-    public int audioFormatSampleSizeInBits;
-    public String audioFormatEncoding;
-    public Map<String, Object> audioFormatproperties;
-    public AudioInputStream ais = null;
-    private IcyInputStreamReader icyReader;
+    protected int gainPercent = 90;  //gibt die Lautstärke in Prozent an.  (0% = -80dB und 100% = 6dB)
+    protected Boolean stop = false;
+    protected Boolean loopPlay = false;
+    protected File song = new File("");
+    protected URL url = null;
+    protected long songDuration = 0;
+    protected long actuallySongTime = 0;
+    protected int sampleSizeInBits = 0;
+    protected long songLaenge = 0;
+    protected boolean reset = false;
+    protected Boolean isPlaying = false;
+    protected long resetKorrektur = 0;
+    protected boolean pause = false;
+    protected boolean mute = false;
+    protected int lautstaerke = gainPercent;
+    protected int bitRate = 0;
+    protected int audioFormatChannels;
+    protected float audioFormatFrameRate;
+    protected int audioFormatFrameSize;
+    protected float audioFormatSampleRate;
+    protected int audioFormatSampleSizeInBits;
+    protected String audioFormatEncoding;
+    protected Map<String, Object> audioFormatproperties;
+    protected AudioInputStream ais = null;
+    protected IcyInputStreamReader icyReader;
 
     public long getActuallySongTime() {
         return this.actuallySongTime;
