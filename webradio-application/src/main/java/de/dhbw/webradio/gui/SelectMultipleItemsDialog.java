@@ -1,22 +1,20 @@
 package de.dhbw.webradio.gui;
 
-import de.dhbw.webradio.models.M3UInfo;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class SelectStreamDialog {
-    private JList<M3UInfo> m3uStreams;
+public class SelectStreamDialog<T> {
+    private JList<T> listOfElements;
     private JLabel label;
     private JOptionPane optionPane;
     private JButton okButton, cancelButton;
     private ActionListener okEvent, cancelEvent;
     private JDialog dialog;
 
-    public SelectStreamDialog(String title, String message, JList<M3UInfo> streamsToSelect) {
-        m3uStreams = streamsToSelect;
+    public SelectStreamDialog(String title, String message, JList<T> objectsToSelect) {
+        listOfElements = objectsToSelect;
         label = new JLabel(message);
         createAndDisplayDialog();
         dialog.setTitle(title);
@@ -35,12 +33,12 @@ public class SelectStreamDialog {
         centerListElements();
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(label, BorderLayout.NORTH);
-        panel.add(m3uStreams, BorderLayout.CENTER);
+        panel.add(listOfElements, BorderLayout.CENTER);
         return panel;
     }
 
     private void centerListElements() {
-        DefaultListCellRenderer renderer = (DefaultListCellRenderer) m3uStreams.getCellRenderer();
+        DefaultListCellRenderer renderer = (DefaultListCellRenderer) listOfElements.getCellRenderer();
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
 
     }
@@ -82,7 +80,7 @@ public class SelectStreamDialog {
         dialog.setVisible(true);
     }
 
-    public M3UInfo getSelectedItem() {
-        return m3uStreams.getSelectedValue();
+    public T getSelectedItem() {
+        return listOfElements.getSelectedValue();
     }
 }
