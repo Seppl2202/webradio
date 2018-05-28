@@ -1,8 +1,11 @@
 package de.dhbw.webradio.radioplayer;
 
+import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.enumerations.FileExtension;
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
-import de.dhbw.webradio.gui.SelectStreamDialog;
+import de.dhbw.webradio.gui.GUIHandler;
+import de.dhbw.webradio.gui.SelectMultipleItemsDialog;
+import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
 import de.dhbw.webradio.m3uparser.M3uParser;
 import de.dhbw.webradio.models.M3UInfo;
@@ -22,9 +25,13 @@ public class PlayerFactory implements Factory {
         }
         FileExtensionParser fileExtensionParser = new FileExtensionParser();
         URL stationURL = s.getStationURL();
-        FileExtension urlExtension = fileExtensionParser.parseFileExtension(stationURL.toString());
+        FileExtension urlExtension = fileExtensionParser.parseFileExtension(stationURL);
         if (urlExtension.equals(FileExtension.MP3)) {
             AbstractPlayer player = new Mp3Player();
+            player.setUrl(stationURL);
+            return player;
+        } else if (urlExtension.equals(FileExtension.AAC)) {
+            AbstractPlayer player = new AACPlayer();
             player.setUrl(stationURL);
             return player;
         } else if (urlExtension.equals(FileExtension.M3U)) {
@@ -33,38 +40,52 @@ public class PlayerFactory implements Factory {
                 M3uParser m3uParser = new M3uParser();
                 m3uFileContent = m3uParser.parseFileFromUrlToString(stationURL);
                 M3UInfo userSelectedStream = getUserSelection(m3uFileContent, m3uParser);
-                if (fileExtensionParser.parseFileExtension(userSelectedStream.getUrl().toString()).equals(FileExtension.MP3)) {
+                if (fileExtensionParser.parseFileExtension(userSelectedStream.getUrl()).equals(FileExtension.MP3)) {
                     AbstractPlayer player = new Mp3Player();
                     player.setUrl(new URL(userSelectedStream.getUrl().toString()));
                     return player;
-                } else if (fileExtensionParser.parseFileExtension(userSelectedStream.getUrl().toString()).equals(FileExtension.AAC)) {
+                } else if (fileExtensionParser.parseFileExtension(userSelectedStream.getUrl()).equals(FileExtension.AAC)) {
                     AbstractPlayer aacPlayer = new AACPlayer();
                     aacPlayer.setUrl(userSelectedStream.getUrl());
                     return aacPlayer;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                WebradioPlayer.setPlayer(null);
+                GUIHandler.getInstance().resetComponents();
+                Logger.logError(e.getMessage());
             } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
+                WebradioPlayer.setPlayer(null);
+                GUIHandler.getInstance().resetComponents();
+                Logger.logError(e.getMessage());
             } catch (NoURLTagFoundException e) {
-                e.printStackTrace();
+                WebradioPlayer.setPlayer(null);
+                GUIHandler.getInstance().resetComponents();
+                Logger.logError(e.getMessage());
             }
         }
         return null;
     }
 
+    /**
+     * @param m3uFileContent the parsed m3u file
+     * @param m3uParser      the parser that parses the different m3u objects from @m3uFileContent
+     * @return a single M3UInfo: the user selection
+     * @throws UnsupportedAudioFileException if no valid audio formats are found
+     * @throws NoURLTagFoundException        if an EM3U file does not contain a valid syntax
+     * @throws MalformedURLException         if the URLs of the M3U file are incorrect
+     */
     public M3UInfo getUserSelection(String m3uFileContent, M3uParser m3uParser) throws UnsupportedAudioFileException, NoURLTagFoundException, MalformedURLException {
 
         List<M3UInfo> m3uStreamInformation = m3uParser.parseUrlFromString(m3uFileContent);
         if (m3uStreamInformation.size() == 1) {
             return m3uStreamInformation.get(0);
         } else {
-            final M3UInfo[] m3uInfo = new M3UInfo[1];
+            final Object[] m3uInfo = new M3UInfo[m3uStreamInformation.size()];
             JList list = new JList<>(m3uStreamInformation.toArray());
-            SelectStreamDialog dialog = new SelectStreamDialog("Bitte wählen Sie einen Stream aus", "Bitte wählen:", list);
-            dialog.setOnOk(e -> m3uInfo[0] = dialog.getSelectedItem());
+            SelectMultipleItemsDialog dialog = new SelectMultipleItemsDialog<M3UInfo>("Bitte wählen Sie einen Stream aus", "Bitte wählen:", list, ListSelectionModel.SINGLE_SELECTION);
+            dialog.setOnOk(e -> m3uInfo[0] = dialog.getSelectedItem().get(0));
             dialog.show();
-            return m3uInfo[0];
+            return (M3UInfo) m3uInfo[0];
         }
     }
 }

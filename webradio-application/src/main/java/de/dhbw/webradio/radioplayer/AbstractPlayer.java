@@ -65,23 +65,12 @@ public abstract class AbstractPlayer {
         }
     }
 
-    public abstract void setInputStream();
-
-
-    public abstract void fetchStreamInfo();
-
     public abstract void play();
 
     public File getSong() {
         return this.song;
     }
 
-    public void setSong(String song) throws MalformedURLException {
-        this.song = new File(song);
-        this.url = new URL("file:/" + this.song);
-        setInputStream();
-        fetchStreamInfo();
-    }
 
     public long getSongDuration() {
         return this.songDuration;

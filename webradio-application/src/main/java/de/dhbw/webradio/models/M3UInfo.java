@@ -23,4 +23,14 @@ public class M3UInfo {
     public String toString() {
         return getTitleInfo();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof M3UInfo)) {
+            return false;
+        }
+        M3UInfo that = (M3UInfo) obj;
+        return this.getUrl().equals(that.getUrl())
+                && this.getTitleInfo().equalsIgnoreCase(that.getTitleInfo());
+    }
 }

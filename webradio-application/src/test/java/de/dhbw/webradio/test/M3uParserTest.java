@@ -1,7 +1,7 @@
 package de.dhbw.webradio.test;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
-import de.dhbw.webradio.gui.SelectStreamDialog;
+import de.dhbw.webradio.gui.SelectMultipleItemsDialog;
 import de.dhbw.webradio.m3uparser.M3uParser;
 import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
@@ -109,7 +109,7 @@ public class M3uParserTest {
     }
 
     @Test
-    public void testMultipleM3uInfo() {
+    public void testMultipleM3uInfo() throws MalformedURLException {
         File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\bigfmWebradio.m3u8");
         String parsedFile = null;
         List<M3UInfo> info = null;
@@ -129,9 +129,11 @@ public class M3uParserTest {
         assertEquals(23, info.size());
         //test multiple stream selection window
         JList list = new JList<>(info.toArray());
-        SelectStreamDialog dialog = new SelectStreamDialog("Bitte wählen Sie einen Stream aus", "Bitte wählen:", list);
-        dialog.setOnOk(e -> System.err.println("Gewählt: " + dialog.getSelectedItem().getUrl()));
+        SelectMultipleItemsDialog dialog = new SelectMultipleItemsDialog("Bitte wählen Sie einen Stream aus", "Bitte wählen:", list, ListSelectionModel.SINGLE_SELECTION);
+        M3UInfo testInfo = new M3UInfo(new URL("http://streams.bigfm.de/bigfm-deutschland-128-aac?usid=0-0-H-A-D-30"), "bigFM DEUTSCHLAND");
+        dialog.setOnOk(e -> assertEquals(testInfo, (M3UInfo) dialog.getSelectedItem().get(0)));
         dialog.show();
+
     }
 
     @Test

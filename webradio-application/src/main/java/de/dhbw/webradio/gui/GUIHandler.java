@@ -4,11 +4,12 @@ import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
 
+import java.util.Optional;
+
 public class GUIHandler {
     private static GUIHandler guiHandler = new GUIHandler();
 
     private GUIHandler() {
-
     }
 
     public static GUIHandler getInstance() {
@@ -23,13 +24,21 @@ public class GUIHandler {
     }
 
     public void updateGui(Station station, IcyInputStreamReader icyReader, AbstractPlayer player) {
-        Gui.getInstance().getStreamDetails().updateM3uUrl(icyReader.getStationName() + ": " + icyReader.getStationUrl());
-        Gui.getInstance().getStreamDetails().updateM3uInfo(icyReader.getActualTitle());
-        Gui.getInstance().getStreamDetails().updateStreamUrl(station.getStationURL().toString());
-        Gui.getInstance().getStreamDetails().updateStationName(station.getName());
-        Gui.getInstance().getStatusBar().updateActualStation(icyReader.getStationName());
-        Gui.getInstance().getStatusBar().updateAdditionalM3uInfo(icyReader.getActualTitle());
-        Gui.getInstance().getStatusBar().updateVolume(player.getVolume());
+        try {
+            //two seconds delay to let icyReader fetch all information
+            Thread.sleep(2000);
+            Optional<String> titleInfo = Optional.ofNullable(icyReader.getActualTitle());
+            Optional<String> stationInfo = Optional.ofNullable(icyReader.getStationName() + ": " + icyReader.getStationUrl());
+            Gui.getInstance().getStreamDetails().updateM3uUrl(stationInfo.orElse("Keine Informationen verfügbar"));
+            Gui.getInstance().getStreamDetails().updateM3uInfo(titleInfo.orElse("Keine Informationen verfügbar"));
+            Gui.getInstance().getStreamDetails().updateStreamUrl(player.getUrl().toString());
+            Gui.getInstance().getStreamDetails().updateStationName(station.getName());
+            Gui.getInstance().getStatusBar().updateActualStation(stationInfo.orElse("Keine Informationen verfügbar"));
+            Gui.getInstance().getStatusBar().updateAdditionalM3uInfo(titleInfo.orElse("Keine Informationen verfügbar"));
+            Gui.getInstance().getStatusBar().updateVolume(player.getVolume());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void updatePlayerDetails(AbstractPlayer player) {
@@ -70,5 +79,9 @@ public class GUIHandler {
         Gui.getInstance().getAudioDetails().changeChannelsText(player.getAudioFormatChannels());
         Gui.getInstance().getAudioDetails().changeFormat(player.getAudioFormatEncoding());
         Gui.getInstance().getAudioDetails().changeSamplerate(player.getAudioFormatSampleRate());
+    }
+
+    public void toggleControls(boolean statusToSet) {
+        Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setEnabled(statusToSet);
     }
 }

@@ -7,6 +7,7 @@ import org.apache.commons.io.FileUtils;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class M3uParser {
     private final static String START_TOKEN = "#EXTM3U";
     private final static String INFO_TOKEN = "#EXTINF:";
     private final static String URL_TOKEN = "http://";
-
+    private static int MAX_REDIRECT_COUNT = 5;
+    private int redirectCount = 0;
 
     /**
      * @param m3ufile the temporary downloaded m3ufile
@@ -40,10 +42,32 @@ public class M3uParser {
         }
     }
 
-    public String parseFileFromUrlToString(URL url) throws IOException {
+
+    /**
+     * Parses a file of an URL to String
+     *
+     * @param url the file url
+     * @return the parsed string
+     * @throws IOException           if an error occurs during writing the stream
+     * @throws MalformedURLException if the url contains too many redirects (specified by MAX_REDIRECT_COUNT)
+     */
+    public String parseFileFromUrlToString(URL url) throws IOException, MalformedURLException {
         File f = File.createTempFile("temp", ".m3u");
-        FileUtils.copyURLToFile(url, f);
-        return parseFileToString(f);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.connect();
+        int statusCode = con.getResponseCode();
+        if (statusCode == 200 || statusCode == 201) {
+            FileUtils.copyURLToFile(url, f);
+            return parseFileToString(f);
+
+        }
+        String newURL = con.getHeaderField("Location");
+        if (redirectCount == MAX_REDIRECT_COUNT) {
+            throw new MalformedURLException("URL " + url + " contains too many redirects: \r\n" +
+                    "Last known redirect points to: " + newURL);
+        }
+        redirectCount++;
+        return parseFileFromUrlToString(new URL(newURL));
     }
 
     public List<M3UInfo> parseUrlFromString(String s) throws NoURLTagFoundException, UnsupportedAudioFileException, MalformedURLException {
@@ -91,9 +115,22 @@ public class M3uParser {
             M3UInfo info = new M3UInfo(new URL(splittedLines[i]), "Nicht verfügbar");
             m3uInfos.add(info);
         }
-        if(m3uInfos.size() == 0) {
+        if (m3uInfos.size() == 0) {
             throw new NoURLTagFoundException("Simple M3U did not contain valid URLs");
         }
         return m3uInfos;
+    }
+
+    public int getRedirectCount() {
+        return redirectCount;
+    }
+
+    /**
+     * Change the redirect limit
+     * ATTENTION: Long waiting and/or endless loops could result!
+     * @param redirectCount the new redirect limit
+     */
+    public void setRedirectCount(int redirectCount) {
+        this.redirectCount = redirectCount;
     }
 }

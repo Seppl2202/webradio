@@ -7,18 +7,18 @@ import de.dhbw.webradio.eventhandlers.TogglePlayerListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PlayerControlPanel extends JPanel {
     private JButton togglePlayerButton, volumeUpButton, volumeDownButton, muteVolumeButton;
-    PlayerControlPanel(){
+
+    PlayerControlPanel() {
         initializePanel();
     }
 
     private void initializePanel() {
         this.setLayout(new FlowLayout());
         togglePlayerButton = new JButton("Start");
+        togglePlayerButton.setEnabled(false);
         togglePlayerButton.addActionListener(new TogglePlayerListener());
         volumeUpButton = new JButton("+");
         volumeUpButton.addActionListener(new IncreaseVolumeListener());
@@ -33,13 +33,13 @@ public class PlayerControlPanel extends JPanel {
     }
 
     public void togglePlayButton() {
-        if(this.togglePlayerButton.getText().equalsIgnoreCase("Start")) {
+        if (this.togglePlayerButton.getText().equalsIgnoreCase("Start")) {
             this.togglePlayerButton.setText("Stop");
         }
     }
 
     public void toggleMuteVolumeButton() {
-        if(this.muteVolumeButton.getText().equalsIgnoreCase("Lautlos")) {
+        if (this.muteVolumeButton.getText().equalsIgnoreCase("Lautlos")) {
             this.muteVolumeButton.setText("Ton ein");
         } else {
             this.muteVolumeButton.setText("Lautlos");

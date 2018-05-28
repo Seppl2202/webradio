@@ -4,8 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
-public class SelectStreamDialog<T> {
+public class SelectMultipleItemsDialog<T> {
     private JList<T> listOfElements;
     private JLabel label;
     private JOptionPane optionPane;
@@ -13,8 +14,17 @@ public class SelectStreamDialog<T> {
     private ActionListener okEvent, cancelEvent;
     private JDialog dialog;
 
-    public SelectStreamDialog(String title, String message, JList<T> objectsToSelect) {
+    /**
+     *
+     * @param title the title to be displayed
+     * @param message the message above the list
+     * @param objectsToSelect a JList component of elements
+     * @param listSelectionMode the desired selection type of JList: 0: single, 2: multiple, 1: interval
+     *                          see @ https://docs.oracle.com/javase/10/docs/api/javax/swing/ListSelectionModel.html
+     */
+    public SelectMultipleItemsDialog(String title, String message, JList<T> objectsToSelect, int listSelectionMode) {
         listOfElements = objectsToSelect;
+        objectsToSelect.setSelectionMode(listSelectionMode);
         label = new JLabel(message);
         createAndDisplayDialog();
         dialog.setTitle(title);
@@ -80,7 +90,11 @@ public class SelectStreamDialog<T> {
         dialog.setVisible(true);
     }
 
-    public T getSelectedItem() {
-        return listOfElements.getSelectedValue();
+    /**
+     *
+     * @return a list of selected item. in case of single selection, list size = 1
+     */
+    public List<T> getSelectedItem() {
+        return listOfElements.getSelectedValuesList();
     }
 }

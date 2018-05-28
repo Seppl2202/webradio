@@ -1,18 +1,19 @@
 package de.dhbw.webradio.radioplayer;
 
-import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.gui.GUIHandler;
+import de.dhbw.webradio.logger.Logger;
 
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Mp3Player extends AbstractPlayer implements Runnable {
     private static int BufferSize = 1024; // Anzahl der Daten, die aufeinmal an die Soundkarte geschickt werden.
     private static byte[] buffer = new byte[BufferSize];
     private Thread runner = new Thread(this); //AbspielThread
+    private AudioFormat audioFormat;
+
 
     /**
      * starten der Wiedergabe
@@ -29,12 +30,10 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
         this.song = new File("");
         this.url = url;
         if (url != null) {
-            System.err.println("called set url");
             setInputStream();
         }
     }
 
-    @Override
     public void setInputStream() {
         try {
             ais = AudioSystem.getAudioInputStream(url);
@@ -67,37 +66,8 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
                 line.open(audioFormat);
                 FloatControl gainControl = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
                 line.start();
-
-                System.out.println("audioFormat.getChannels: " + audioFormat.getChannels());
-                System.out.println("audioFormat.getFrameSize: " + audioFormat.getFrameSize());
-                System.out.println("audioFormat.getSampleRate: " + audioFormat.getSampleRate());
-                System.out.println("audioFormat.getSampleSizeInBits: " + audioFormat.getSampleSizeInBits());
-                System.out.println("audioFormat.getEncoding: " + audioFormat.getEncoding());
-                System.out.println("audioFormat.properties: " + audioFormat.properties());
-                System.out.println("audioFormat.getChannels: " + audioFormat.getChannels());
-                System.out.println("durch:  audioFormat.getFrameRate: " + audioFormat.getFrameRate());
-                System.out.println("audioFormat.getFrameSize: " + audioFormat.getFrameSize());
-                System.out.println("audioFormat.getSampleRate: " + audioFormat.getSampleRate());
-                System.out.println("audioFormat.getSampleSizeInBits: " + audioFormat.getSampleSizeInBits());
-                System.out.println("audioFormat.getEncoding: " + audioFormat.getEncoding());
-                System.out.println("audioFormat.properties: " + audioFormat.properties());
-                System.out.println("in.available: " + in.available());
-                System.out.println("in.getFrameLength: " + in.getFrameLength());
-                System.out.println("audioFormat.getFrameRate: " + audioFormat.getFrameRate());
-                System.out.println("dies geteilt: in.FrameLength: " + in.getFrameLength());
-                System.out.println("in.getFormat: " + in.getFormat());
-                System.out.println("line.available: " + line.available());
-                System.out.println("line.getBufferSize: " + line.getBufferSize());
-                System.out.println("line.available: " + line.getFramePosition());
-                System.out.println("line.getFramePosition: " + line.getLevel());
-                System.out.println("line.getLongFramePosition: " + line.getLongFramePosition());
-                System.out.println("line.getMicrosecondPosition: " + line.getMicrosecondPosition());
-                System.out.println("line.getControls: " + line.getControls());
-                System.out.println("line.getFormat: " + line.getFormat());
-                System.out.println("line.getLineInfo: " + line.getLineInfo());
-                GUIHandler.getInstance().updateAudioDetails(this);
-
-
+                logAudioData(in, audioFormat, line);
+                updateGui();
                 songLaenge = song.length();
                 sampleSizeInBits = audioFormat.getSampleSizeInBits();
 
@@ -110,6 +80,7 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
                 }
 
                 in.mark(in.available());
+                logPlayStart();
                 while ((true) && (!stop)) {
                     isPlaying = true;
                     int gainLevel = (int) ((int) gainControl.getMinimum() + ((gainControl.getMaximum() - gainControl.getMinimum()) / 100 * gainPercent));
@@ -126,6 +97,7 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
                         }
                         actuallySongTime = line.getMicrosecondPosition() / 1000000 - resetKorrektur;
                         line.write(buffer, 0, n);
+
                     }
                 }
                 line.drain();
@@ -142,12 +114,53 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
         isPlaying = false;
     }
 
-    @Override
+    private void updateGui() {
+        GUIHandler.getInstance().updateAudioDetails(this);
+    }
+
+    private void logPlayStart() {
+        String logInfo =
+                "Started player: " + this.url;
+        Logger.logInfo(logInfo);
+    }
+
+    private void logAudioData(AudioInputStream in, AudioFormat audioFormat, SourceDataLine line) throws IOException {
+        String logInfo =
+                "Number of channels: " + audioFormat.getChannels() + "\r\n" +
+                        "Sample rate: " + audioFormat.getSampleRate() + "\r\n" +
+                        "Frame size: " + audioFormat.getFrameSize() + "\r\n" +
+                        "Encoding: " + audioFormat.getEncoding() + "\r\n" +
+                        "audioFormat.getSampleSizeInBits: " + audioFormat.getSampleSizeInBits() + "\r\n" +
+                        "audioFormat.getEncoding: " + audioFormat.getEncoding() + "\r\n" +
+                        "audioFormat.properties: " + audioFormat.properties() + "\r\n" +
+                        "audioFormat.getChannels: " + audioFormat.getChannels() + "\r\n" +
+                        "div. by:  audioFormat.getFrameRate: " + audioFormat.getFrameRate() + "\r\n" +
+                        "audioFormat.getFrameSize: " + audioFormat.getFrameSize() + "\r\n" +
+                        "audioFormat.getSampleRate: " + audioFormat.getSampleRate() + "\r\n" +
+                        "audioFormat.getSampleSizeInBits: " + audioFormat.getSampleSizeInBits() + "\r\n" +
+                        "audioFormat.getEncoding: " + audioFormat.getEncoding() + "\r\n" +
+                        "audioFormat.properties: " + audioFormat.properties() + "\r\n" +
+                        "in.available: " + in.available() + "\r\n" +
+                        "in.getFrameLength: " + in.getFrameLength() + "\r\n" +
+                        "audioFormat.getFrameRate: " + audioFormat.getFrameRate() + "\r\n" +
+                        "div. by: in.FrameLength: " + in.getFrameLength() + "\r\n" +
+                        "in.getFormat: " + in.getFormat() + "\r\n" +
+                        "line.available: " + line.available() + "\r\n" +
+                        "line.getBufferSize: " + line.getBufferSize() + "\r\n" +
+                        "line.available: " + line.getFramePosition() + "\r\n" +
+                        "line.getFramePosition: " + line.getLevel() + "\r\n" +
+                        "line.getLongFramePosition: " + line.getLongFramePosition() + "\r\n" +
+                        "line.getMicrosecondPosition: " + line.getMicrosecondPosition() + "\r\n" +
+                        "line.getFormat: " + line.getFormat() + "\r\n" +
+                        "line.getLineInfo: " + line.getLineInfo();
+        Logger.logInfo(logInfo);
+    }
+
     public void fetchStreamInfo() {
         try {
             resetKorrektur = 0;
             AudioInputStream in = AudioSystem.getAudioInputStream(AudioFormat.Encoding.PCM_SIGNED, AudioSystem.getAudioInputStream(url));
-            AudioFormat audioFormat = in.getFormat();
+            audioFormat = in.getFormat();
             audioFormatChannels = audioFormat.getChannels();
             audioFormatFrameRate = audioFormat.getFrameRate();
             audioFormatFrameSize = audioFormat.getFrameSize();
@@ -171,21 +184,14 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
             line.close();
             in.close();
         } catch (UnsupportedAudioFileException e) {
-            System.out.println("nicht unterst�tztes Format");
+            System.out.println("nicht unterstütztes Format");
         } catch (IOException e) {
             System.out.println("Datei nicht gefunden" + e);
         } catch (LineUnavailableException e) {
             System.out.println("Soundkartenfehler");
         }
-        BufferSize = bitRate / 8 * 1000 / 10; // Buffergr��e auf Anzahl der ben�tigten Bytes pro 1/10s
+        BufferSize = bitRate / 8 * 1000 / 10; // Buffergröße auf Anzahl der benötigten Bytes pro 1/10s
         buffer = new byte[BufferSize];
 
-    }
-
-    public static void main(String[] args) throws MalformedURLException {
-        AbstractPlayer player = new Mp3Player();
-        player.setUrl(new URL("http://hr-youfm-live.cast.addradio.de/hr/youfm/live/mp3/128/stream.mp3"));
-        player.setVolume(90);
-        player.play();
     }
 }

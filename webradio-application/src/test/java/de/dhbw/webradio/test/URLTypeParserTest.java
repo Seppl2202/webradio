@@ -1,19 +1,22 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.runner.RunWith;
+package de.dhbw.webradio.test;
 
-import static org.junit.Assert.*;
+import de.dhbw.webradio.enumerations.FileExtension;
+import de.dhbw.webradio.m3uparser.URLTypeParser;
+import org.junit.Test;
 
-@RunWith(Arquillian.class)
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static org.junit.Assert.assertEquals;
+
 public class URLTypeParserTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(de.dhbw.webradio.m3uparser.URLTypeParser.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
 
+    @Test
+    public void parseByContentDetection() throws MalformedURLException {
+        URL url1 = new URL("http://stream.antenne.com/hra-nds/mp3-128/IMDADevice/");
+        URL url2 = new URL("http://streams.bigfm.de/bigfm-charts-128-aac?usid=0-0-H-A-D-30");
+        URLTypeParser parser = new URLTypeParser();
+        assertEquals(FileExtension.MP3, parser.parseByContentDetection(url1));
+        assertEquals(FileExtension.AAC, parser.parseByContentDetection(url2));
+    }
 }

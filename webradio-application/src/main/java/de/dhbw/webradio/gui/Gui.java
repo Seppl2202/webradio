@@ -1,13 +1,12 @@
 package de.dhbw.webradio.gui;
 
-import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.models.StationsTableModel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Gui extends JFrame {
-    public static Gui gui = new Gui();
+    private static Gui gui = new Gui();
     private PlayerControlPanel playerControlPanel;
     private JPanel mainPanel;
     private StatusBar statusBar;
@@ -43,6 +42,8 @@ public class Gui extends JFrame {
         streamAudioDetails.add("Player-Steuerung", playerControlPanel);
         streamAudioDetails.add("Stream-Details", streamDetails);
         streamAudioDetails.add("Audio-Details", audioDetails);
+        RecorderTab recorderTab = new RecorderTab();
+        streamAudioDetails.add(recorderTab);
         mainPanel.add(streamAudioDetails, BorderLayout.CENTER);
     }
 

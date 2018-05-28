@@ -3,6 +3,7 @@ package de.dhbw.webradio.eventhandlers;
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.gui.GUIHandler;
 import de.dhbw.webradio.gui.Gui;
+import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
@@ -38,9 +39,13 @@ public class TogglePlayerListener implements ActionListener {
                         }
                         createPlayerAndUpdateGui(playerFactory, s);
                     } catch (MalformedURLException mue) {
-                        mue.printStackTrace();
+                        WebradioPlayer.setPlayer(null);
+                        GUIHandler.getInstance().resetComponents();
+                        Logger.logError(mue.getMessage());
                     } catch (Exception ex) {
-                        ex.printStackTrace();
+                        WebradioPlayer.setPlayer(null);
+                        GUIHandler.getInstance().resetComponents();
+                        Logger.logError(ex.getMessage());
                     }
                 }
             }

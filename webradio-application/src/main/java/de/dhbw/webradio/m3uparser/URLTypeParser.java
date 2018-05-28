@@ -1,7 +1,8 @@
-package de.dhbw.webradio;
+package de.dhbw.webradio.m3uparser;
 
+import de.dhbw.webradio.enumerations.FileExtension;
 import org.apache.tika.exception.TikaException;
-import org.apache.tika.parser.AutoDetectParser;
+import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.audio.AudioParser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.xml.sax.SAXException;
@@ -11,24 +12,47 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class URLTypeParser {
-    public static void main(String[] args) throws IOException {
-        URL url = new URL("http://streams.bigfm.de/bigfm-charts-128-aac?usid=0-0-H-A-D-30");
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
-        InputStream in = con.getInputStream();
-        BodyContentHandler handler = new BodyContentHandler();
-        AutoDetectParser autoDetectParser = new AutoDetectParser();
-        AudioParser audioParser = new AudioParser();
-        org.apache.tika.metadata.Metadata metadata = new org.apache.tika.metadata.Metadata();
+/**
+ * This class parses the mediatype directly from the URL input stream
+ */
+public class URLTypeParser {
+
+
+    /** This class uses Apache Tika to parse an URL using her content
+     *
+     * @param url the webstream url
+     * @return the detected file encoding: MP3, AAC or unsupported
+     */
+
+    public FileExtension parseByContentDetection(URL url) {
         try {
-            audioParser.parse(in, handler, metadata);
-            System.err.println(metadata.toString());
-        } catch (SAXException e) {
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            InputStream in = connection.getInputStream();
+            BodyContentHandler handler = new BodyContentHandler();
+            AudioParser parser = new AudioParser();
+            Metadata metadata = new Metadata();
+            //AudioParser.parse is deprecated, but the only way to parse detailed audio types instead of MIME-Type audio
+            parser.parse(in, handler, metadata);
+            return parseMediaType(metadata);
+        } catch (IOException e) {
             e.printStackTrace();
         } catch (TikaException e) {
             e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
         }
+        return FileExtension.UNSUPPORTED_TYPE;
+    }
+
+    private FileExtension parseMediaType(Metadata metadata) {
+        String parsedMediaType = metadata.get("encoding");
+        if (parsedMediaType.equalsIgnoreCase("aac")) {
+            return FileExtension.AAC;
+        } else if (parsedMediaType.equalsIgnoreCase("mpeg1l3")) {
+            return FileExtension.MP3;
+        }
+        return FileExtension.UNSUPPORTED_TYPE;
     }
 
 }

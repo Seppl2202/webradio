@@ -1,6 +1,7 @@
 package de.dhbw.webradio.radioplayer;
 
 import de.dhbw.webradio.gui.GUIHandler;
+import de.dhbw.webradio.logger.Logger;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -99,7 +100,7 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
     private void fireEventNewMetaData(String key, String value) {
         //to do: log received metadata
         //add header key-values to map
-        System.err.println("new data:" + key + value);
+        Logger.logInfo("New icy data: " + key + ": +" + value);
         if (!(key.contains("Length"))) {
             id3Values.put(key, value);
         } else {

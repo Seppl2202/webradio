@@ -1,30 +1,22 @@
 package de.dhbw.webradio.radioplayer;
 
 
+import de.dhbw.webradio.gui.GUIHandler;
+import de.dhbw.webradio.recording.Recorder;
 import net.sourceforge.jaad.aac.AACException;
 import net.sourceforge.jaad.aac.Decoder;
 import net.sourceforge.jaad.aac.SampleBuffer;
 import net.sourceforge.jaad.adts.ADTSDemultiplexer;
+import net.sourceforge.jaad.util.wav.WaveFileWriter;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.*;
+import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class AACPlayer extends AbstractPlayer implements Runnable {
     private Thread runner = new Thread(this);
-
-    @Override
-    public void setInputStream() {
-
-    }
-
-    @Override
-    public void fetchStreamInfo() {
-
-    }
 
     @Override
     public void play() {
@@ -42,6 +34,7 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
 
     @Override
     public void run() {
+        gainPercent = 90;
         decodeAndPlayAAC();
     }
 
@@ -56,15 +49,23 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
             while (!stop) {
                 b = adts.readNextFrame();
                 dec.decodeFrame(b, buf);
+                FloatControl gainControl = null;
 
                 if (line == null) {
-                    final AudioFormat aufmt = new AudioFormat(buf.getSampleRate(), buf.getBitsPerSample(), buf.getChannels(), true, true);
-                    line = AudioSystem.getSourceDataLine(aufmt);
+                    final AudioFormat audioFormat = new AudioFormat(buf.getSampleRate(), buf.getBitsPerSample(), buf.getChannels(), true, true);
+                    line = AudioSystem.getSourceDataLine(audioFormat);
                     line.open();
+                    gainControl = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
                     line.start();
+                    addAudioDetails(audioFormat);
                 }
                 b = buf.getData();
                 line.write(b, 0, b.length);
+
+//                float range = gainControl.getMaximum() - gainControl.getMinimum();
+//                float gain = (range * (gainPercent/100)) + gainControl.getMinimum();
+//                gainControl.setValue(gain);
+
             }
         } catch (LineUnavailableException e) {
             e.printStackTrace();
@@ -77,7 +78,15 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
                 line.stop();
                 line.close();
                 isPlaying = false;
+                GUIHandler.getInstance().resetComponents();
             }
         }
+    }
+
+    private void addAudioDetails(AudioFormat audioFormat) {
+        audioFormatChannels = audioFormat.getChannels();
+        audioFormatEncoding = audioFormat.getEncoding().toString();
+        audioFormatSampleRate = audioFormat.getSampleRate();
+        GUIHandler.getInstance().updateAudioDetails(this);
     }
 }
