@@ -47,6 +47,7 @@ public class URLTypeParser {
 
     private FileExtension parseMediaType(Metadata metadata) {
         String parsedMediaType = metadata.get("encoding");
+        System.err.println(parsedMediaType);
         if (parsedMediaType.equalsIgnoreCase("aac")) {
             return FileExtension.AAC;
         } else if (parsedMediaType.equalsIgnoreCase("mpeg1l3")) {

@@ -8,6 +8,7 @@ import de.dhbw.webradio.gui.SelectMultipleItemsDialog;
 import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
 import de.dhbw.webradio.m3uparser.M3uParser;
+import de.dhbw.webradio.m3uparser.PLSParser;
 import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.models.Station;
 
@@ -34,21 +35,15 @@ public class PlayerFactory implements Factory {
             AbstractPlayer player = new AACPlayer();
             player.setUrl(stationURL);
             return player;
+
         } else if (urlExtension.equals(FileExtension.M3U)) {
             String m3uFileContent;
             try {
                 M3uParser m3uParser = new M3uParser();
                 m3uFileContent = m3uParser.parseFileFromUrlToString(stationURL);
                 M3UInfo userSelectedStream = getUserSelection(m3uFileContent, m3uParser);
-                if (fileExtensionParser.parseFileExtension(userSelectedStream.getUrl()).equals(FileExtension.MP3)) {
-                    AbstractPlayer player = new Mp3Player();
-                    player.setUrl(new URL(userSelectedStream.getUrl().toString()));
-                    return player;
-                } else if (fileExtensionParser.parseFileExtension(userSelectedStream.getUrl()).equals(FileExtension.AAC)) {
-                    AbstractPlayer aacPlayer = new AACPlayer();
-                    aacPlayer.setUrl(userSelectedStream.getUrl());
-                    return aacPlayer;
-                }
+                AbstractPlayer player = parseMP3orAAC(fileExtensionParser, userSelectedStream.getUrl());
+                if (player != null) return player;
             } catch (IOException e) {
                 WebradioPlayer.setPlayer(null);
                 GUIHandler.getInstance().resetComponents();
@@ -62,8 +57,44 @@ public class PlayerFactory implements Factory {
                 GUIHandler.getInstance().resetComponents();
                 Logger.logError(e.getMessage());
             }
+        } else if (urlExtension.equals(FileExtension.PLS)) {
+            PLSParser plsParser = new PLSParser();
+            List<String> plsEntries = plsParser.parsePLS(stationURL);
+            try {
+                String userSelectedURL = getPLSSelection(plsEntries);
+                AbstractPlayer player = parseMP3orAAC(fileExtensionParser, new URL(userSelectedURL));
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+
         }
         return null;
+    }
+
+    private AbstractPlayer parseMP3orAAC(FileExtensionParser fileExtensionParser, URL userSelectedStream) throws MalformedURLException {
+        if (fileExtensionParser.parseFileExtension(userSelectedStream).equals(FileExtension.MP3)) {
+            AbstractPlayer player = new Mp3Player();
+            player.setUrl(userSelectedStream);
+            return player;
+        } else if (fileExtensionParser.parseFileExtension(userSelectedStream).equals(FileExtension.AAC)) {
+            AbstractPlayer aacPlayer = new AACPlayer();
+            aacPlayer.setUrl(userSelectedStream);
+            return aacPlayer;
+        }
+        return null;
+    }
+
+    private String getPLSSelection(List<String> plsEntries) throws MalformedURLException {
+        if (plsEntries.size() == 1) {
+            return plsEntries.get(0);
+        } else {
+            final String[] selectoin = new String[1];
+            JList list = new JList<>(plsEntries.toArray());
+            SelectMultipleItemsDialog dialog = new SelectMultipleItemsDialog<M3UInfo>("Bitte wählen Sie einen Stream aus", "Bitte wählen:", list, ListSelectionModel.SINGLE_SELECTION);
+            dialog.setOnOk(e -> selectoin[0] = (String) dialog.getSelectedItem().get(0));
+            dialog.show();
+            return selectoin[0];
+        }
     }
 
     /**

@@ -44,7 +44,7 @@ public class WebradioPlayer {
             Station s6 = new Station("antenne", new URL("http://stream.antenne.com/hra-nds/mp3-128/IMDADevice/"));
             stationList.add(s5);
             stationList.add(s6);
-            Station s7 = new Station("FFH ITunes Top 40", new URL("http://streams.ffh.de/ffhchannels/mp3/hqtop40.m3u"));
+            Station s7 = new Station("FFH AAC", new URL("http://mp3.ffh.de/radioffh/hqlivestream.aac"));
             stationList.add(s7);
         } catch (MalformedURLException e) {
             e.printStackTrace();
