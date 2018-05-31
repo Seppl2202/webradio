@@ -2,6 +2,7 @@ package de.dhbw.webradio.radioplayer;
 
 
 import de.dhbw.webradio.gui.GUIHandler;
+import de.dhbw.webradio.recording.AACRecorder;
 import net.sourceforge.jaad.aac.AACException;
 import net.sourceforge.jaad.aac.Decoder;
 import net.sourceforge.jaad.aac.SampleBuffer;
@@ -13,7 +14,6 @@ import java.net.URL;
 
 public class AACPlayer extends AbstractPlayer implements Runnable {
     private Thread runner = new Thread(this);
-
     @Override
     public void play() {
         stop = false;

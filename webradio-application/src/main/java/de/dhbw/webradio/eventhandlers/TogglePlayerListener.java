@@ -8,10 +8,13 @@ import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
+import org.apache.http.conn.ConnectTimeoutException;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
