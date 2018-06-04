@@ -5,11 +5,13 @@ import de.dhbw.webradio.logger.Logger;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class IcyInputStreamReader extends FilterInputStream implements Runnable {
     private static IcyInputStreamReader reader;
@@ -33,6 +35,19 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
         connection.addRequestProperty("Icy-MetaData", "1");
         in = connection.getInputStream();
         id3Values = new HashMap<String, String>();
+    }
+
+
+    public static void main(String[] args) {
+        try {
+            IcyInputStreamReader r = new IcyInputStreamReader(new URL("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3"));
+            Thread t = new Thread(r);
+            t.start();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void readHeader() {
@@ -100,7 +115,7 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
     private void fireEventNewMetaData(String key, String value) {
         //to do: log received metadata
         //add header key-values to map
-        Logger.logInfo("New icy data: " + key + ": +" + value);
+        Logger.logInfo("New icy data: " + key + value);
         if (!(key.contains("Length"))) {
             id3Values.put(key, value);
         } else {
@@ -111,9 +126,34 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
             String mapKey = mapArray[0];
             String mapValue = mapArray[1].replaceAll("'", "").replaceAll(";", "").replaceAll("StreamUrl", "");
             id3Values.put(mapKey, mapValue);
+            if (icyInfoContainsTitleInfo()) {
+                id3Values.put("titleInfo", mapValue);
+            }
             GUIHandler.getInstance().notifyNewIcyData(this);
         }
     }
+
+    private boolean icyInfoContainsTitleInfo() {
+        String title = id3Values.get("StreamTitle");
+        String icy = id3Values.get("icy-name");
+
+        String[] titleSplit = title.split("\\s");
+        String[] icySplit = icy.split("\\s");
+
+        for (String a : titleSplit) {
+            StringBuilder abuilder = new StringBuilder();
+            abuilder.append(a);
+            for (String b : icySplit) {
+                StringBuilder builder = new StringBuilder();
+                builder.append(b);
+                if (builder.toString().toLowerCase().contains(abuilder.toString().toLowerCase())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     public String getActualTitle() {
         return id3Values.get("StreamTitle");
@@ -133,6 +173,11 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
 
     public String getStationUrl() {
         return id3Values.get("icy-url");
+    }
+
+    public String getActualMusicTitle() {
+        Optional<String> titleOptional = Optional.ofNullable(id3Values.get("titleInfo"));
+        return titleOptional.orElse("Keine Informationen verfügbar");
     }
 
     public void run() {

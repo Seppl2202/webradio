@@ -8,34 +8,33 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
 
 public class MP3RecordTest implements Recorder, Runnable {
     private boolean stop = false;
 
-    public static void main(String[] args) throws IOException, LineUnavailableException {
-
-        MP3RecordTest r = new MP3RecordTest();
-        r.recordNow();
-    }
 
     @Override
-    public void recordNow() throws LineUnavailableException, IOException {
+    public void recordNow(URL url, String filename) throws LineUnavailableException, IOException {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                if (url == null) {
+                    throw new IllegalArgumentException("URL was not valid");
+                }
                 File f = null;
                 try {
-                    URL url = new URL("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3");
+                    Optional<String> filenameOptional = Optional.ofNullable(filename);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     InputStream in = con.getInputStream();
-                    f = new File("C://repository/recmp.mp3");
+                    f = new File("C://repository/recmp" + filenameOptional.orElse("nofilenameprovided") + ".mp3");
                     stop = false;
                     OutputStream out = new FileOutputStream(f);
                     byte[] buffer = new byte[4096];
                     int len;
                     long t = System.currentTimeMillis();
                     System.err.println("entering while");
-                    while ((len = in.read(buffer)) > 0 && (System.currentTimeMillis() - t) < 75000) {
+                    while ((len = in.read(buffer)) > 0 && (!stop)) {
                         out.write(buffer, 0, len);
                     }
                     out.close();

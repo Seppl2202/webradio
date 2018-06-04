@@ -23,7 +23,7 @@ public class AACRecorder implements Recorder, Runnable {
     }
 
     @Override
-    public void recordNow() throws LineUnavailableException, IOException {
+    public void recordNow(URL urlt, String filename) throws LineUnavailableException, IOException {
         new Thread(new Runnable() {
             @Override
             public void run() {

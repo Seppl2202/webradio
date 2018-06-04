@@ -21,6 +21,7 @@ public class MenuBar extends JPanel {
         menuBar.add(settings);
         menuBar.add(stationList);
         JMenuItem exitProgram = new JMenuItem("Beenden");
+        exitProgram.addActionListener(e -> System.exit(0));
         file.add(exitProgram);
         JMenuItem generalSettings = new JMenuItem("Allgemeine Einstellungen");
         generalSettings.addActionListener(new GeneralSettingsEventHandler());

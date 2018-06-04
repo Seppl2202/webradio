@@ -1,14 +1,13 @@
 package de.dhbw.webradio.gui;
 
 import de.dhbw.webradio.WebradioPlayer;
-import de.dhbw.webradio.recording.AACRecorder;
 import de.dhbw.webradio.recording.Recorder;
+import de.dhbw.webradio.recording.RecorderController;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 
 public class RecorderTab extends JPanel {
@@ -23,9 +22,9 @@ public class RecorderTab extends JPanel {
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                r = new AACRecorder(WebradioPlayer.getPlayer().getUrl(), new File("C://repository/rec.wav"));
+                r = RecorderController.getInstance().recordNow(WebradioPlayer.getPlayer().getUrl(), "testfile");
                 try {
-                    r.recordNow();
+                    r.recordNow(WebradioPlayer.getPlayer().getUrl(), "filetest");
                 } catch (LineUnavailableException e1) {
                     e1.printStackTrace();
                 } catch (IOException e1) {
