@@ -38,18 +38,6 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
     }
 
 
-    public static void main(String[] args) {
-        try {
-            IcyInputStreamReader r = new IcyInputStreamReader(new URL("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3"));
-            Thread t = new Thread(r);
-            t.start();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     protected void readHeader() {
         for (Map.Entry<String, List<String>> header : connection.getHeaderFields().entrySet()) {
             if ("icy-metaint".equalsIgnoreCase(header.getKey())) {
@@ -128,7 +116,9 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable 
             id3Values.put(mapKey, mapValue);
             if (icyInfoContainsTitleInfo()) {
                 id3Values.put("titleInfo", mapValue);
+                System.err.println(mapValue);
             }
+            System.err.println(getActualMusicTitle());
             GUIHandler.getInstance().notifyNewIcyData(this);
         }
     }

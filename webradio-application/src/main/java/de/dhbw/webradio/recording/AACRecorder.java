@@ -11,9 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AACRecorder implements Recorder, Runnable {
-    private WaveFileWriter waveFileWriter;
     private boolean stop = false;
-    private SampleBuffer buf;
     private URL url;
     private File fileToSave;
 
@@ -55,7 +53,6 @@ public class AACRecorder implements Recorder, Runnable {
 
     @Override
     public void saveToFile() throws IOException {
-        waveFileWriter.write(buf.getData());
     }
 
     @Override

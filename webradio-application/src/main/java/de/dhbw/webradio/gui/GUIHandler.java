@@ -6,7 +6,7 @@ import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
 
 import java.util.Optional;
 
-public class GUIHandler {
+public class GUIHandler implements Handler {
     private static GUIHandler guiHandler = new GUIHandler();
 
     private GUIHandler() {
@@ -16,13 +16,16 @@ public class GUIHandler {
         return guiHandler;
     }
 
+    @Override
     public void notifyNewIcyData(IcyInputStreamReader reader) {
         Gui.getInstance().getStatusBar().updateActualStation(reader.getStationName());
         Gui.getInstance().getStatusBar().updateAdditionalM3uInfo(reader.getActualTitle());
         Gui.getInstance().getStreamDetails().updateM3uUrl(reader.getStationName() + ": " + reader.getStationUrl());
         Gui.getInstance().getStreamDetails().updateM3uInfo(reader.getActualTitle());
+        Gui.getInstance().getStreamDetails().updateRealTitelInfo(reader.getActualMusicTitle());
     }
 
+    @Override
     public void updateGui(Station station, IcyInputStreamReader icyReader, AbstractPlayer player) {
         try {
             //two seconds delay to let icyReader fetch all information
@@ -33,6 +36,7 @@ public class GUIHandler {
             Gui.getInstance().getStreamDetails().updateM3uInfo(titleInfo.orElse("Keine Informationen verfügbar"));
             Gui.getInstance().getStreamDetails().updateStreamUrl(player.getUrl().toString());
             Gui.getInstance().getStreamDetails().updateStationName(station.getName());
+            Gui.getInstance().getStreamDetails().updateRealTitelInfo(icyReader.getActualMusicTitle());
             Gui.getInstance().getStatusBar().updateActualStation(stationInfo.orElse("Keine Informationen verfügbar"));
             Gui.getInstance().getStatusBar().updateAdditionalM3uInfo(titleInfo.orElse("Keine Informationen verfügbar"));
             Gui.getInstance().getStatusBar().updateVolume(player.getVolume());
@@ -41,19 +45,23 @@ public class GUIHandler {
         }
     }
 
+    @Override
     public void updatePlayerDetails(AbstractPlayer player) {
         Gui.getInstance().getPlayerControlPanel().togglePlayButton();
         Gui.getInstance().getStatusBar().updateVolume(player.getVolume());
     }
 
+    @Override
     public void mutePlayer() {
         Gui.getInstance().getStatusBar().updateVolume(-1);
     }
 
+    @Override
     public void updatePlayerVolume(AbstractPlayer player) {
         Gui.getInstance().getStatusBar().updateVolume(player.getVolume());
     }
 
+    @Override
     public void resetComponents() {
         Gui.getInstance().getStatusBar().updateAdditionalM3uInfo("Keine Informationen verfügbar");
         Gui.getInstance().getStatusBar().updateActualStation("Aktuell keine Wiedergabe");
@@ -67,6 +75,7 @@ public class GUIHandler {
         togglePlayButton();
     }
 
+    @Override
     public void togglePlayButton() {
         if (Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().getText().equalsIgnoreCase("start")) {
             Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setText("Stop");
@@ -75,12 +84,14 @@ public class GUIHandler {
         }
     }
 
+    @Override
     public void updateAudioDetails(AbstractPlayer player) {
         Gui.getInstance().getAudioDetails().changeChannelsText(player.getAudioFormatChannels());
         Gui.getInstance().getAudioDetails().changeFormat(player.getAudioFormatEncoding());
         Gui.getInstance().getAudioDetails().changeSamplerate(player.getAudioFormatSampleRate());
     }
 
+    @Override
     public void toggleControls(boolean statusToSet) {
         Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setEnabled(statusToSet);
     }

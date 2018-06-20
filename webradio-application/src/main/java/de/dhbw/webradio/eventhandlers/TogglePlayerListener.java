@@ -3,18 +3,16 @@ package de.dhbw.webradio.eventhandlers;
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.gui.GUIHandler;
 import de.dhbw.webradio.gui.Gui;
+import de.dhbw.webradio.gui.Handler;
 import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
-import org.apache.http.conn.ConnectTimeoutException;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -72,8 +70,9 @@ public class TogglePlayerListener implements ActionListener {
         WebradioPlayer.setPlayer(player);
         player.play();
         IcyInputStreamReader icyReader = parseIcyInputFromPlayer(player.getUrl(), player);
-        GUIHandler.getInstance().updateGui(s, reader, player);
-        GUIHandler.getInstance().togglePlayButton();
+        Handler guiHandler = GUIHandler.getInstance();
+        guiHandler.updateGui(s, reader, player);
+        guiHandler.togglePlayButton();
     }
 
     private IcyInputStreamReader parseIcyInputFromPlayer(URL url, AbstractPlayer player) {

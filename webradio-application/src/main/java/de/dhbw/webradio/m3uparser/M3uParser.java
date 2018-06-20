@@ -127,7 +127,7 @@ public class M3uParser {
 
     /**
      * Change the redirect limit
-     * ATTENTION: Long waiting and/or endless loops could result!
+     * ATTENTION: Long waiting and/or endless loops may result!
      * @param redirectCount the new redirect limit
      */
     public void setRedirectCount(int redirectCount) {

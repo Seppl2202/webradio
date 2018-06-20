@@ -2,9 +2,7 @@ package de.dhbw.webradio.models;
 
 import java.net.URL;
 
-public class M3UInfo {
-    private URL url;
-    private String titleInfo;
+public class M3UInfo extends InformationObject {
 
     public M3UInfo(URL url, String titleInfo) {
         this.url = url;

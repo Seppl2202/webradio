@@ -1,12 +1,14 @@
 package de.dhbw.webradio.gui;
 
+import de.dhbw.webradio.models.InformationObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class SelectMultipleItemsDialog<T> {
+public class SelectMultipleItemsDialog<T extends InformationObject> {
     private JList<T> listOfElements;
     private JLabel label;
     private JOptionPane optionPane;
@@ -64,7 +66,7 @@ public class SelectMultipleItemsDialog<T> {
         okEvent = event;
     }
 
-    public void setOnClose(ActionListener event) {
+    public void setOnCancel(ActionListener event) {
         cancelEvent = event;
     }
 
