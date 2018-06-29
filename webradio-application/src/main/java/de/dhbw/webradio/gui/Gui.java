@@ -33,7 +33,7 @@ public class Gui extends JFrame {
         statusBar = new StatusBar();
         mainPanel.add(statusBar, BorderLayout.SOUTH);
         stationsTable = new StationsTable();
-        mainPanel.add(new JScrollPane(stationsTable), BorderLayout.WEST);
+        mainPanel.add(new JScrollPane(stationsTable), BorderLayout.CENTER);
         streamDetails = new StreamDetails();
         menuBar = new MenuBar();
         mainPanel.add(menuBar, BorderLayout.NORTH);
@@ -44,7 +44,7 @@ public class Gui extends JFrame {
         streamAudioDetails.add("Audio-Details", audioDetails);
         RecorderTab recorderTab = new RecorderTab();
         streamAudioDetails.add(recorderTab);
-        mainPanel.add(streamAudioDetails, BorderLayout.CENTER);
+        mainPanel.add(streamAudioDetails, BorderLayout.EAST);
     }
 
     public PlayerControlPanel getPlayerControlPanel() {
