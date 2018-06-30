@@ -3,6 +3,7 @@ package de.dhbw.webradio.gui;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
+import de.dhbw.webradio.radioplayer.MetainformationReader;
 
 import java.util.Optional;
 
@@ -17,7 +18,7 @@ public class GUIHandler implements Handler {
     }
 
     @Override
-    public void notifyNewIcyData(IcyInputStreamReader reader) {
+    public void notifyNewIcyData(MetainformationReader reader) {
         Gui.getInstance().getStatusBar().updateActualStation(reader.getStationName());
         Gui.getInstance().getStatusBar().updateAdditionalM3uInfo(reader.getActualTitle());
         Gui.getInstance().getStreamDetails().updateM3uUrl(reader.getStationName() + ": " + reader.getStationUrl());
@@ -26,7 +27,7 @@ public class GUIHandler implements Handler {
     }
 
     @Override
-    public void updateGui(Station station, IcyInputStreamReader icyReader, AbstractPlayer player) {
+    public void updateGui(Station station, MetainformationReader icyReader, AbstractPlayer player) {
         try {
             //two seconds delay to let icyReader fetch all information
             Thread.sleep(2000);

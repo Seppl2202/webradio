@@ -1,6 +1,7 @@
 package de.dhbw.webradio.gui;
 
 import de.dhbw.webradio.WebradioPlayer;
+import de.dhbw.webradio.eventhandlers.DeleteStationHandler;
 import de.dhbw.webradio.models.StationsTableModel;
 
 import javax.swing.*;
@@ -30,6 +31,7 @@ public class StationsTable extends JPanel {
         this.add(stationsTable, BorderLayout.CENTER);
         final TableRowSorter<StationsTableModel> rowSorter = new TableRowSorter<>(stationsTableModel);
         stationsTable.setRowSorter(rowSorter);
+        stationsTable.addKeyListener(new DeleteStationHandler());
         searchField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {

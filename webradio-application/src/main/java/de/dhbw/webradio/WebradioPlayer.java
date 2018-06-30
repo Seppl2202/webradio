@@ -51,6 +51,10 @@ public class WebradioPlayer {
         }
     }
 
+    public static void deleteStation(Station s) {
+        stationList.remove(s);
+    }
+
     public static Gui getGui() {
         return gui;
     }

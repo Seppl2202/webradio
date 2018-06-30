@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class IcyInputStreamReader extends FilterInputStream implements Runnable {
+public class IcyInputStreamReader extends FilterInputStream implements Runnable, MetainformationReader {
     private static IcyInputStreamReader reader;
     private URLConnection connection;
     private int metaDataInterval = -1;
