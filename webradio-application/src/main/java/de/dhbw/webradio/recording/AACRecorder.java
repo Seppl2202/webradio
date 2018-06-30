@@ -1,5 +1,6 @@
 package de.dhbw.webradio.recording;
 
+import de.dhbw.webradio.WebradioPlayer;
 import net.sourceforge.jaad.aac.SampleBuffer;
 import net.sourceforge.jaad.util.wav.WaveFileWriter;
 import org.joda.time.DateTime;
@@ -9,11 +10,15 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.WeakHashMap;
 
 public class AACRecorder implements Recorder, Runnable {
     private boolean stop = false;
     private URL url;
     private File fileToSave;
+    private File recorderDirectory = WebradioPlayer.getSettings().getGeneralSettings().getRecordingDirectory();
 
     public AACRecorder(URL urlToRecord, File file) {
         setUrl(urlToRecord);
@@ -29,8 +34,9 @@ public class AACRecorder implements Recorder, Runnable {
 
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     InputStream in = con.getInputStream();
-                    File f = new File("C://repository/recaac" + System.currentTimeMillis() + ".aac");
-                    OutputStream out = new FileOutputStream(f);
+                    File f = new File(recorderDirectory + generateFileName() + ".aac");
+                    Path path = Paths.get(f.toURI());
+                    OutputStream out = new FileOutputStream(path.toFile());
                     byte[] buffer = new byte[4096];
                     int len;
                     long t = System.currentTimeMillis();
@@ -50,10 +56,11 @@ public class AACRecorder implements Recorder, Runnable {
             }
         }).start();
     }
-
-    @Override
-    public void saveToFile() throws IOException {
+    private String generateFileName() {
+        //remove everything but characters and numbers
+        return WebradioPlayer.getPlayer().getIcyReader().getActualMusicTitle().replaceAll("[^a-zA-Z0-9]", "");
     }
+
 
     @Override
     public void recordByTitle() {

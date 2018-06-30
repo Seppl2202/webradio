@@ -7,7 +7,6 @@ import java.net.URL;
 public interface Recorder {
     public void recordNow(URL url, String filename) throws LineUnavailableException, IOException;
 
-    public void saveToFile() throws IOException;
 
     public void recordByTitle();
 

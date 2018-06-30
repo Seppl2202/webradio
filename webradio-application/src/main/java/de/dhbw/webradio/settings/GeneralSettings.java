@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class GeneralSettings {
     private Map<String, String> attributes = new HashMap<String, String>();
-    private File directory;
+    private File recordingDirectory;
 
 
     public GeneralSettings() {
@@ -20,11 +20,11 @@ public class GeneralSettings {
         this.attributes = attributes;
     }
 
-    public void setDirectory(File f) {
-        this.directory = f;
+    public void setRecordingDirectory(File f) {
+        this.recordingDirectory= f;
     }
 
     public File getRecordingDirectory() {
-        return this.directory;
+        return this.recordingDirectory;
     }
 }

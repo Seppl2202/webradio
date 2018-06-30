@@ -1,8 +1,9 @@
 ---
 generalSettings:
   attributes:
-    bufferSize: 1024
-    initialVolume: 90
+    bufferSize: "1024"
+    initialVolume: "90"
+  recordingDirectory: "C:\\Users\\priva\\IdeaProjects\\webradio"
 recordSettings:
   attributes:
-    filePath:
+    filePath: ""
