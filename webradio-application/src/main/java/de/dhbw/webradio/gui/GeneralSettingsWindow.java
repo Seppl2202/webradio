@@ -1,20 +1,23 @@
 package de.dhbw.webradio.gui;
 
 import de.dhbw.webradio.WebradioPlayer;
+import de.dhbw.webradio.eventhandlers.FilePathEventHandler;
 import de.dhbw.webradio.settings.GeneralSettings;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 public class GeneralSettingsWindow extends JFrame {
     private GeneralSettings generalSettings;
     private Map<JLabel, JTextField> settingsInputElements;
+    private JLabel filePathLabel;
     private JPanel elementsPanel, buttonsPanel;
-    private JButton save, cancel;
+    private JButton save, cancel, selectFilePath;
 
     public GeneralSettingsWindow() {
         settingsInputElements = new HashMap<JLabel, JTextField>();
@@ -31,7 +34,7 @@ public class GeneralSettingsWindow extends JFrame {
         JPanel mainPanel = new JPanel();
         this.add(mainPanel);
         elementsPanel = new JPanel();
-        elementsPanel.setLayout(new GridLayout(generalSettings.getAttributes().size(), generalSettings.getAttributes().size()));
+        elementsPanel.setLayout(new GridLayout(generalSettings.getAttributes().size() + 1, generalSettings.getAttributes().size() + 1));
         buttonsPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
         mainPanel.add(elementsPanel, BorderLayout.CENTER);
@@ -40,7 +43,6 @@ public class GeneralSettingsWindow extends JFrame {
         cancel = new JButton("Abbrechen");
         buttonsPanel.add(save);
         buttonsPanel.add(cancel);
-        cancel = new JButton("Abbrechen");
 
     }
 
@@ -64,5 +66,10 @@ public class GeneralSettingsWindow extends JFrame {
             elementsPanel.add(input.getKey());
             elementsPanel.add(input.getValue());
         }
+        filePathLabel = new JLabel("Verzeichnis für Audioaufnahmen: ");
+        selectFilePath = new JButton("Ändern");
+        selectFilePath.addActionListener(new FilePathEventHandler());
+        elementsPanel.add(filePathLabel);
+        elementsPanel.add(selectFilePath);
     }
 }

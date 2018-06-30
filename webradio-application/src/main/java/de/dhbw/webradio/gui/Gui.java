@@ -42,7 +42,7 @@ public class Gui extends JFrame {
         streamAudioDetails.add("Stream-Details", streamDetails);
         streamAudioDetails.add("Audio-Details", audioDetails);
         RecorderTab recorderTab = new RecorderTab();
-        streamAudioDetails.add(recorderTab);
+        streamAudioDetails.add("Aufnahme", recorderTab);
         JPanel splitListAndControlsPanel = new JPanel(new GridLayout(1, 2));
         splitListAndControlsPanel.add(new JScrollPane(stationsTable), BorderLayout.CENTER);
         splitListAndControlsPanel.add(streamAudioDetails);

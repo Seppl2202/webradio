@@ -8,12 +8,12 @@ import de.dhbw.webradio.radioplayer.MetainformationReader;
 import java.util.Optional;
 
 public class GUIHandler implements Handler {
-    private static GUIHandler guiHandler = new GUIHandler();
+    private static Handler guiHandler = new GUIHandler();
 
     private GUIHandler() {
     }
 
-    public static GUIHandler getInstance() {
+    public static Handler getInstance() {
         return guiHandler;
     }
 

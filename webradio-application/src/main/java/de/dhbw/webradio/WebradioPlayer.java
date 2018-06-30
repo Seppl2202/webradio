@@ -19,12 +19,13 @@ public class WebradioPlayer {
     private static AbstractPlayer player;
     private static List<Station> stationList;
     private static Settings settings;
+    public static File settingsDirectory = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml");
 
     public static void main(String[] args) {
         stationList = new ArrayList();
         addStations();
         SettingsParser settingsParser = new SettingsParser();
-        settings = settingsParser.parsegeneralSettings(new File("C:\\repository\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml"));
+        settings = settingsParser.parsegeneralSettings(settingsDirectory);
         ;
         gui = Gui.getInstance();
         NetworkConnectivityChecker n = NetworkConnectivityChecker.getInstance();
