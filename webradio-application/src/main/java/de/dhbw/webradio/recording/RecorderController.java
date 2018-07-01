@@ -2,6 +2,7 @@ package de.dhbw.webradio.recording;
 
 import de.dhbw.webradio.enumerations.FileExtension;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
+import de.dhbw.webradio.models.ScheduledRecord;
 
 import java.net.URL;
 import java.util.ArrayList;

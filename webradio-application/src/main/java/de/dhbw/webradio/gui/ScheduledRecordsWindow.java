@@ -16,8 +16,9 @@ public class ScheduledRecordsWindow extends JFrame {
         table = new ScheduledRecordsTable();
         this.setLayout(new BorderLayout());
         this.add(table, BorderLayout.CENTER);
-        add = new JButton();
+        add = new JButton("Hinzufügen");
         this.add(add, BorderLayout.SOUTH);
+        add.addActionListener(e-> new AddScheduledRecordWindow());
         this.setVisible(true);
     }
 

@@ -6,7 +6,7 @@ import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.networkconnection.NetworkConnectivityChecker;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.recording.RecorderController;
-import de.dhbw.webradio.recording.ScheduledRecord;
+import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.settings.Settings;
 import de.dhbw.webradio.settings.SettingsParser;
 

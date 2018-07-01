@@ -1,7 +1,5 @@
 package de.dhbw.webradio.models;
 
-import de.dhbw.webradio.recording.ScheduledRecord;
-
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 

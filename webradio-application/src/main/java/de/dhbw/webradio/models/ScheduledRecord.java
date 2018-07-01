@@ -1,4 +1,4 @@
-package de.dhbw.webradio.recording;
+package de.dhbw.webradio.models;
 
 public class ScheduledRecord {
     private String title, actor;

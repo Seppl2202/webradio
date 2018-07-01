@@ -2,7 +2,7 @@ package de.dhbw.webradio.eventhandlers;
 
 import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.recording.RecorderController;
-import de.dhbw.webradio.recording.ScheduledRecord;
+import de.dhbw.webradio.models.ScheduledRecord;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
