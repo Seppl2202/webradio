@@ -5,10 +5,13 @@ import java.io.IOException;
 import java.net.URL;
 
 public interface Recorder {
-    public void recordNow(URL url, String filename) throws LineUnavailableException, IOException;
+
+    public void recordNow(URL url) throws LineUnavailableException, IOException;
 
 
     public void recordByTitle();
 
     public void stop();
+
+    public boolean isRecording();
 }

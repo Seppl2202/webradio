@@ -15,18 +15,14 @@ import java.nio.file.Paths;
 import java.util.WeakHashMap;
 
 public class AACRecorder implements Recorder, Runnable {
-    private boolean stop = false;
-    private URL url;
-    private File fileToSave;
+    private boolean recording = false;
     private File recorderDirectory = WebradioPlayer.getSettings().getGeneralSettings().getRecordingDirectory();
 
-    public AACRecorder(URL urlToRecord, File file) {
-        setUrl(urlToRecord);
-        setFile(file);
+    public AACRecorder() {
     }
 
     @Override
-    public void recordNow(URL urlt, String filename) throws LineUnavailableException, IOException {
+    public void recordNow(URL url) throws LineUnavailableException, IOException {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -41,7 +37,7 @@ public class AACRecorder implements Recorder, Runnable {
                     int len;
                     long t = System.currentTimeMillis();
                     System.err.println("entering while");
-                    while ((len = in.read(buffer)) > 0 && (!stop)) {
+                    while ((len = in.read(buffer)) > 0 && (recording)) {
                         out.write(buffer, 0, len);
                     }
                     out.close();
@@ -52,6 +48,8 @@ public class AACRecorder implements Recorder, Runnable {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
+                } finally {
+                    stop();
                 }
             }
         }).start();
@@ -75,17 +73,12 @@ public class AACRecorder implements Recorder, Runnable {
 
     @Override
     public void stop() {
-        this.stop = true;
+        this.recording = true;
         System.err.println("stopped");
     }
 
-    public void setUrl(URL url) {
-        if (url != null) {
-            this.url = url;
-        }
-    }
-
-    public void setFile(File file) {
-        this.fileToSave = file;
+    @Override
+    public boolean isRecording() {
+        return recording;
     }
 }

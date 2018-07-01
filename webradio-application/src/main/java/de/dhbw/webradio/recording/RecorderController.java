@@ -21,17 +21,24 @@ public class RecorderController {
         return recorderController;
     }
 
-    public Recorder recordNow(URL url, String filename) {
+    public Recorder recordNow(URL url) {
         FileExtensionParser p = new FileExtensionParser();
         FileExtension mediaType = p.parseFileExtension(url);
 
-        switch (mediaType) {
-            case MP3:
-                actualRecordNowRecorder = new MP3RecordTest();
-            case AAC:
-//                actualRecordNowRecorder = new AACRecorder();
+        if (mediaType.equals(FileExtension.MP3)) {
+            return new MP3RecordTest();
         }
-
+        if (mediaType.equals(FileExtension.AAC)) {
+            return new AACRecorder();
+        }
         return actualRecordNowRecorder;
+    }
+
+    public Recorder getActualRecordNowRecorder() {
+        return actualRecordNowRecorder;
+    }
+
+    public void setActualRecordNowRecorder(Recorder r) {
+        this.actualRecordNowRecorder = r;
     }
 }

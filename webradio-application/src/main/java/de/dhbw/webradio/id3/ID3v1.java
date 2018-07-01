@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Optional;
 
 public class ID3v1 implements ID3 {
     public static final int TAG_LENGTH = 128;
@@ -37,7 +38,14 @@ public class ID3v1 implements ID3 {
     private String comment = null;
     private byte[] id3InfoToWrite;
 
-    public ID3v1() {
+    public ID3v1(String title, String artist, String track, String album, String year, int genre, String comment) {
+        this.track = track;
+        this.artist = artist;
+        this.title = title;
+        this.album = album;
+        this.year = year;
+        this.genre = genre;
+        this.comment = comment;
         id3InfoToWrite = new byte[128];
     }
 
@@ -218,4 +226,5 @@ public class ID3v1 implements ID3 {
             e.printStackTrace();
         }
     }
+
 }
