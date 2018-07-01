@@ -13,6 +13,7 @@ import java.io.IOException;
 public class RecorderTab extends JPanel {
     private Recorder r;
     private JButton start;
+    private ScheduledRecordsWindow window;
 
     public RecorderTab() {
         initializePanel();
@@ -39,7 +40,7 @@ public class RecorderTab extends JPanel {
             }
         });
         JButton scheduledRecords = new JButton("Aufnahme nach Titel...");
-        scheduledRecords.addActionListener(e -> new ScheduledRecordsWindow());
+        scheduledRecords.addActionListener(e -> this.window = new ScheduledRecordsWindow());
         this.add(start);
         this.add(scheduledRecords);
     }
@@ -66,5 +67,9 @@ public class RecorderTab extends JPanel {
         } else {
             this.start.setText("Start");
         }
+    }
+
+    public ScheduledRecordsWindow getScheduledRecordsWindow() {
+        return this.window;
     }
 }

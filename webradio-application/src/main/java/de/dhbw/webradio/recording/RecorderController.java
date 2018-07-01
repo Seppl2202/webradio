@@ -41,4 +41,16 @@ public class RecorderController {
     public void setActualRecordNowRecorder(Recorder r) {
         this.actualRecordNowRecorder = r;
     }
+
+    public List<ScheduledRecord> getScheduledRecordList() {
+        return scheduledRecordList;
+    }
+
+    public void addScheduledRecord(ScheduledRecord r) {
+        scheduledRecordList.add(r);
+    }
+
+    public void removeScheduledRecord(ScheduledRecord r) {
+        scheduledRecordList.remove(r);
+    }
 }

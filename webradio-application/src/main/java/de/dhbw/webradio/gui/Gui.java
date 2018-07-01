@@ -15,6 +15,7 @@ public class Gui extends JFrame {
     private MenuBar menuBar;
     private JTabbedPane streamAudioDetails;
     private AudioDetails audioDetails;
+    private RecorderTab recorderTab;
 
     private Gui() {
         initialize();
@@ -41,7 +42,7 @@ public class Gui extends JFrame {
         streamAudioDetails.add("Player-Steuerung", playerControlPanel);
         streamAudioDetails.add("Stream-Details", streamDetails);
         streamAudioDetails.add("Audio-Details", audioDetails);
-        RecorderTab recorderTab = new RecorderTab();
+        recorderTab = new RecorderTab();
         streamAudioDetails.add("Aufnahme", recorderTab);
         JPanel splitListAndControlsPanel = new JPanel(new GridLayout(1, 2));
         splitListAndControlsPanel.add(new JScrollPane(stationsTable), BorderLayout.CENTER);
@@ -76,5 +77,9 @@ public class Gui extends JFrame {
 
     public AudioDetails getAudioDetails() {
         return audioDetails;
+    }
+
+    public RecorderTab getRecorderTab() {
+        return this.recorderTab;
     }
 }

@@ -5,7 +5,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
 public class StationsTableModel extends AbstractTableModel {
-    private String headers[] = {"Name", "URL", "Löschen"};
+    private String headers[] = {"Name", "URL"};
     private List<Station> stationList;
 
     public StationsTableModel(List<Station> stations) {

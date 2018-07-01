@@ -5,6 +5,8 @@ import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.networkconnection.NetworkConnectivityChecker;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
+import de.dhbw.webradio.recording.RecorderController;
+import de.dhbw.webradio.recording.ScheduledRecord;
 import de.dhbw.webradio.settings.Settings;
 import de.dhbw.webradio.settings.SettingsParser;
 
@@ -24,9 +26,9 @@ public class WebradioPlayer {
     public static void main(String[] args) {
         stationList = new ArrayList();
         addStations();
+        addScheduledRecords();
         SettingsParser settingsParser = new SettingsParser();
         settings = settingsParser.parsegeneralSettings(settingsDirectory);
-        ;
         gui = Gui.getInstance();
         NetworkConnectivityChecker n = NetworkConnectivityChecker.getInstance();
     }
@@ -52,6 +54,13 @@ public class WebradioPlayer {
         }
     }
 
+
+    private static void addScheduledRecords() {
+        ScheduledRecord r1 = new ScheduledRecord("Titel 1", "Interpret 1");
+        ScheduledRecord r2 = new ScheduledRecord("Titel 2", "Interpret 2");
+        RecorderController.getInstance().addScheduledRecord(r1);
+        RecorderController.getInstance().addScheduledRecord(r2);
+    }
     public static void deleteStation(Station s) {
         stationList.remove(s);
     }
