@@ -1,7 +1,9 @@
 package de.dhbw.webradio.networkconnection;
 
 import de.dhbw.webradio.gui.GUIHandler;
+import de.dhbw.webradio.gui.Gui;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.NetworkInterface;
@@ -61,14 +63,17 @@ public class NetworkConnectivityChecker {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-
         }
         if (!netAccess) {
-            System.err.println("toggled button");
+            showErrorDialog();
             GUIHandler.getInstance().toggleControls(false);
         } else {
             GUIHandler.getInstance().toggleControls(true);
         }
         return netAccess;
+    }
+
+    private void showErrorDialog() {
+        JOptionPane.showMessageDialog(Gui.getInstance(), "Es konnte keine Netzwerkverbdingung gefunden werden\r\nSie können erst Sender wiedergeben und eine Sofortaufnahme starten, wenn eine Verbindung verfügbar ist", "Netzwerkfehler", JOptionPane.ERROR_MESSAGE);
     }
 }

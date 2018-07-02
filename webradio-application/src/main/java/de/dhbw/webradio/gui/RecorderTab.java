@@ -21,6 +21,8 @@ public class RecorderTab extends JPanel {
 
     private void initializePanel() {
         start = new JButton("Start");
+        start.setEnabled(false);
+        this.add(start);
         start.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,7 +43,6 @@ public class RecorderTab extends JPanel {
         });
         JButton scheduledRecords = new JButton("Aufnahme nach Titel...");
         scheduledRecords.addActionListener(e -> this.window = new ScheduledRecordsWindow());
-        this.add(start);
         this.add(scheduledRecords);
     }
 
@@ -71,5 +72,9 @@ public class RecorderTab extends JPanel {
 
     public ScheduledRecordsWindow getScheduledRecordsWindow() {
         return this.window;
+    }
+
+    public void toggleControls(boolean statusToSet) {
+        this.start.setEnabled(statusToSet);
     }
 }

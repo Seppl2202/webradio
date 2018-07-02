@@ -19,8 +19,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class M3uParserTest {
-    File success = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_success.m3u");
-    File fail = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_fail.m3u");
+
+    File success = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_success.m3u");
+    File fail = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_fail.m3u");
     M3uParser m3uParser = new M3uParser();
     String expectedText = "#EXTM3U\r\n" +
             "#EXTINF:-1,SWR1 Baden-Württemberg\r\n" +
@@ -53,6 +54,7 @@ public class M3uParserTest {
         assertEquals("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3", info.get(0).getUrl().toString());
     }
 
+    //this test works, exception is thrown as  expected
     @Test(expected = NoURLTagFoundException.class)
     public void parseURLFromString() {
         List<M3UInfo> info = new ArrayList<>();
@@ -110,7 +112,7 @@ public class M3uParserTest {
 
     @Test
     public void testMultipleM3uInfo() throws MalformedURLException {
-        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\bigfmWebradio.m3u8");
+        File f = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\bigfmWebradio.m3u8");
         String parsedFile = null;
         List<M3UInfo> info = null;
         try {
@@ -133,7 +135,6 @@ public class M3uParserTest {
         M3UInfo testInfo = new M3UInfo(new URL("http://streams.bigfm.de/bigfm-deutschland-128-aac?usid=0-0-H-A-D-30"), "bigFM DEUTSCHLAND");
         dialog.setOnOk(e -> assertEquals(testInfo, (M3UInfo) dialog.getSelectedItem().get(0)));
         dialog.show();
-
     }
 
     @Test
@@ -141,7 +142,7 @@ public class M3uParserTest {
      * Tests the multiple stream selection
      */
     public void testMultipleStreamPlayerCreation() {
-        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testMultiple.m3u");
+        File f = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testMultiple.m3u");
         String parsedFile = null;
         List<M3UInfo> info = null;
         M3UInfo selected = null;
@@ -174,7 +175,7 @@ public class M3uParserTest {
 
     @Test
     public void testSM3UParsing() {
-        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\youfm_2.m3u");
+        File f = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\youfm_2.m3u");
         String parsedFile = null;
         List<M3UInfo> info = null;
         M3UInfo selected = null;

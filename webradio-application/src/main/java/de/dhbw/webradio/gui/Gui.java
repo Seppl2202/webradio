@@ -48,6 +48,7 @@ public class Gui extends JFrame {
         splitListAndControlsPanel.add(new JScrollPane(stationsTable), BorderLayout.CENTER);
         splitListAndControlsPanel.add(streamAudioDetails);
         mainPanel.add(splitListAndControlsPanel, BorderLayout.CENTER);
+        this.setSize(950, 300);
 
     }
 

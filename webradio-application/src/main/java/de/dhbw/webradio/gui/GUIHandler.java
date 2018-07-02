@@ -95,5 +95,6 @@ public class GUIHandler implements Handler {
     @Override
     public void toggleControls(boolean statusToSet) {
         Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setEnabled(statusToSet);
+        Gui.getInstance().getRecorderTab().toggleControls(statusToSet);
     }
 }

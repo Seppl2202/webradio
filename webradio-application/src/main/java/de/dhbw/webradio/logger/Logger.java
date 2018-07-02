@@ -6,12 +6,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Logger {
-    public static void logInfo(String info) {
+    public static synchronized void logInfo(String info) {
         System.out.println("---" + getActualDateAsString() + "---" + "\r\n"
                 + info);
     }
 
-    public static void logError(String error) {
+    public static synchronized void logError(String error) {
         System.err.println("---" + getActualDateAsString() + "---" + "\r\n"
                 + error);
     }

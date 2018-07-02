@@ -12,5 +12,12 @@ public interface ID3 {
     public void setComment(String comment);
     public void setTrack(String track);
     public void writeId3Info();
+    public String getTitle();
+    public String getArtist();
+    public String getAlbum();
+    public int getGenre();
+    public String getYear();
+    public String getComment();
+    public String getTrack();
 
 }

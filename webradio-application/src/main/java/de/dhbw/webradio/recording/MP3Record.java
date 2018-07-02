@@ -5,6 +5,7 @@ import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.id3.ID3;
 import de.dhbw.webradio.id3.ID3v1;
 import de.dhbw.webradio.id3.ID3v1Builder;
+import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -17,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Optional;
 
-public class MP3RecordTest implements Recorder, Runnable {
+public class MP3Record implements Recorder, Runnable {
     private boolean recording = false;
     private File recorderDirectory = WebradioPlayer.getSettings().getGeneralSettings().getRecordingDirectory();
 
@@ -53,37 +54,42 @@ public class MP3RecordTest implements Recorder, Runnable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                System.err.println("writing id3v1.1");
-                ID3v1Builder builder = new ID3v1Builder("Testttiel", "Testartist");
-                builder.setYear(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)).toString());
-                builder.setAlbum(WebradioPlayer.getPlayer().getIcyReader().getStationName());
-                ID3v1 id3 = builder.build();
-                System.err.println(id3.toString());
+                Logger.logInfo("writing id3v1.1");
+                ID3 id3 = new ID3v1Builder(createTitle().orElse("Webradio-Aufnahme"), createArtist().orElse("Kein Interpret"))
+                        .setYear(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)).toString())
+                        .setAlbum(WebradioPlayer.getPlayer().getIcyReader().getStationName())
+                        .setGenre(1)
+                        .build();
                 id3.writeId3Info();
                 id3.writeId3ToFile(f);
-                System.err.println("finished writing id3");
+                Logger.logInfo("Wrote ID3: " + id3.toString());
+                Logger.logInfo("finished writing id3 for file " + f.toString());
             }
         }).start();
     }
 
-    private String createTitle() {
+    private Optional<String> createTitle() {
         String s = WebradioPlayer.getPlayer().getIcyReader().getActualMusicTitle();
+        String title = null;
         if (s.contains("/")) {
-            return s.split("'/'")[0];
+            title = s.split("/")[0];
         } else if (s.contains("-")) {
-            return s.split("-")[0];
+            title =  s.split("-")[0];
         }
-        return "No title macthed";
+        return Optional.ofNullable(title);
     }
 
-    private String createArtist() {
+    private Optional<String> createArtist() {
         String s = WebradioPlayer.getPlayer().getIcyReader().getActualMusicTitle();
+        String artist = null;
         if (s.contains("/")) {
-            return s.split("'/'")[1];
+            artist =  s.split("/")[1];
         } else if (s.contains("-")) {
-            return s.split("-")[1];
+            artist=  s.split("-")[1];
         }
-        return "No artist macthed";
+        //replace possible spaces, tabs and line wraps after slash splitting
+        artist.replaceFirst("\\s", "");
+        return Optional.ofNullable(artist);
     }
 
     private String generateFileName() {

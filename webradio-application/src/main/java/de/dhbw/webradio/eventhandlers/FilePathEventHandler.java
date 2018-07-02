@@ -2,6 +2,7 @@ package de.dhbw.webradio.eventhandlers;
 
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.gui.Gui;
+import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.settings.SettingsWriter;
 import de.dhbw.webradio.settings.Writer;
 
@@ -30,6 +31,6 @@ public class FilePathEventHandler implements ActionListener {
     private void saveUserSelection(File f) {
         Writer settingsWriter = new SettingsWriter();
         settingsWriter.updateFilePath(f);
-        System.err.println("saved new directory" + f.toString());
+        Logger.logInfo("saved new directory" + f.toString());
     }
 }
