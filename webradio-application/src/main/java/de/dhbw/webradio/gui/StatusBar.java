@@ -3,6 +3,7 @@ package de.dhbw.webradio.gui;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
+import java.util.Optional;
 
 public class StatusBar extends JPanel {
     private JLabel actualStationLabel;
@@ -42,7 +43,6 @@ public class StatusBar extends JPanel {
         }
     }
 
-    public void updateAdditionalM3uInfo(String info) {
-        additionalm3uInfo.setText("Aktueller Titel: " + info);
+    public void updateAdditionalM3uInfo(String info) { additionalm3uInfo.setText("Aktueller Titel: " + info);
     }
 }

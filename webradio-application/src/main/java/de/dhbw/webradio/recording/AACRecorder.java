@@ -1,6 +1,7 @@
 package de.dhbw.webradio.recording;
 
 import de.dhbw.webradio.WebradioPlayer;
+import de.dhbw.webradio.utilities.FileUtilitie;
 import net.sourceforge.jaad.aac.SampleBuffer;
 import net.sourceforge.jaad.util.wav.WaveFileWriter;
 import org.joda.time.DateTime;
@@ -30,13 +31,14 @@ public class AACRecorder implements Recorder, Runnable {
 
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     InputStream in = con.getInputStream();
-                    File f = new File(recorderDirectory + generateFileName() + ".aac");
+                    File f = new File(recorderDirectory + "/" + generateFileName() + ".aac");
                     Path path = Paths.get(f.toURI());
                     OutputStream out = new FileOutputStream(path.toFile());
                     byte[] buffer = new byte[4096];
                     int len;
                     long t = System.currentTimeMillis();
                     System.err.println("entering while");
+                    recording = true;
                     while ((len = in.read(buffer)) > 0 && (recording)) {
                         out.write(buffer, 0, len);
                     }
@@ -56,7 +58,7 @@ public class AACRecorder implements Recorder, Runnable {
     }
     private String generateFileName() {
         //remove everything but characters and numbers
-        return WebradioPlayer.getPlayer().getIcyReader().getActualMusicTitle().replaceAll("[^a-zA-Z0-9]", "");
+        return FileUtilitie.generateFileNameForRecording();
     }
 
 
@@ -73,7 +75,7 @@ public class AACRecorder implements Recorder, Runnable {
 
     @Override
     public void stop() {
-        this.recording = true;
+        this.recording = false;
         System.err.println("stopped");
     }
 

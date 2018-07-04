@@ -7,6 +7,7 @@ import de.dhbw.webradio.id3.ID3v1;
 import de.dhbw.webradio.id3.ID3v1Builder;
 import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
+import de.dhbw.webradio.utilities.FileUtilitie;
 
 import javax.sound.sampled.LineUnavailableException;
 import java.io.*;
@@ -18,7 +19,7 @@ import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Optional;
 
-public class MP3Record implements Recorder, Runnable {
+public class MP3Recorder implements Recorder, Runnable {
     private boolean recording = false;
     private File recorderDirectory = WebradioPlayer.getSettings().getGeneralSettings().getRecordingDirectory();
 
@@ -74,7 +75,7 @@ public class MP3Record implements Recorder, Runnable {
         if (s.contains("/")) {
             title = s.split("/")[0];
         } else if (s.contains("-")) {
-            title =  s.split("-")[0];
+            title = s.split("-")[0];
         }
         return Optional.ofNullable(title);
     }
@@ -83,18 +84,17 @@ public class MP3Record implements Recorder, Runnable {
         String s = WebradioPlayer.getPlayer().getIcyReader().getActualMusicTitle();
         String artist = null;
         if (s.contains("/")) {
-            artist =  s.split("/")[1];
+            artist = s.split("/")[1];
         } else if (s.contains("-")) {
-            artist=  s.split("-")[1];
+            artist = s.split("-")[1];
         }
-        //replace possible spaces, tabs and line wraps after slash splitting
-        artist.replaceFirst("\\s", "");
+        //replace possible spaces, tabs and line wraps after slash
         return Optional.ofNullable(artist);
     }
 
     private String generateFileName() {
         //remove everything but characters and numbers
-        return WebradioPlayer.getPlayer().getIcyReader().getActualMusicTitle().replaceAll("[^a-zA-Z0-9]", "");
+        return FileUtilitie.generateFileNameForRecording();
     }
 
     @Override

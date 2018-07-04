@@ -3,7 +3,7 @@ generalSettings:
   attributes:
     bufferSize: "1024"
     initialVolume: "90"
-  recordingDirectory: "C:\\Users\\priva\\IdeaProjects\\webradio"
+  recordingDirectory: "C:\\Users\\priva\\Desktop\\Musik"
 recordSettings:
   attributes:
     filePath: ""

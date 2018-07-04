@@ -1,7 +1,10 @@
 package de.dhbw.webradio.radioplayer;
 
 
+import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.gui.GUIHandler;
+import de.dhbw.webradio.gui.Gui;
+import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.recording.AACRecorder;
 import net.sourceforge.jaad.aac.AACException;
 import net.sourceforge.jaad.aac.Decoder;
@@ -14,6 +17,7 @@ import java.net.URL;
 
 public class AACPlayer extends AbstractPlayer implements Runnable {
     private Thread runner = new Thread(this);
+
     @Override
     public void play() {
         stop = false;
@@ -44,6 +48,7 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
             final SampleBuffer buf = new SampleBuffer();
             while (!stop) {
                 b = adts.readNextFrame();
+                //here the AACException for unexpected profile is thrown
                 dec.decodeFrame(b, buf);
                 FloatControl gainControl = null;
 
@@ -66,7 +71,11 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         } catch (AACException e) {
+            Logger.logError("AACException catched. This is a known problem. Please retry until the player starts correctly.");
             e.printStackTrace();
+            WebradioPlayer.getPlayer().getIcyReader().setInterrupted(true);
+            WebradioPlayer.setPlayer(null);
+            GUIHandler.getInstance().resetComponents();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

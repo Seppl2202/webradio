@@ -136,6 +136,7 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable,
             for (String b : icySplit) {
                 StringBuilder builder = new StringBuilder();
                 builder.append(b);
+                //improve contains, not working reliable
                 if (builder.toString().toLowerCase().contains(abuilder.toString().toLowerCase())) {
                     return false;
                 }

@@ -27,7 +27,7 @@ public class RecorderController {
         FileExtension mediaType = p.parseFileExtension(url);
 
         if (mediaType.equals(FileExtension.MP3)) {
-            return new MP3Record();
+            return new MP3Recorder();
         }
         if (mediaType.equals(FileExtension.AAC)) {
             return new AACRecorder();

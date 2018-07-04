@@ -20,6 +20,9 @@ import java.net.URL;
 import java.util.List;
 
 public class PlayerFactory implements Factory {
+    private static Factory factory = new PlayerFactory();
+
+    public static Factory getInstance() { return factory; }
     public AbstractPlayer get(Station s) {
         if (s == null) {
             throw new IllegalArgumentException("No station was passed. \r\n PlayerFactory needs a station to determine file extension");
