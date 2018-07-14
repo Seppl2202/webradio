@@ -1,9 +1,14 @@
 package de.dhbw.webradio.recording;
 
+import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.enumerations.FileExtension;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
 import de.dhbw.webradio.models.ScheduledRecord;
+import de.dhbw.webradio.models.Station;
+import de.dhbw.webradio.radioplayer.MetainformationReader;
+import de.dhbw.webradio.radioplayer.SimpleIcyInputStreamReader;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +18,10 @@ public class RecorderController {
     private Recorder actualRecordNowRecorder;
     private List<ScheduledRecord> scheduledRecordList = new ArrayList<>();
     private List<Recorder> listeningRecorders = new ArrayList<>();
+    private int maximumRecords = 5;
 
     private RecorderController() {
-
+        initializeScheduledRecords();
     }
 
     public static RecorderController getInstance() {
@@ -33,6 +39,46 @@ public class RecorderController {
             return new AACRecorder();
         }
         return actualRecordNowRecorder;
+    }
+
+    private void initializeScheduledRecords() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int i = 0;
+                while (scheduledRecordList.size() <= maximumRecords && i < WebradioPlayer.getStationList().size()) {
+                    Station s = WebradioPlayer.getStationList().get(i);
+                    MetainformationReader r = null;
+                    try {
+                        r = new SimpleIcyInputStreamReader(s.getStationURL());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Thread t = new Thread(r);
+                    t.start();
+                    waitToFetchIcy();
+                    if (!(r.getActualMusicTitle().equalsIgnoreCase("keine informationen verfügbar"))) {
+                        Recorder recorder = RecorderController.getInstance().recordNow(s.getStationURL());
+                        recorder.setMetaInformationReader(r);
+                        listeningRecorders.add(recorder);
+                        System.err.println(r.getActualMusicTitle());
+                    }
+                    System.err.println(i);
+                    i++;
+                }
+                //complete initialization and start recorders
+                listeningRecorders.forEach(recorder -> recorder.recordByTitle());
+            }
+        }).start();
+    }
+
+    private void waitToFetchIcy() {
+        try {
+            Thread.sleep(30000);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public Recorder getActualRecordNowRecorder() {

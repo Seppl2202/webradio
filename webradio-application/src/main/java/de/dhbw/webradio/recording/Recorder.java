@@ -1,5 +1,7 @@
 package de.dhbw.webradio.recording;
 
+import de.dhbw.webradio.radioplayer.MetainformationReader;
+
 import javax.sound.sampled.LineUnavailableException;
 import java.io.IOException;
 import java.net.URL;
@@ -14,4 +16,6 @@ public interface Recorder {
     public void stop();
 
     public boolean isRecording();
+
+    public void setMetaInformationReader(MetainformationReader r);
 }

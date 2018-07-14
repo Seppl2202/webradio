@@ -85,7 +85,6 @@ public class NetworkConnectivityChecker {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.err.println("entered method");
                 checkInfoDialog = new JDialog();
                 checkInfoDialog.setLocationRelativeTo(Gui.getInstance());
                 checkInfoDialog.setTitle("Prüfung");

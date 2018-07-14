@@ -5,7 +5,6 @@ import de.dhbw.webradio.logger.Logger;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class IcyInputStreamReader extends FilterInputStream implements Runnable, MetainformationReader {
+public class SimpleIcyInputStreamReader extends FilterInputStream implements Runnable,  MetainformationReader {
     private static IcyInputStreamReader reader;
     private URLConnection connection;
     private int metaDataInterval = -1;
@@ -22,14 +21,14 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable,
     private boolean interrupted;
 
     /**
-     * instanciates the icyReader class.
-     * see @https://cast.readme.io/docs/icy for detailed informatoin about ICY and its specification
+     * Simple icy reader for scheduled record purposes.
+     * does not call gui handler for information update
      *
-     * @param icyURL the mp3 stream url
+     * @param icyURL the audio stream url
      * @throws IOException if reading the icy stream fails
      */
 
-    public IcyInputStreamReader(URL icyURL) throws IOException {
+    public SimpleIcyInputStreamReader(URL icyURL) throws IOException {
         super(null);
         connection = icyURL.openConnection();
         connection.addRequestProperty("Icy-MetaData", "1");
@@ -103,7 +102,6 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable,
     private void fireEventNewMetaData(String key, String value) {
         //to do: log received metadata
         //add header key-values to map
-        Logger.logInfo("New icy data: " + key + value);
         if (!(key.contains("Length"))) {
             id3Values.put(key, value);
         } else {
@@ -118,7 +116,6 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable,
                 id3Values.put("titleInfo", mapValue);
                 System.err.println(mapValue);
             }
-            GUIHandler.getInstance().notifyNewIcyData(this);
         }
     }
 

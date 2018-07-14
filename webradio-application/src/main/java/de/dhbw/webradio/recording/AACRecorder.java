@@ -1,6 +1,7 @@
 package de.dhbw.webradio.recording;
 
 import de.dhbw.webradio.WebradioPlayer;
+import de.dhbw.webradio.radioplayer.MetainformationReader;
 import de.dhbw.webradio.utilities.FileUtilitie;
 import net.sourceforge.jaad.aac.SampleBuffer;
 import net.sourceforge.jaad.util.wav.WaveFileWriter;
@@ -18,6 +19,7 @@ import java.util.WeakHashMap;
 public class AACRecorder implements Recorder, Runnable {
     private boolean recording = false;
     private File recorderDirectory = WebradioPlayer.getSettings().getGeneralSettings().getRecordingDirectory();
+    private MetainformationReader reader = null;
 
     public AACRecorder() {
     }
@@ -82,5 +84,10 @@ public class AACRecorder implements Recorder, Runnable {
     @Override
     public boolean isRecording() {
         return recording;
+    }
+
+    @Override
+    public void setMetaInformationReader(MetainformationReader r) {
+        this.reader = r;
     }
 }

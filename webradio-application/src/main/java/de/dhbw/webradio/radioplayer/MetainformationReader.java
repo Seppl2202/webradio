@@ -2,7 +2,7 @@ package de.dhbw.webradio.radioplayer;
 
 import java.util.Map;
 
-public interface MetainformationReader {
+public interface MetainformationReader extends Runnable{
      Map<String, String> id3Values = null;
 
      String getActualMusicTitle();
@@ -15,4 +15,5 @@ public interface MetainformationReader {
     public String getGenre();
 
     public String getStationUrl();
+
 }

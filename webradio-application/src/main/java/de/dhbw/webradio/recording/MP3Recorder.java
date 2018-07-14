@@ -6,6 +6,7 @@ import de.dhbw.webradio.id3.ID3;
 import de.dhbw.webradio.id3.ID3v1;
 import de.dhbw.webradio.id3.ID3v1Builder;
 import de.dhbw.webradio.logger.Logger;
+import de.dhbw.webradio.radioplayer.MetainformationReader;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
 import de.dhbw.webradio.utilities.FileUtilitie;
 
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class MP3Recorder implements Recorder, Runnable {
     private boolean recording = false;
     private File recorderDirectory = WebradioPlayer.getSettings().getGeneralSettings().getRecordingDirectory();
+    private MetainformationReader reader = null;
 
     @Override
     public void recordNow(URL url) throws LineUnavailableException, IOException {
@@ -88,7 +90,6 @@ public class MP3Recorder implements Recorder, Runnable {
         } else if (s.contains("-")) {
             artist = s.split("-")[1];
         }
-        //replace possible spaces, tabs and line wraps after slash
         return Optional.ofNullable(artist);
     }
 
@@ -99,7 +100,16 @@ public class MP3Recorder implements Recorder, Runnable {
 
     @Override
     public void recordByTitle() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                recordToBuffer();
+            }
+        }).start();
+    }
 
+    private void recordToBuffer() {
+        System.err.println("Reorder: " + this.reader.getStationUrl());
     }
 
     @Override
@@ -115,5 +125,10 @@ public class MP3Recorder implements Recorder, Runnable {
     @Override
     public boolean isRecording() {
         return recording;
+    }
+
+    @Override
+    public void setMetaInformationReader(MetainformationReader r) {
+        this.reader = r;
     }
 }
