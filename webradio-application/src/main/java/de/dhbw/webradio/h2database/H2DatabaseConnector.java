@@ -2,26 +2,28 @@ package de.dhbw.webradio.h2database;
 
 import de.dhbw.webradio.models.Station;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class H2DatabaseConnector implements DatabaseConnector {
 
-    private final String INSERT_STATEMENT = "INSERT INTO station" + "(name, url) values(?,?)";
-    private final String UPDATE_STATEMENT = "UPDATE station SET name=?, url=? WHERE (name=? AND url=?)";
-    private final String DELETE_STATEMENT = "DELETE FROM station WHERE (name=? AND url=?)";
-
+    private final String INSERT_STATEMENT = "INSERT INTO STATION" + "(name, url) values(?,?)";
+    private final String UPDATE_STATEMENT = "UPDATE STATION SET name=?, url=? WHERE (name=? AND url=?)";
+    private final String DELETE_STATEMENT = "DELETE FROM STATION WHERE (name=? AND url=?)";
+    private DatabaseSetup databaseSetup = new H2DatabaseSetup();
     private static DatabaseConnector h2databaDatabaseConnector = new H2DatabaseConnector();
 
     private H2DatabaseConnector() {
 
     }
 
-    @Override
-    public DatabaseConnector getInstance() {
+    public static DatabaseConnector getInstance() {
         return h2databaDatabaseConnector;
     }
 
@@ -30,7 +32,7 @@ public class H2DatabaseConnector implements DatabaseConnector {
         Connection con = null;
         PreparedStatement s = null;
         try {
-            con = DatabaseSetup.getConnection();
+            con = databaseSetup.getConnection();
             s = con.prepareStatement(UPDATE_STATEMENT);
             s.setString(1, newStation.getName());
             s.setString(2, newStation.getStationURL().toString());
@@ -66,7 +68,7 @@ public class H2DatabaseConnector implements DatabaseConnector {
         Connection con = null;
         PreparedStatement s = null;
         try {
-            con = DatabaseSetup.getConnection();
+            con = databaseSetup.getConnection();
             s = con.prepareStatement(DELETE_STATEMENT);
             s.setString(1, stationToDelete.getName());
             s.setString(2, stationToDelete.getStationURL().toString());
@@ -99,7 +101,7 @@ public class H2DatabaseConnector implements DatabaseConnector {
         Connection con = null;
         PreparedStatement s = null;
         try {
-            con = DatabaseSetup.getConnection();
+            con = databaseSetup.getConnection();
             s = con.prepareStatement(INSERT_STATEMENT);
             s.setString(1, stationToAdd.getName());
             s.setString(2, stationToAdd.getStationURL().toString());
@@ -127,10 +129,30 @@ public class H2DatabaseConnector implements DatabaseConnector {
         return true;
     }
 
+    /**
+     * @return all Stations saved in database
+     */
     @Override
     public List<Station> getStations() {
         List<Station> stationsList = new ArrayList<>();
-
+        try {
+            Connection con = databaseSetup.getConnection();
+            PreparedStatement s = con.prepareStatement("SELECT * FROM station");
+            ResultSet r = s.executeQuery();
+            while (r.next()) {
+                stationsList.add(new Station(r.getString("name"), new URL(r.getString("url"))));
+            }
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         return stationsList;
     }
 }

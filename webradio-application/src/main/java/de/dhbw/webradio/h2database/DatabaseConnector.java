@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DatabaseConnector {
 
-    public DatabaseConnector getInstance();
+    public static DatabaseConnector getInstance() { return null;}
 
     public boolean updateStation(Station stationToChange, Station newStation);
     public boolean deleteStation(Station stationToDelete);

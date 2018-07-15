@@ -56,4 +56,11 @@ public class Station {
     public void setM3uStationName(String m3uStationName) {
         this.m3uStationName = m3uStationName;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        obj = (Station) obj;
+        return name.equalsIgnoreCase(((Station) obj).name) &&
+                stationURL.equals(((Station) obj).stationURL);
+    }
 }
