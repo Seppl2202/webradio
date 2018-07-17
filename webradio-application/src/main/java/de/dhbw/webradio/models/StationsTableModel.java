@@ -41,7 +41,7 @@ public class StationsTableModel extends AbstractTableModel {
         return this.headers[column];
     }
 
-    public void addRow(Station s) {
+    public synchronized void addRow(Station s) {
         for (Station station : stationList
                 ) {
             if (station.equals(s)) {
@@ -53,6 +53,11 @@ public class StationsTableModel extends AbstractTableModel {
 
         }
     }
+
+    public void removeStation(Station s) {
+        stationList.remove(s);
+    }
+
     public Station getStationFromIndex(int row) {
         return stationList.get(row);
     }

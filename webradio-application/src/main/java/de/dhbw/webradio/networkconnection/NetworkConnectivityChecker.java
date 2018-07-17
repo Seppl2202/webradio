@@ -68,7 +68,6 @@ public class NetworkConnectivityChecker {
             return false;
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
         }
         if (!netAccess) {
             checkInfoDialog.dispose();

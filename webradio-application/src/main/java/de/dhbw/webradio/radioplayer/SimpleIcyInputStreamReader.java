@@ -1,8 +1,5 @@
 package de.dhbw.webradio.radioplayer;
 
-import de.dhbw.webradio.gui.GUIHandler;
-import de.dhbw.webradio.logger.Logger;
-
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -114,7 +111,6 @@ public class SimpleIcyInputStreamReader extends FilterInputStream implements Run
             id3Values.put(mapKey, mapValue);
             if (icyInfoContainsTitleInfo()) {
                 id3Values.put("titleInfo", mapValue);
-                System.err.println(mapValue);
             }
         }
     }

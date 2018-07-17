@@ -23,4 +23,10 @@ public class ScheduledRecord {
     public void setActor(String actor) {
         this.actor = actor;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        ScheduledRecord r = (ScheduledRecord) obj;
+        return title.equalsIgnoreCase(r.getTitle()) && actor.equalsIgnoreCase(r.getActor());
+    }
 }

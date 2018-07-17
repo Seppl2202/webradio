@@ -66,7 +66,7 @@ public class AddStationEventHandler implements ActionListener {
             if (parser.parseFileExtension(s.getStationURL()).equals(FileExtension.UNSUPPORTED_TYPE)) {
                 JOptionPane.showMessageDialog(null, "Dieses Dateiformat wird nicht unterstützt. \r\n" +
                         "Folgende Formate werden unterstützt:\r\n" +
-                        "MP3, M3U");
+                        "MP3, AAC, M3U, PLS");
             }
             return s.isURLValid();
         } catch (IOException e) {

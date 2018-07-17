@@ -5,7 +5,9 @@ import de.dhbw.webradio.gui.SelectMultipleItemsDialog;
 import de.dhbw.webradio.m3uparser.M3uParser;
 import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -54,19 +56,14 @@ public class M3uParserTest {
         assertEquals("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3", info.get(0).getUrl().toString());
     }
 
-    //this test works, exception is thrown as  expected
-    @Test(expected = NoURLTagFoundException.class)
-    public void parseURLFromString() {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+
+    @Test
+    public void parseURLFromString() throws IOException, UnsupportedAudioFileException, NoURLTagFoundException {
         List<M3UInfo> info = new ArrayList<>();
-        try {
-            info = m3uParser.parseUrlFromString(m3uParser.parseFileToString(fail));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (UnsupportedAudioFileException uafe) {
-            uafe.printStackTrace();
-        } catch (NoURLTagFoundException nufe) {
-            nufe.printStackTrace();
-        }
+        expectedException.expect(NoURLTagFoundException.class);
+        info = m3uParser.parseUrlFromString(m3uParser.parseFileToString(fail));
     }
 
     @Test

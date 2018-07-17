@@ -1,7 +1,11 @@
 package de.dhbw.webradio;
 
 
+import de.dhbw.webradio.gui.GUIHandler;
 import de.dhbw.webradio.gui.Gui;
+import de.dhbw.webradio.h2database.DatabaseConnector;
+import de.dhbw.webradio.h2database.H2DatabaseConnector;
+import de.dhbw.webradio.h2database.InitializeH2Database;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.networkconnection.NetworkConnectivityChecker;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
@@ -13,6 +17,7 @@ import de.dhbw.webradio.settings.SettingsParser;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +26,13 @@ public class WebradioPlayer {
     private static AbstractPlayer player;
     private static List<Station> stationList;
     private static Settings settings;
+    private static DatabaseConnector databaseConnector = H2DatabaseConnector.getInstance();
     public static File settingsDirectory = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        InitializeH2Database.initialiteDatabase();
         stationList = new ArrayList();
-        addStations();
+        //addStations();
         addScheduledRecords();
         SettingsParser settingsParser = new SettingsParser();
         settings = settingsParser.parsegeneralSettings(settingsDirectory);
@@ -49,6 +56,11 @@ public class WebradioPlayer {
             stationList.add(s6);
             Station s7 = new Station("FFH AAC", new URL("http://mp3.ffh.de/radioffh/hqlivestream.aac"));
             stationList.add(s7);
+            addStation(s);
+            addStation(s2);
+            addStation(s3);
+            addStation(s4);
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -61,8 +73,12 @@ public class WebradioPlayer {
         RecorderController.getInstance().addScheduledRecord(r1);
         RecorderController.getInstance().addScheduledRecord(r2);
     }
-    public static void deleteStation(Station s) {
+
+    public synchronized static void deleteStation(Station s) {
+        databaseConnector.deleteStation(s);
         stationList.remove(s);
+        Gui.getInstance().getStationsTableModel().removeStation(s);
+        Gui.getInstance().getStationsTableModel().fireTableDataChanged();
     }
 
     public static Gui getGui() {
@@ -78,11 +94,15 @@ public class WebradioPlayer {
     }
 
     public static List<Station> getStationList() {
-        return stationList;
+        return databaseConnector.getStations();
+
     }
 
-    public static boolean addStation(Station s) {
-        return stationList.add(s);
+    public synchronized static boolean addStation(Station s) {
+        stationList.add(s);
+        Gui.getInstance().getStationsTableModel().addRow(s);
+        Gui.getInstance().getStationsTableModel().fireTableDataChanged();
+        return databaseConnector.addStation(s);
     }
 
     public static Settings getSettings() {

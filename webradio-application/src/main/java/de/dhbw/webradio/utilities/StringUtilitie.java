@@ -3,7 +3,7 @@ package de.dhbw.webradio.utilities;
 import java.io.UnsupportedEncodingException;
 
 public class StringUtilitie {
-    private static String DEFAULT_CHARSET = "ISO-8859-1";
+    private static final String DEFAULT_CHARSET = "ISO-8859-1";
 
     public static String trimStringRightEnd(String toTrim) {
         int endingPosition = toTrim.length() - 1;

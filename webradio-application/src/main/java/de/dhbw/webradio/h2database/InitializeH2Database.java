@@ -13,10 +13,6 @@ public class InitializeH2Database {
 
     private  static DatabaseSetup databaseSetup = new H2DatabaseSetup();
 
-
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-        initialiteDatabase();
-    }
     public static void initialiteDatabase() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         Server server = Server.createTcpServer();
         server.start();

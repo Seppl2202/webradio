@@ -49,7 +49,7 @@ public class AddScheduledRecordWindow extends JFrame {
     }
 
     private boolean checkInputValues() {
-        if (artistField.getText() == null || artistField.getText() == "" || titleField.getText() == null || titleField.getText() == "") {
+        if (artistField.getText().equals(null) || artistField.getText().equals("") || titleField.getText().equals(null)|| titleField.getText().equals(null)) {
             return false;
         }
         return true;

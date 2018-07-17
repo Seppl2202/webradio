@@ -32,6 +32,7 @@ public class TogglePlayerListener implements ActionListener {
             if (actualPlayer.isPlaying() && !(actualPlayer == null)) {
                 actualPlayer.stop();
                 actualPlayer.getIcyReader().setInterrupted(true);
+                GUIHandler.getInstance().resetComponents();
             } else {
                 if (!(s == null)) {
                     try {
