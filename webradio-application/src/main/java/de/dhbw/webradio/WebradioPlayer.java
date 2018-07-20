@@ -24,20 +24,23 @@ import java.util.List;
 public class WebradioPlayer {
     private static Gui gui;
     private static AbstractPlayer player;
-    private static List<Station> stationList;
+    private static List<Station> stationList = new ArrayList<>();
     private static Settings settings;
     private static DatabaseConnector databaseConnector = H2DatabaseConnector.getInstance();
     public static File settingsDirectory = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml");
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         InitializeH2Database.initialiteDatabase();
-        stationList = new ArrayList();
         //addStations();
         addScheduledRecords();
         SettingsParser settingsParser = new SettingsParser();
-        settings = settingsParser.parsegeneralSettings(settingsDirectory);
+        parseSettings(settingsParser);
         gui = Gui.getInstance();
         NetworkConnectivityChecker n = NetworkConnectivityChecker.getInstance();
+    }
+
+    public static void parseSettings(SettingsParser settingsParser) {
+        settings = settingsParser.parsegeneralSettings(settingsDirectory);
     }
 
     private static void addStations() {

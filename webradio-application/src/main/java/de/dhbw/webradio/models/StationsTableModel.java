@@ -2,6 +2,7 @@ package de.dhbw.webradio.models;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.util.Iterator;
 import java.util.List;
 
 public class StationsTableModel extends AbstractTableModel {
@@ -42,16 +43,16 @@ public class StationsTableModel extends AbstractTableModel {
     }
 
     public synchronized void addRow(Station s) {
-        for (Station station : stationList
-                ) {
+        Station toAdd = null;
+        for (Iterator<Station> it = stationList.iterator(); it.hasNext(); ) {
+            Station station = it.next();
             if (station.equals(s)) {
                 throw new IllegalArgumentException("Station " + s.toString() + " already exists in list");
             } else {
-                stationList.add(s);
-                fireTableDataChanged();
+                toAdd = s;
             }
-
         }
+        stationList.add(toAdd);
     }
 
     public void removeStation(Station s) {

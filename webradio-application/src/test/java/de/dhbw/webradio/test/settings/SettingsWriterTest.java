@@ -1,4 +1,4 @@
-package de.dhbw.webradio.test;
+package de.dhbw.webradio.test.settings;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

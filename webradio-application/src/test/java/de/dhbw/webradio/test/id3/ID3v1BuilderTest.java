@@ -1,4 +1,4 @@
-package de.dhbw.webradio.test;
+package de.dhbw.webradio.test.id3;
 
 import de.dhbw.webradio.id3.ID3;
 import de.dhbw.webradio.id3.ID3v1;

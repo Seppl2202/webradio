@@ -1,4 +1,4 @@
-package de.dhbw.webradio.test;
+package de.dhbw.webradio.test.id3;
 
 import de.dhbw.webradio.id3.ID3v1;
 import de.dhbw.webradio.id3.ID3v1Builder;
@@ -68,6 +68,5 @@ public class ID3v1Test {
         ID3v1 id3Test = new ID3v1(id3Info);
         assertEquals("Testtitel", id3Test.getTitle());
         assertEquals("Kein Kommentar", id3Test.getComment());
-
     }
 }

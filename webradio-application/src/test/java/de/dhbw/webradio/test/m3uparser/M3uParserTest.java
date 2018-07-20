@@ -1,4 +1,4 @@
-package de.dhbw.webradio.test;
+package de.dhbw.webradio.test.m3uparser;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.gui.SelectMultipleItemsDialog;
@@ -13,6 +13,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -67,7 +70,7 @@ public class M3uParserTest {
     }
 
     @Test
-    public void parseFileFromUrlToString() {
+    public void parseFileFromUrlToString() throws NoSuchFieldException, IllegalAccessException, IOException {
         URL url = null;
         String s = null;
         try {
@@ -202,6 +205,21 @@ public class M3uParserTest {
         assertEquals(1, info.size());
         assertEquals("http://hr-youfm-live.cast.addradio.de/hr/youfm/live/mp3/128/stream.mp3", info.get(0).getUrl().toString());
         assertEquals("Nicht verfügbar", info.get(0).getTitleInfo());
+    }
+
+    @Test
+    public void parseUrlFromEM3U() throws NoSuchMethodException, IllegalAccessException {
+        String fail = "fksdjghlsdkgjhsd";
+        Method m = m3uParser.getClass().getDeclaredMethod("parseUrlFromEM3UString", String.class);
+        m.setAccessible(true);
+        try {
+            m.invoke(m3uParser, fail);
+            //check if the underlying method throws an exception
+            expectedException.expect(InvocationTargetException.class);
+        } catch (InvocationTargetException e) {
+            //check if the underlying method throws the correct exception
+            assertEquals("File did not contain a valid extended M3U syntax", e.getCause().getMessage());
+        }
     }
 }
 

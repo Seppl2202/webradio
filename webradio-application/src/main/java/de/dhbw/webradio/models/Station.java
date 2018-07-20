@@ -59,8 +59,8 @@ public class Station {
 
     @Override
     public boolean equals(Object obj) {
-        obj = (Station) obj;
-        return name.equalsIgnoreCase(((Station) obj).name) &&
-                stationURL.equals(((Station) obj).stationURL);
+        Station o = (Station) obj;
+        return name.equalsIgnoreCase((o.name)) &&
+                stationURL.equals(( o.stationURL));
     }
 }

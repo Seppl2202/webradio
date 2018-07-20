@@ -18,6 +18,8 @@ public class FileExtensionParser {
             return FileExtension.M3U;
         } else if (filename.endsWith(".aac")) {
             return FileExtension.AAC;
+        } else if(filename.endsWith((".pls"))) {
+            return FileExtension.PLS;
         }
         URLTypeParser parser = new URLTypeParser();
         return parser.parseByContentDetection(filenameUrl);

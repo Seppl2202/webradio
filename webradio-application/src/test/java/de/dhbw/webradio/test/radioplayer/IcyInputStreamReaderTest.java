@@ -1,4 +1,4 @@
-package de.dhbw.webradio.test;
+package de.dhbw.webradio.test.radioplayer;
 
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
 import org.junit.Test;

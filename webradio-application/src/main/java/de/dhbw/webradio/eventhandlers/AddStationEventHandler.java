@@ -18,33 +18,33 @@ import java.util.List;
 import java.util.Map;
 
 public class AddStationEventHandler implements ActionListener {
+    private Map<JLabel, JTextField> inputElements;
     private AddStationWindow window;
 
-    public AddStationEventHandler(AddStationWindow windowPassed) {
+    public AddStationEventHandler(Map<JLabel, JTextField> inputElements, AddStationWindow windowPassed) {
         if (!(windowPassed instanceof AddStationWindow)) {
             throw new IllegalArgumentException("unsopported class type passed! required: " + AddStationWindow.class + " but found: " + windowPassed.getClass());
         }
+        this.inputElements = inputElements;
         this.window = windowPassed;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!saveStation()) {
-            JOptionPane.showMessageDialog(window, "Es ist ein Fehler aufgetreten", "Fehler", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(Gui.getInstance(), "Es ist ein Fehler aufgetreten", "Fehler", JOptionPane.ERROR_MESSAGE);
         } else {
-            Gui.getInstance().getStationsTableModel().fireTableDataChanged();
             window.dispose();
         }
     }
 
     private boolean saveStation() {
-        Map<JLabel, JTextField> input = window.getInputElements();
         List<JLabel> keys = new ArrayList<>();
-        for (Map.Entry<JLabel, JTextField> inputElement : input.entrySet()) {
+        for (Map.Entry<JLabel, JTextField> inputElement : inputElements.entrySet()) {
             keys.add(inputElement.getKey());
         }
-        String stationName = input.get(keys.get(0)).getText();
-        String urlString = input.get(keys.get(1)).getText();
+        String stationName = inputElements.get(keys.get(0)).getText();
+        String urlString = inputElements.get(keys.get(1)).getText();
         URL stationURL = null;
         try {
             stationURL = new URL(urlString);

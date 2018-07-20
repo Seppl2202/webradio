@@ -15,7 +15,7 @@ import java.util.List;
 
 public class RecorderController {
     private static RecorderController recorderController = new RecorderController();
-    private Recorder actualRecordNowRecorder;
+    private Recorder actualRecordNowRecorder = null;
     private List<ScheduledRecord> scheduledRecordList = new ArrayList<>();
     private List<Recorder> listeningRecorders = new ArrayList<>();
     private int maximumRecords = 5;

@@ -1,4 +1,4 @@
-package de.dhbw.webradio.test;
+package de.dhbw.webradio.test.models;
 
 import de.dhbw.webradio.models.ScheduledRecord;
 import org.junit.Test;

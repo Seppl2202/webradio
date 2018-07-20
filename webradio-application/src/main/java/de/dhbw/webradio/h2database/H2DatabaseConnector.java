@@ -100,6 +100,9 @@ public class H2DatabaseConnector implements DatabaseConnector {
     public boolean addStation(Station stationToAdd) {
         Connection con = null;
         PreparedStatement s = null;
+        if(stationToAdd.getName().equals("")){
+            throw new IllegalArgumentException("Station did not contain a valid name");
+        }
         try {
             con = databaseSetup.getConnection();
             s = con.prepareStatement(INSERT_STATEMENT);

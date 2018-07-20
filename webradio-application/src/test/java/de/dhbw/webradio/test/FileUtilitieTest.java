@@ -3,20 +3,17 @@ package de.dhbw.webradio.test;
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
-import de.dhbw.webradio.radioplayer.MetainformationReader;
 import de.dhbw.webradio.radioplayer.Mp3Player;
 import de.dhbw.webradio.utilities.FileUtilitie;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class FileUtilitieTest {
 
