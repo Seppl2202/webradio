@@ -4,7 +4,6 @@ import de.dhbw.webradio.gui.GUIHandler;
 import de.dhbw.webradio.logger.Logger;
 
 import javax.sound.sampled.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -27,7 +26,6 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
 
     @Override
     public void setUrl(URL url) {
-        this.song = new File("");
         this.url = url;
         if (url != null) {
             setInputStream();
@@ -68,21 +66,21 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
                 line.start();
                 logAudioData(in, audioFormat, line);
                 updateGui();
-                songLaenge = song.length();
                 sampleSizeInBits = audioFormat.getSampleSizeInBits();
 
+                //mp3
                 if (in.getFrameLength() == -1) {
-                    songDuration = songLaenge / sampleSizeInBits / 1000; // berechnung für mp3
                     bitRate = audioFormat.getSampleSizeInBits() * audioFormat.getFrameSize() * audioFormat.getChannels();
-                } else {
-                    songDuration = in.getFrameLength() / (long) audioFormat.getFrameRate(); // berechnung f�r wav
+                }
+                //wav
+                else {
                     bitRate = (int) (in.available() / (in.getFrameLength() / (long) audioFormat.getFrameRate()) * 8 / 1000);
                 }
 
                 in.mark(in.available());
                 logPlayStart();
                 while ((true) && (!stop)) {
-                    isPlaying = true;
+                    stop = false;
                     int gainLevel = (int) ((int) gainControl.getMinimum() + ((gainControl.getMaximum() - gainControl.getMinimum()) / 100 * gainPercent));
                     gainControl.setValue(gainLevel);
                     if (!pause) {
@@ -95,7 +93,6 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
                             in.reset();
                             reset = false;
                         }
-                        actuallySongTime = line.getMicrosecondPosition() / 1000000 - resetKorrektur;
                         line.write(buffer, 0, n);
 
                     }
@@ -109,9 +106,7 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
             } catch (LineUnavailableException e) {
                 System.out.println("Soundkartenfehler");
             }
-        } while (loopPlay && !stop);
-
-        isPlaying = false;
+        } while (!stop);
     }
 
     private void updateGui() {
@@ -171,14 +166,11 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
             SourceDataLine line = (SourceDataLine) AudioSystem.getLine(new DataLine.Info(SourceDataLine.class, audioFormat));
             line.open(audioFormat);
             line.start();
-            songLaenge = song.length();
             sampleSizeInBits = audioFormat.getSampleSizeInBits();
 
             if (in.getFrameLength() == -1) {
-                songDuration = songLaenge / sampleSizeInBits / 1000; // berechnung für mp3
                 bitRate = audioFormat.getSampleSizeInBits() * audioFormat.getFrameSize() * audioFormat.getChannels();
             } else {
-                songDuration = in.getFrameLength() / (long) audioFormat.getFrameRate(); // berechnung f�r wav
                 bitRate = (int) (in.available() / (in.getFrameLength() / (long) audioFormat.getFrameRate()) * 8 / 1000);
             }
             line.close();

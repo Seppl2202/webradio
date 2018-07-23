@@ -1,11 +1,7 @@
 package de.dhbw.webradio.radioplayer;
 
-import de.dhbw.webradio.WebradioPlayer;
-import de.dhbw.webradio.gui.GUIHandler;
-
 import javax.sound.sampled.AudioInputStream;
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
@@ -13,19 +9,14 @@ public abstract class AbstractPlayer {
 
     protected int gainPercent = 90;  //gibt die Lautstärke in Prozent an.  (0% = -80dB und 100% = 6dB)
     protected Boolean stop = false;
-    protected Boolean loopPlay = false;
-    protected File song = new File("");
     protected URL url = null;
-    protected long songDuration = 0;
-    protected long actuallySongTime = 0;
     protected int sampleSizeInBits = 0;
     protected long songLaenge = 0;
     protected boolean reset = false;
-    protected Boolean isPlaying = false;
     protected long resetKorrektur = 0;
     protected boolean pause = false;
     protected boolean mute = false;
-    protected int lautstaerke = gainPercent;
+    protected int volume = gainPercent;
     protected int bitRate = 0;
     protected int audioFormatChannels;
     protected float audioFormatFrameRate;
@@ -37,21 +28,9 @@ public abstract class AbstractPlayer {
     protected AudioInputStream ais = null;
     protected IcyInputStreamReader icyReader;
 
-    public long getActuallySongTime() {
-        return this.actuallySongTime;
-    }
-
-    public boolean isLoopPlay() {
-        return this.loopPlay;
-    }
-
-    public void setLoopPlay(Boolean loop) {
-        this.loopPlay = loop;
-    }
 
     public void stop() {
         stop = true;
-        actuallySongTime = 0;
     }
 
     public int getVolume() {
@@ -66,22 +45,13 @@ public abstract class AbstractPlayer {
 
     public abstract void play();
 
-    public File getSong() {
-        return this.song;
-    }
 
 
-    public long getSongDuration() {
-        return this.songDuration;
-    }
 
     public void reset(boolean reset) {
         this.reset = reset;
     }
 
-    public boolean isPlaying() {
-        return this.isPlaying;
-    }
 
     public boolean isPaused() {
         return this.pause;
@@ -93,10 +63,10 @@ public abstract class AbstractPlayer {
 
     public void setMute(boolean mute) {
         if ((mute) && (!this.mute)) {
-            lautstaerke = this.getVolume();
+            volume = this.getVolume();
             this.setVolume(0);
         } else {
-            this.setVolume(lautstaerke);
+            this.setVolume(volume);
         }
         this.mute = mute;
     }
@@ -137,13 +107,6 @@ public abstract class AbstractPlayer {
         return audioFormatproperties;
     }
 
-    public boolean isNetConnection() {
-        if (song.length() == 0 && !(url == null)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     public void increaseVolume(int step) {
         setVolume(getVolume() + step);

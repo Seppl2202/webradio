@@ -92,7 +92,6 @@ public class MP3Recorder implements Recorder, Runnable {
     }
 
     private String generateFileName() {
-        //remove everything but characters and numbers
         return FileUtilitie.generateFileNameForRecording();
     }
 

@@ -1,5 +1,6 @@
 package de.dhbw.webradio.h2database;
 
+import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.models.Station;
 
 import java.net.MalformedURLException;
@@ -13,14 +14,14 @@ import java.util.List;
 
 public class H2DatabaseConnector implements DatabaseConnector {
 
+    private static DatabaseConnector h2databaDatabaseConnector = new H2DatabaseConnector();
     private final String INSERT_STATION_STATEMENT = "INSERT INTO STATION" + "(name, url) values(?,?)";
     private final String UPDATE_STATION_STATEMENT = "UPDATE STATION SET name=?, url=? WHERE (name=? AND url=?)";
     private final String DELETE_STATION_STATEMENT = "DELETE FROM STATION WHERE (name=? AND url=?)";
-    private final String INSERT_RECORD_STATEMENT = "INSERT INTO RECORD" + "(name, url) values(?,?)";
-    private final String UPDATE_RECORD_STATEMENT = "UPDATE RECORD SET name=?, url=? WHERE (artist=? AND name=?)";
+    private final String INSERT_RECORD_STATEMENT = "INSERT INTO RECORD" + "(artist, title) values(?,?)";
+    private final String UPDATE_RECORD_STATEMENT = "UPDATE RECORD SET artist=?, title=? WHERE (artist=? AND title=?)";
     private final String DELETE_RECORD_STATEMENT = "DELETE RECORD STATION WHERE (artist=? AND title=?)";
     private DatabaseSetup databaseSetup = new H2DatabaseSetup();
-    private static DatabaseConnector h2databaDatabaseConnector = new H2DatabaseConnector();
 
     private H2DatabaseConnector() {
 
@@ -56,12 +57,6 @@ public class H2DatabaseConnector implements DatabaseConnector {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return true;
     }
@@ -89,12 +84,6 @@ public class H2DatabaseConnector implements DatabaseConnector {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return true;
     }
@@ -103,7 +92,7 @@ public class H2DatabaseConnector implements DatabaseConnector {
     public boolean addStation(Station stationToAdd) {
         Connection con = null;
         PreparedStatement s = null;
-        if(stationToAdd.getName().equals("")){
+        if (stationToAdd.getName().equals("")) {
             throw new IllegalArgumentException("Station did not contain a valid name");
         }
         try {
@@ -125,12 +114,6 @@ public class H2DatabaseConnector implements DatabaseConnector {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return true;
     }
@@ -160,5 +143,97 @@ public class H2DatabaseConnector implements DatabaseConnector {
             e.printStackTrace();
         }
         return stationsList;
+    }
+
+    @Override
+    public List<ScheduledRecord> getRecords() {
+        List<ScheduledRecord> recordArrayList = new ArrayList<>();
+        try {
+            Connection con = databaseSetup.getConnection();
+            PreparedStatement s = con.prepareStatement(
+                    "SELECT * FROM RECORD"
+            );
+            ResultSet r = s.executeQuery();
+            while (r.next()) {
+                recordArrayList.add(new ScheduledRecord(r.getString("title"), r.getString("artist")));
+            }
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return recordArrayList;
+    }
+
+
+    public boolean addScheduledRecord(ScheduledRecord record) {
+        try {
+            Connection con = databaseSetup.getConnection();
+            PreparedStatement s = con.prepareStatement(INSERT_RECORD_STATEMENT);
+            s.setString(1, record.getActor());
+            s.setString(2, record.getTitle());
+            s.executeUpdate();
+            s.close();
+            return true;
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean updateScheduledRecord(ScheduledRecord recordToChange, ScheduledRecord newRecord) {
+        try {
+            Connection con = databaseSetup.getConnection();
+            PreparedStatement s = con.prepareStatement(UPDATE_RECORD_STATEMENT);
+            s.setString(1, newRecord.getActor());
+            s.setString(2, newRecord.getTitle());
+            s.setString(3, recordToChange.getActor());
+            s.setString(4, recordToChange.getTitle());
+            s.executeUpdate();
+            s.close();
+            return true;
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteScheduledRecord(ScheduledRecord recordToDelete) {
+        try {
+            Connection con = databaseSetup.getConnection();
+            PreparedStatement s = con.prepareStatement(DELETE_RECORD_STATEMENT);
+            s.setString(1, recordToDelete.getActor());
+            s.setString(2, recordToDelete.getTitle());
+            s.executeUpdate();
+            s.close();
+            return true;
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

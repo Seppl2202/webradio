@@ -77,6 +77,12 @@ public class WebradioPlayer {
         RecorderController.getInstance().addScheduledRecord(r2);
     }
 
+    public synchronized boolean addScheduledRecord(ScheduledRecord record) {
+        RecorderController.getInstance().addScheduledRecord(record);
+        databaseConnector.addScheduledRecord(record);
+        return true;
+    }
+
     public synchronized static void deleteStation(Station s) {
         databaseConnector.deleteStation(s);
         stationList.remove(s);

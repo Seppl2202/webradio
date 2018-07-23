@@ -1,4 +1,4 @@
-package de.dhbw.webradio.test;
+package de.dhbw.webradio.test.utilities;
 
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;

@@ -2,15 +2,14 @@ package de.dhbw.webradio.test.h2database;
 
 import de.dhbw.webradio.h2database.DatabaseConnector;
 import de.dhbw.webradio.h2database.H2DatabaseConnector;
-import de.dhbw.webradio.h2database.H2DatabaseSetup;
 import de.dhbw.webradio.h2database.InitializeH2Database;
+import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.models.Station;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,16 +20,16 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class H2DatabaseConnectorTest {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
     private DatabaseConnector databaseConnector = H2DatabaseConnector.getInstance();
     private List<Station> addedStations = new ArrayList();
+    private List<ScheduledRecord> scheduledRecords = new ArrayList<>();
 
     @Before
     public void setUp() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         InitializeH2Database.initialiteDatabase();
     }
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void getInstance() {
@@ -100,8 +99,39 @@ public class H2DatabaseConnectorTest {
         addedStations.add(new Station("newStation", new URL("http://new.de")));
     }
 
+    @Test
+    public void addScheduledRecord() {
+        ScheduledRecord r1 = new ScheduledRecord("Testtitel", "Testinterpret");
+        databaseConnector.addScheduledRecord(r1);
+        scheduledRecords.add(r1);
+        List<ScheduledRecord> recordList = databaseConnector.getRecords();
+        assertTrue(recordList.contains(r1));
+    }
+
+    @Test
+    public void updateScheduledRecord() {
+        ScheduledRecord oldRecord = new ScheduledRecord("TestAlt", "TestInterpretAlt");
+        ScheduledRecord newRecord = new ScheduledRecord("TestNeu", "TestInterpretNeu");
+        databaseConnector.addScheduledRecord(oldRecord);
+        databaseConnector.updateScheduledRecord(oldRecord, newRecord);
+        scheduledRecords.add(oldRecord);
+        scheduledRecords.add(newRecord);
+        assertTrue(databaseConnector.getRecords().contains(newRecord));
+        assertTrue(databaseConnector.getRecords().get(databaseConnector.getRecords().indexOf(newRecord)).equals(newRecord));
+        assertTrue(! databaseConnector.getRecords().contains(oldRecord));
+    }
+
+    @Test
+    public void deleteRecord() {
+        ScheduledRecord r = new ScheduledRecord("Testtitel", "Testinterpret");
+        databaseConnector.addScheduledRecord(r);
+        databaseConnector.deleteScheduledRecord(r);
+        assertTrue(! databaseConnector.getRecords().contains(r));
+    }
+
     @After
     public void tearDown() {
         addedStations.forEach(s -> databaseConnector.deleteStation(s));
+        scheduledRecords.forEach(r -> databaseConnector.deleteScheduledRecord(r));
     }
 }
