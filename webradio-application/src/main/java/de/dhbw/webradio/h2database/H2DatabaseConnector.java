@@ -13,9 +13,12 @@ import java.util.List;
 
 public class H2DatabaseConnector implements DatabaseConnector {
 
-    private final String INSERT_STATEMENT = "INSERT INTO STATION" + "(name, url) values(?,?)";
-    private final String UPDATE_STATEMENT = "UPDATE STATION SET name=?, url=? WHERE (name=? AND url=?)";
-    private final String DELETE_STATEMENT = "DELETE FROM STATION WHERE (name=? AND url=?)";
+    private final String INSERT_STATION_STATEMENT = "INSERT INTO STATION" + "(name, url) values(?,?)";
+    private final String UPDATE_STATION_STATEMENT = "UPDATE STATION SET name=?, url=? WHERE (name=? AND url=?)";
+    private final String DELETE_STATION_STATEMENT = "DELETE FROM STATION WHERE (name=? AND url=?)";
+    private final String INSERT_RECORD_STATEMENT = "INSERT INTO RECORD" + "(name, url) values(?,?)";
+    private final String UPDATE_RECORD_STATEMENT = "UPDATE RECORD SET name=?, url=? WHERE (artist=? AND name=?)";
+    private final String DELETE_RECORD_STATEMENT = "DELETE RECORD STATION WHERE (artist=? AND title=?)";
     private DatabaseSetup databaseSetup = new H2DatabaseSetup();
     private static DatabaseConnector h2databaDatabaseConnector = new H2DatabaseConnector();
 
@@ -33,7 +36,7 @@ public class H2DatabaseConnector implements DatabaseConnector {
         PreparedStatement s = null;
         try {
             con = databaseSetup.getConnection();
-            s = con.prepareStatement(UPDATE_STATEMENT);
+            s = con.prepareStatement(UPDATE_STATION_STATEMENT);
             s.setString(1, newStation.getName());
             s.setString(2, newStation.getStationURL().toString());
             s.setString(3, stationToChange.getName());
@@ -69,7 +72,7 @@ public class H2DatabaseConnector implements DatabaseConnector {
         PreparedStatement s = null;
         try {
             con = databaseSetup.getConnection();
-            s = con.prepareStatement(DELETE_STATEMENT);
+            s = con.prepareStatement(DELETE_STATION_STATEMENT);
             s.setString(1, stationToDelete.getName());
             s.setString(2, stationToDelete.getStationURL().toString());
             s.executeUpdate();
@@ -105,7 +108,7 @@ public class H2DatabaseConnector implements DatabaseConnector {
         }
         try {
             con = databaseSetup.getConnection();
-            s = con.prepareStatement(INSERT_STATEMENT);
+            s = con.prepareStatement(INSERT_STATION_STATEMENT);
             s.setString(1, stationToAdd.getName());
             s.setString(2, stationToAdd.getStationURL().toString());
             s.executeUpdate();
