@@ -47,14 +47,8 @@ public class RecorderTab extends JPanel {
     }
 
     private void startRecording() {
-        try {
-            RecorderController.getInstance().setActualRecordNowRecorder(r);
-            r.recordNow(WebradioPlayer.getPlayer().getUrl());
-        } catch (LineUnavailableException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
+        RecorderController.getInstance().setActualRecordNowRecorder(r);
+        r.recordNow(WebradioPlayer.getPlayer().getUrl());
     }
 
     private void stopRecording() {

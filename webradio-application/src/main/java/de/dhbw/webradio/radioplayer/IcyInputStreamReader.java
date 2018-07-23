@@ -2,6 +2,7 @@ package de.dhbw.webradio.radioplayer;
 
 import de.dhbw.webradio.gui.GUIHandler;
 import de.dhbw.webradio.logger.Logger;
+import de.dhbw.webradio.models.ScheduledRecord;
 
 import java.io.FilterInputStream;
 import java.io.IOException;
@@ -162,6 +163,27 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable,
 
     public String getStationUrl() {
         return id3Values.get("icy-url");
+    }
+
+    @Override
+    public boolean matchesScheduledRecord(ScheduledRecord scheduledRecord) {
+            String artist, title;
+            String musicTitle = getActualMusicTitle();
+            if (musicTitle.contains("\\")) {
+                artist = musicTitle.split("\\\\")[0].trim();
+                title = musicTitle.split("\\\\")[1].trim();
+                if ((scheduledRecord.getActor().equalsIgnoreCase(artist) && scheduledRecord.getTitle().equalsIgnoreCase(title)) || (scheduledRecord.getActor().equalsIgnoreCase(title) && scheduledRecord.getTitle().equalsIgnoreCase(artist))) {
+                    return true;
+                }
+            }
+            if (musicTitle.contains("/")) {
+                artist = musicTitle.split("/")[0].trim();
+                title = musicTitle.split("/")[1].trim();
+                if ((scheduledRecord.getActor().trim().equalsIgnoreCase(artist) && scheduledRecord.getTitle().trim().equalsIgnoreCase(title)) || (scheduledRecord.getActor().trim().equalsIgnoreCase(title) && scheduledRecord.getTitle().trim().equalsIgnoreCase(artist))) {
+                    return true;
+                }
+            }
+        return false;
     }
 
     public String getActualMusicTitle() {

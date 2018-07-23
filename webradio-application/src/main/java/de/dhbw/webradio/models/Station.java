@@ -61,6 +61,11 @@ public class Station {
     public boolean equals(Object obj) {
         Station o = (Station) obj;
         return name.equalsIgnoreCase((o.name)) &&
-                stationURL.equals(( o.stationURL));
+                stationURL.equals((o.stationURL));
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + name + " | " + "url: " + stationURL;
     }
 }

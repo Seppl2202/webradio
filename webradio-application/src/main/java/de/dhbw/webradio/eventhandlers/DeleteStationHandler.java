@@ -2,6 +2,7 @@ package de.dhbw.webradio.eventhandlers;
 
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.gui.Gui;
+import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.models.Station;
 
 import java.awt.event.KeyEvent;
@@ -30,7 +31,7 @@ public class DeleteStationHandler implements KeyListener {
         Station toDelete = getStation();
         WebradioPlayer.deleteStation(toDelete);
         Gui.getInstance().getStationsTableModel().fireTableDataChanged();
-        System.err.println("removed " + toDelete);
+        Logger.logInfo("Deleted station: " + toDelete.toString());
     }
 
 

@@ -29,4 +29,9 @@ public class ScheduledRecord {
         ScheduledRecord r = (ScheduledRecord) obj;
         return title.equalsIgnoreCase(r.getTitle()) && actor.equalsIgnoreCase(r.getActor());
     }
+
+    @Override
+    public String toString() {
+        return "artist: " + actor + " | " + "title: " + title;
+    }
 }

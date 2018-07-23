@@ -8,10 +8,10 @@ import java.net.URL;
 
 public interface Recorder {
 
-    public void recordNow(URL url) throws LineUnavailableException, IOException;
+    public void recordNow(URL url);
 
 
-    public void recordByTitle();
+    public void recordByTitle(URL url);
 
     public void stop();
 

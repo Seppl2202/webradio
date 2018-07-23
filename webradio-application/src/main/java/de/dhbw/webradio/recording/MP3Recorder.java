@@ -1,16 +1,13 @@
 package de.dhbw.webradio.recording;
 
 import de.dhbw.webradio.WebradioPlayer;
-import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.id3.ID3;
-import de.dhbw.webradio.id3.ID3v1;
 import de.dhbw.webradio.id3.ID3v1Builder;
 import de.dhbw.webradio.logger.Logger;
+import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.radioplayer.MetainformationReader;
-import de.dhbw.webradio.radioplayer.PlayerFactory;
 import de.dhbw.webradio.utilities.FileUtilitie;
 
-import javax.sound.sampled.LineUnavailableException;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -18,6 +15,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 public class MP3Recorder implements Recorder, Runnable {
@@ -26,7 +24,7 @@ public class MP3Recorder implements Recorder, Runnable {
     private MetainformationReader reader = null;
 
     @Override
-    public void recordNow(URL url) throws LineUnavailableException, IOException {
+    public void recordNow(URL url) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -99,13 +97,23 @@ public class MP3Recorder implements Recorder, Runnable {
     }
 
     @Override
-    public void recordByTitle() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                recordToBuffer();
+    public void recordByTitle(URL url) {
+        ScheduledRecord matchedRecord = null;
+        while (true) {
+            List<ScheduledRecord> scheduledRecords = RecorderController.getInstance().getScheduledRecordList();
+            for (ScheduledRecord r : scheduledRecords) {
+                if (reader.matchesScheduledRecord(r)) {
+                    if (!r.equals(matchedRecord)) {
+                        matchedRecord = r;
+                        this.recordNow(url);
+                    }
+                }
             }
-        }).start();
+            if (!reader.matchesScheduledRecord(matchedRecord)) {
+                this.stop();
+            }
+        }
+
     }
 
     private void recordToBuffer() {

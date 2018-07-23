@@ -2,6 +2,7 @@ package de.dhbw.webradio.recording;
 
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.enumerations.FileExtension;
+import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
 import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.models.Station;
@@ -61,13 +62,11 @@ public class RecorderController {
                         Recorder recorder = RecorderController.getInstance().recordNow(s.getStationURL());
                         recorder.setMetaInformationReader(r);
                         listeningRecorders.add(recorder);
-                        System.err.println(r.getActualMusicTitle());
+                        recorder.recordNow(s.getStationURL());
+                        Logger.logInfo("Added new listening recorder: " + recorder.toString());
                     }
-                    System.err.println(i);
                     i++;
                 }
-                //complete initialization and start recorders
-                listeningRecorders.forEach(recorder -> recorder.recordByTitle());
             }
         }).start();
     }

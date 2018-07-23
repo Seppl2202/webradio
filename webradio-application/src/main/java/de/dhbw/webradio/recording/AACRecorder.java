@@ -25,7 +25,7 @@ public class AACRecorder implements Recorder, Runnable {
     }
 
     @Override
-    public void recordNow(URL url) throws LineUnavailableException, IOException {
+    public void recordNow(URL url) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -65,7 +65,7 @@ public class AACRecorder implements Recorder, Runnable {
 
 
     @Override
-    public void recordByTitle() {
+    public void recordByTitle(URL url) {
 
     }
 
