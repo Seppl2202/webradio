@@ -41,6 +41,7 @@ public class GeneralSettingsWindow extends JFrame {
         mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
         save = new JButton("Speichern");
         cancel = new JButton("Abbrechen");
+        cancel.addActionListener(e -> this.dispose());
         buttonsPanel.add(save);
         buttonsPanel.add(cancel);
 

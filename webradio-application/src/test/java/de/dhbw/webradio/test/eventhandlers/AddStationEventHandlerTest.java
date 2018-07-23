@@ -85,18 +85,15 @@ public class AddStationEventHandlerTest {
         Field f2 = window.getClass().getDeclaredField("save");
         f2.setAccessible(true);
         JButton saveButton = (JButton) f2.get(window);
+        Station s = new Station("Testsender", new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3"));
+        stationsToDelete.add(s);
         inputs.get(window.getInputLabels().get(0)).setText("Testsender");
-        inputs.get((window.getInputLabels().get(1))).setText("asdasdsa");
+        inputs.get((window.getInputLabels().get(1))).setText("http://mp3.ffh.de/radioffh/hqlivestream.mp3");
         ActionListener listener = saveButton.getActionListeners()[0];
         Method m = listener.getClass().getDeclaredMethod("saveStation");
         m.setAccessible(true);
         m.invoke(listener);
-        expectedException.expect(Exception.class);
-    }
-
-    @Test
-    public void checkStation() {
-
+        assertTrue(WebradioPlayer.getStationList().contains(s));
     }
 
     @After

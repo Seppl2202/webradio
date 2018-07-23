@@ -18,4 +18,8 @@ public class InitializeH2Database {
         server.start();
     }
 
+    private void createTable() {
+
+    }
+
 }
