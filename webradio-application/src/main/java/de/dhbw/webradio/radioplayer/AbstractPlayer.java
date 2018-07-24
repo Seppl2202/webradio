@@ -45,8 +45,9 @@ public abstract class AbstractPlayer {
 
     public abstract void play();
 
-
-
+    public boolean isPlaying() {
+        return !stop;
+    }
 
     public void reset(boolean reset) {
         this.reset = reset;

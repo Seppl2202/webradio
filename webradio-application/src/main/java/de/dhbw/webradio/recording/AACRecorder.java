@@ -1,6 +1,7 @@
 package de.dhbw.webradio.recording;
 
 import de.dhbw.webradio.WebradioPlayer;
+import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.radioplayer.MetainformationReader;
 import de.dhbw.webradio.utilities.FileUtilitie;
 import net.sourceforge.jaad.aac.SampleBuffer;
@@ -39,13 +40,13 @@ public class AACRecorder implements Recorder, Runnable {
                     byte[] buffer = new byte[4096];
                     int len;
                     long t = System.currentTimeMillis();
-                    System.err.println("entering while");
+                    Logger.logInfo("Started aac recording from: " + url.toString());
                     recording = true;
                     while ((len = in.read(buffer)) > 0 && (recording)) {
                         out.write(buffer, 0, len);
                     }
                     out.close();
-                    System.err.println("finished");
+                    System.err.println("Finished aac recording");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (MalformedURLException e) {

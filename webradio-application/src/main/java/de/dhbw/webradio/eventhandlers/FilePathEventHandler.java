@@ -31,6 +31,6 @@ public class FilePathEventHandler implements ActionListener {
     private void saveUserSelection(File f) {
         Writer settingsWriter = new SettingsWriter();
         settingsWriter.updateFilePath(f);
-        Logger.logInfo("saved new directory" + f.toString());
+        Logger.logInfo("Saved new directory" + f.toString());
     }
 }

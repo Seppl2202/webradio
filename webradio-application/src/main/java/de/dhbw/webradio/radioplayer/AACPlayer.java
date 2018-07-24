@@ -42,7 +42,7 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
         SourceDataLine line = null;
         byte[] b;
         try {
-            isPlaying = true;
+            stop = false;
             final ADTSDemultiplexer adts = new ADTSDemultiplexer(url.openStream());
             final Decoder dec = new Decoder(adts.getDecoderSpecificInfo());
             final SampleBuffer buf = new SampleBuffer();
@@ -71,7 +71,7 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
         } catch (LineUnavailableException e) {
             e.printStackTrace();
         } catch (AACException e) {
-            Logger.logError("AACException catched. This is a known problem. Please retry until the player starts correctly.");
+            Logger.logError("AACException catched. This is a known problem. Please retry with another stream until the player starts correctly.");
             e.printStackTrace();
             WebradioPlayer.getPlayer().getIcyReader().setInterrupted(true);
             WebradioPlayer.setPlayer(null);
@@ -82,7 +82,7 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
             if (line != null) {
                 line.stop();
                 line.close();
-                isPlaying = false;
+                stop = true;
                 GUIHandler.getInstance().resetComponents();
             }
         }

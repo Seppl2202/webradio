@@ -1,16 +1,15 @@
 package de.dhbw.webradio;
 
 
-import de.dhbw.webradio.gui.GUIHandler;
 import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.h2database.DatabaseConnector;
 import de.dhbw.webradio.h2database.H2DatabaseConnector;
 import de.dhbw.webradio.h2database.InitializeH2Database;
+import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.networkconnection.NetworkConnectivityChecker;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.recording.RecorderController;
-import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.settings.Settings;
 import de.dhbw.webradio.settings.SettingsParser;
 
@@ -22,17 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebradioPlayer {
+    public static File settingsDirectory = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml");
     private static Gui gui;
     private static AbstractPlayer player;
     private static List<Station> stationList = new ArrayList<>();
     private static Settings settings;
     private static DatabaseConnector databaseConnector = H2DatabaseConnector.getInstance();
-    public static File settingsDirectory = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml");
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         InitializeH2Database.initialiteDatabase();
-        //addStations();
-        addScheduledRecords();
         SettingsParser settingsParser = new SettingsParser();
         parseSettings(settingsParser);
         gui = Gui.getInstance();
@@ -67,20 +64,6 @@ public class WebradioPlayer {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-    }
-
-
-    private static void addScheduledRecords() {
-        ScheduledRecord r1 = new ScheduledRecord("Titel 1", "Interpret 1");
-        ScheduledRecord r2 = new ScheduledRecord("Titel 2", "Interpret 2");
-        RecorderController.getInstance().addScheduledRecord(r1);
-        RecorderController.getInstance().addScheduledRecord(r2);
-    }
-
-    public synchronized boolean addScheduledRecord(ScheduledRecord record) {
-        RecorderController.getInstance().addScheduledRecord(record);
-        databaseConnector.addScheduledRecord(record);
-        return true;
     }
 
     public synchronized static void deleteStation(Station s) {
@@ -120,6 +103,18 @@ public class WebradioPlayer {
 
     public static void setSettings(Settings settings) {
         WebradioPlayer.settings = settings;
+    }
+
+    public static synchronized boolean addScheduledRecord(ScheduledRecord record) {
+        RecorderController.getInstance().addScheduledRecord(record);
+        databaseConnector.addScheduledRecord(record);
+        return true;
+    }
+
+    public static synchronized boolean deleteScheduledRecord(ScheduledRecord toDelete) {
+        RecorderController.getInstance().removeScheduledRecord(toDelete);
+        databaseConnector.deleteScheduledRecord(toDelete);
+        return true;
     }
 
 }

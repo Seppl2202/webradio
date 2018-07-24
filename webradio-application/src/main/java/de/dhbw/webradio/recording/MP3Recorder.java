@@ -38,7 +38,7 @@ public class MP3Recorder implements Recorder, Runnable {
                     f = new File(recorderDirectory + "/" + generateFileName() + ".mp3");
                     Path path = Paths.get(f.toURI());
                     recording = true;
-                    System.err.println("started recording");
+                    System.err.println("started mp3 recording from: " + url.toString());
                     OutputStream out = new FileOutputStream(path.toFile());
                     byte[] buffer = new byte[4096];
                     int len;
@@ -55,6 +55,7 @@ public class MP3Recorder implements Recorder, Runnable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                Logger.logInfo("Finished mp3 recording");
                 Logger.logInfo("writing id3v1.1");
                 ID3 id3 = new ID3v1Builder(createTitle().orElse("Webradio-Aufnahme"), createArtist().orElse("Kein Interpret"))
                         .setYear(String.valueOf(Calendar.getInstance().get(Calendar.YEAR)).toString())
@@ -115,9 +116,6 @@ public class MP3Recorder implements Recorder, Runnable {
 
     }
 
-    private void recordToBuffer() {
-        System.err.println("Reorder: " + this.reader.getStationUrl());
-    }
 
     @Override
     public void stop() {

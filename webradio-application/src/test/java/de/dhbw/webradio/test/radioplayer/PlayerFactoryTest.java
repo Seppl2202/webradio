@@ -41,6 +41,12 @@ public class PlayerFactoryTest {
         assertEquals(true, player3 instanceof Mp3Player);
     }
 
+    /**
+     * please select the first entry of the selection dialog
+     * @throws IOException
+     * @throws NoURLTagFoundException
+     * @throws UnsupportedAudioFileException
+     */
     @Test
     public void getUserSelection() throws IOException, NoURLTagFoundException, UnsupportedAudioFileException {
         Station s = new Station("test1", new URL("http://static.bigfm.de/sites/default/files/playlist/bigFM%20WEBRADIO%20(WinAmp).m3u8"));

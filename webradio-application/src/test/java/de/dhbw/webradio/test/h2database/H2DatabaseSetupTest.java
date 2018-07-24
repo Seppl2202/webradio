@@ -1,19 +1,38 @@
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.asset.EmptyAsset;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
+package de.dhbw.webradio.test.h2database;
+
+import de.dhbw.webradio.h2database.H2DatabaseSetup;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import static org.junit.Assert.*;
 
-@RunWith(Arquillian.class)
 public class H2DatabaseSetupTest {
-    @Deployment
-    public static JavaArchive createDeployment() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addClass(de.dhbw.webradio.h2database.H2DatabaseSetup.class)
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+    public H2DatabaseSetup databaseSetup;
+    public Connection con;
+    @Before
+    public void setUp() {
+        databaseSetup = new H2DatabaseSetup();
     }
 
+    /**
+     * checks if the connection to the database is succesfully established
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * @throws InstantiationException
+     * @throws IllegalAccessException
+     */
+    @Test
+    public void getConnection() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        con = databaseSetup.getConnection();
+    }
+
+    @After
+    public void tearDown() throws SQLException {
+        con.close();
+    }
 }

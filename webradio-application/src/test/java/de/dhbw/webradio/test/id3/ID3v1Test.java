@@ -61,6 +61,7 @@ public class ID3v1Test {
                 .setComment("Kein Kommentar")
                 .setTrack("2").build();
         Field f = id3.getClass().getDeclaredField("id3InfoToWrite");
+        //at this point, the id3 tags are not written to the target array yet, so getting the target array returns no id3 tags
         f.setAccessible(true);
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("No ID3v1 tag found");
