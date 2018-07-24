@@ -31,7 +31,7 @@ public class PlayerFactory implements Factory {
         URL stationURL = s.getStationURL();
         FileExtension urlExtension = fileExtensionParser.parseFileExtension(stationURL);
         if (urlExtension.equals(FileExtension.MP3)) {
-            AbstractPlayer player = new Mp3Player();
+            AbstractPlayer player = new MP3Player();
             player.setUrl(stationURL);
             return player;
         } else if (urlExtension.equals(FileExtension.AAC)) {
@@ -77,7 +77,7 @@ public class PlayerFactory implements Factory {
 
     private AbstractPlayer parseMP3orAAC(FileExtensionParser fileExtensionParser, URL userSelectedStream) throws MalformedURLException {
         if (fileExtensionParser.parseFileExtension(userSelectedStream).equals(FileExtension.MP3)) {
-            AbstractPlayer player = new Mp3Player();
+            AbstractPlayer player = new MP3Player();
             player.setUrl(userSelectedStream);
             return player;
         } else if (fileExtensionParser.parseFileExtension(userSelectedStream).equals(FileExtension.AAC)) {

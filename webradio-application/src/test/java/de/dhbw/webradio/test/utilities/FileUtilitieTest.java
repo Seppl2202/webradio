@@ -3,7 +3,7 @@ package de.dhbw.webradio.test.utilities;
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
-import de.dhbw.webradio.radioplayer.Mp3Player;
+import de.dhbw.webradio.radioplayer.MP3Player;
 import de.dhbw.webradio.utilities.FileUtilitie;
 import org.junit.Test;
 
@@ -23,7 +23,7 @@ public class FileUtilitieTest {
         Field f = r.getClass().getDeclaredField("id3Values");
         f.setAccessible(true);
         Map<String, String> values = new HashMap<>();
-        AbstractPlayer p = new Mp3Player();
+        AbstractPlayer p = new MP3Player();
         p.setIcyReader(r);
         WebradioPlayer.setPlayer(p);
         values.put("titleInfo", "TesttitelMitSönderzéichen");

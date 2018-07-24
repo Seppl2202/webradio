@@ -6,18 +6,14 @@ import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AACPlayer;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
-import de.dhbw.webradio.radioplayer.Mp3Player;
+import de.dhbw.webradio.radioplayer.MP3Player;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
-import net.sourceforge.jaad.Play;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -37,8 +33,8 @@ public class PlayerFactoryTest {
         //single mp3 stream from m3u
         AbstractPlayer player3 = p.get(s3);
         assertEquals(true, player instanceof AACPlayer);
-        assertEquals(true, player2 instanceof Mp3Player);
-        assertEquals(true, player3 instanceof Mp3Player);
+        assertEquals(true, player2 instanceof MP3Player);
+        assertEquals(true, player3 instanceof MP3Player);
     }
 
     /**
