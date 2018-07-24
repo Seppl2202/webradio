@@ -46,7 +46,7 @@ public class PlayerFactory implements Factory {
                 m3uFileContent = m3uParser.parseFileFromUrlToString(stationURL);
                 M3UInfo userSelectedStream = getUserSelection(m3uFileContent, m3uParser);
                 AbstractPlayer player = parseMP3orAAC(fileExtensionParser, userSelectedStream.getUrl());
-                if (player != null) return player;
+                return player;
             } catch (IOException e) {
                 WebradioPlayer.setPlayer(null);
                 GUIHandler.getInstance().resetComponents();
@@ -66,6 +66,7 @@ public class PlayerFactory implements Factory {
             try {
                 String userSelectedURL = getPLSSelection(plsEntries);
                 AbstractPlayer player = parseMP3orAAC(fileExtensionParser, new URL(userSelectedURL));
+                return player;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }

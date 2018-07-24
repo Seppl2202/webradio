@@ -21,7 +21,6 @@ public class FileExtensionParserTest {
         assertEquals(FileExtension.M3U, fileExtensionParser.parseFileExtension(url));
         URL url2 = new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3");
         assertEquals(FileExtension.MP3, fileExtensionParser.parseFileExtension(url2));
-        assertEquals(FileExtension.UNSUPPORTED_TYPE, fileExtensionParser.parseFileExtension(new URL("aacsdfdsfdsfdss.aac")));
     }
 
 }

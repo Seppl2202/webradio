@@ -25,8 +25,8 @@ import static org.junit.Assert.assertEquals;
 
 public class M3uParserTest {
 
-    File success = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_success.m3u");
-    File fail = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_fail.m3u");
+    File success = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_success.m3u");
+    File fail = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_fail.m3u");
     M3uParser m3uParser = new M3uParser();
     String expectedText = "#EXTM3U\r\n" +
             "#EXTINF:-1,SWR1 Baden-Württemberg\r\n" +
@@ -112,7 +112,7 @@ public class M3uParserTest {
 
     @Test
     public void testMultipleM3uInfo() throws MalformedURLException {
-        File f = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\bigfmWebradio.m3u8");
+        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\bigfmWebradio.m3u8");
         String parsedFile = null;
         List<M3UInfo> info = null;
         try {
@@ -142,7 +142,7 @@ public class M3uParserTest {
      * Tests the multiple stream selection
      */
     public void testMultipleStreamPlayerCreation() {
-        File f = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testMultiple.m3u");
+        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testMultiple.m3u");
         String parsedFile = null;
         List<M3UInfo> info = null;
         M3UInfo selected = null;
@@ -175,7 +175,7 @@ public class M3uParserTest {
 
     @Test
     public void testSM3UParsing() {
-        File f = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\youfm_2.m3u");
+        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\youfm_2.m3u");
         String parsedFile = null;
         List<M3UInfo> info = null;
         M3UInfo selected = null;

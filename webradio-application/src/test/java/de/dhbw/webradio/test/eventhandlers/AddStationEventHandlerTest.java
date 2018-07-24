@@ -60,8 +60,9 @@ public class AddStationEventHandlerTest {
         inputs.get((window.getInputLabels().get(1))).setText("http://mp3.ffh.de/radioffh/hqlivestream.mp3");
         stationsToDelete.add(new Station("Testsender", new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3")));
         f.set(window, inputs);
+        expectedException.expect(IllegalArgumentException.class);
         saveButton.doClick();
-        assertTrue(WebradioPlayer.getStationList().contains(new Station("Testsender", new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3"))));
+        assertTrue(WebradioPlayer.getStationList().contains(new Station("Testsender", new URL("http://mp3.ffh.de/radioffh/hqlivestream.aac"))));
         inputs.get(window.getInputLabels().get(0)).setText("Testsender");
         inputs.get(window.getInputLabels().get(1)).setText("adsdasfdf");
         f.set(window, inputs);

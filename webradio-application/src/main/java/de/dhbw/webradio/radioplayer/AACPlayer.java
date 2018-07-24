@@ -94,4 +94,9 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
         audioFormatSampleRate = audioFormat.getSampleRate();
         GUIHandler.getInstance().updateAudioDetails(this);
     }
+
+    @Override
+    public String toString() {
+        return "URL: " + url;
+    }
 }

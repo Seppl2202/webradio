@@ -186,4 +186,9 @@ public class Mp3Player extends AbstractPlayer implements Runnable {
         buffer = new byte[BufferSize];
 
     }
+
+    @Override
+    public String toString() {
+        return "URL: " + url;
+    }
 }

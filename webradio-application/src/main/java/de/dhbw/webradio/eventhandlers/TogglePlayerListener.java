@@ -67,7 +67,7 @@ public class TogglePlayerListener implements ActionListener {
     private void createPlayerAndUpdateGui(Factory playerFactory, Station s) {
         AbstractPlayer player = playerFactory.get(s);
         if (player == null) {
-            throw new IllegalArgumentException("Station " + s + "did not contain a valid file extension");
+            throw new IllegalArgumentException("Station " + s + " did not contain a valid file extension");
         }
         WebradioPlayer.setPlayer(player);
         player.play();

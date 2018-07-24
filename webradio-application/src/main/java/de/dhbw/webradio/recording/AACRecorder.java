@@ -39,14 +39,13 @@ public class AACRecorder implements Recorder, Runnable {
                     OutputStream out = new FileOutputStream(path.toFile());
                     byte[] buffer = new byte[4096];
                     int len;
-                    long t = System.currentTimeMillis();
                     Logger.logInfo("Started aac recording from: " + url.toString());
                     recording = true;
                     while ((len = in.read(buffer)) > 0 && (recording)) {
                         out.write(buffer, 0, len);
                     }
                     out.close();
-                    System.err.println("Finished aac recording");
+                    Logger.logInfo("Finished aac recording");
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (MalformedURLException e) {
@@ -79,7 +78,6 @@ public class AACRecorder implements Recorder, Runnable {
     @Override
     public void stop() {
         this.recording = false;
-        System.err.println("stopped");
     }
 
     @Override

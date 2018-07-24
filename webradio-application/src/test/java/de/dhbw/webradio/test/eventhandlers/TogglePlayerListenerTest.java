@@ -41,7 +41,7 @@ public class TogglePlayerListenerTest {
         f.setAccessible(true);
         JButton button = (JButton) f.get(p);
         ActionListener listener = button.getActionListeners()[0];
-        Method m = listener.getClass().getDeclaredMethod("createPlayerAndUpdateGui", new Class[]{PlayerFactory.class, Station.class});
+        Method m = listener.getClass().getDeclaredMethod("createPlayerAndUpdateGui", new Class[]{de.dhbw.webradio.radioplayer.Factory.class, Station.class});
         m.setAccessible(true);
         Station failStation = new Station("Test", new URL("http://google.de"));
         PlayerFactory pf = new PlayerFactory();

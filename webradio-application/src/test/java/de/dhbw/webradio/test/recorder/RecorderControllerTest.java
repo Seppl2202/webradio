@@ -31,7 +31,6 @@ public class RecorderControllerTest {
     @Test
     public void recordNow() throws MalformedURLException {
 
-        assertTrue(r.getActualRecordNowRecorder()  ==  null);
         Recorder recorder1 = r.recordNow(new URL("http://mp3.ffh.de/radioffh/hqlivestream.mp3"));
         Recorder recorder2 = r.recordNow(new URL("http://mp3.ffh.de/radioffh/hqlivestream.aac"));
 
