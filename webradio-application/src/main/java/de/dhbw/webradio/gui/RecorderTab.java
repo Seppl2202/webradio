@@ -67,8 +67,6 @@ public class RecorderTab extends JPanel {
     }
 
     public void toggleControls(boolean statusToSet) {
-        if (WebradioPlayer.getPlayer().isPlaying()) {
             this.start.setEnabled(statusToSet);
-        }
     }
 }

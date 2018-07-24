@@ -1,6 +1,7 @@
 package de.dhbw.webradio.test.networkconnection;
 
 import de.dhbw.webradio.networkconnection.NetworkConnectivityChecker;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -8,6 +9,10 @@ import static org.junit.Assert.*;
 
 public class NetworkConnectivityCheckerTest {
 
+    @Before
+    public void setUp() {
+
+    }
 
     @Test
     public void getInstance() {
