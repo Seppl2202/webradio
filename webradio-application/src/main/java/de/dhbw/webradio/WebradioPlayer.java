@@ -21,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WebradioPlayer {
-    public static File settingsDirectory = new File("C:\\Users\\priva\\IdeaProjects\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml");
+
+    public static File settingsDirectory = new File("C:\\repository\\webradio\\webradio-application\\src\\main\\java\\de\\dhbw\\webradio\\general.yaml").getAbsoluteFile();
     private static Gui gui;
     private static AbstractPlayer player;
     private static List<Station> stationList = new ArrayList<>();

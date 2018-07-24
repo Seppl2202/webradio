@@ -89,6 +89,7 @@ public class NetworkConnectivityChecker {
                 checkInfoDialog.setTitle("Prüfung");
                 checkInfoDialog.add(new JLabel("Prüfe Netzwerkverbindung..."));
                 checkInfoDialog.setModal(true);
+                checkInfoDialog.setSize(300,100);
                 checkInfoDialog.setVisible(true);
                 checkInfoDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
                 checkInfoDialog.pack();

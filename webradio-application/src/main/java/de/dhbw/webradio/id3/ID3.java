@@ -2,7 +2,7 @@ package de.dhbw.webradio.id3;
 
 import java.io.File;
 
-public interface ID3 {
+public interface ID3 extends MetainformationTag{
     public void writeId3ToFile(File f);
     public void setTitle(String title);
     public void setAlbum(String album);

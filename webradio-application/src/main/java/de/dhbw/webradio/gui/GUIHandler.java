@@ -73,14 +73,17 @@ public class GUIHandler implements Handler {
         Gui.getInstance().getStreamDetails().updateStationName("Aktuell keine Wiedergabe");
         Gui.getInstance().getStreamDetails().updateM3uUrl("Aktuell keine Wiedergabe");
         Gui.getInstance().getStreamDetails().updateStreamUrl("Aktuell keine Wiedergabe");
+        Gui.getInstance().getStreamDetails().updateRealTitelInfo("Aktuell keine Wiedergabe");
         Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setEnabled(true);
         Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setText("Start");
+        Gui.getInstance().getRecorderTab().toggleControls(false);
     }
 
     @Override
     public void togglePlayButton() {
         if (Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().getText().equalsIgnoreCase("start")) {
             Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setText("Stop");
+            Gui.getInstance().getRecorderTab().toggleControls(true);
         } else {
             Gui.getInstance().getPlayerControlPanel().getTogglePlayerButton().setText("Start");
         }

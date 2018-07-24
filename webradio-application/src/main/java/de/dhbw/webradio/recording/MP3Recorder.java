@@ -74,9 +74,9 @@ public class MP3Recorder implements Recorder, Runnable {
         String s = WebradioPlayer.getPlayer().getIcyReader().getActualMusicTitle();
         String title = null;
         if (s.contains("/")) {
-            title = s.split("/")[0];
+            title = s.split("/")[0].trim();
         } else if (s.contains("-")) {
-            title = s.split("-")[0];
+            title = s.split("-")[0].trim();
         }
         return Optional.ofNullable(title);
     }
@@ -85,9 +85,9 @@ public class MP3Recorder implements Recorder, Runnable {
         String s = WebradioPlayer.getPlayer().getIcyReader().getActualMusicTitle();
         String artist = null;
         if (s.contains("/")) {
-            artist = s.split("/")[1];
+            artist = s.split("/")[1].trim();
         } else if (s.contains("-")) {
-            artist = s.split("-")[1];
+            artist = s.split("-")[1].trim();
         }
         return Optional.ofNullable(artist);
     }

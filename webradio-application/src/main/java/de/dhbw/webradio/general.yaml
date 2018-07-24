@@ -1,0 +1,6 @@
+---
+generalSettings:
+  attributes:
+    bufferSize: "1024"
+    initialVolume: "90"
+  recordingDirectory: "C://Desktop"

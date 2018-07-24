@@ -7,6 +7,7 @@ import de.dhbw.webradio.gui.Handler;
 import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
+import de.dhbw.webradio.radioplayer.Factory;
 import de.dhbw.webradio.radioplayer.IcyInputStreamReader;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
 
@@ -63,7 +64,7 @@ public class TogglePlayerListener implements ActionListener {
         return Gui.getInstance().getStationsTableModel().getStationFromIndex(Gui.getInstance().getStationsTable().getSelectedRow());
     }
 
-    private void createPlayerAndUpdateGui(PlayerFactory playerFactory, Station s) {
+    private void createPlayerAndUpdateGui(Factory playerFactory, Station s) {
         AbstractPlayer player = playerFactory.get(s);
         if (player == null) {
             throw new IllegalArgumentException("Station " + s + "did not contain a valid file extension");
