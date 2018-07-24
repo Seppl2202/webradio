@@ -55,6 +55,7 @@ public class TogglePlayerListener implements ActionListener {
         }
     }
 
+
     private Station getStation() {
         if (Gui.getInstance().getStationsTable().getRowSorter() != null) {
             int selectedRow = Gui.getInstance().getStationsTable().getSelectedRow();

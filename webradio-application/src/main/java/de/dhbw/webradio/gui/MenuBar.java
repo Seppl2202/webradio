@@ -23,12 +23,10 @@ public class MenuBar extends JPanel {
         JMenuItem exitProgram = new JMenuItem("Beenden");
         exitProgram.addActionListener(e -> System.exit(0));
         file.add(exitProgram);
-        JMenuItem generalSettings = new JMenuItem("Allgemeine Einstellungen");
+        JMenuItem generalSettings = new JMenuItem("Allgemeine Einstellungen...");
         generalSettings.addActionListener(new GeneralSettingsEventHandler());
-        JMenuItem generalRecordingSettings = new JMenuItem("Einstellungen Audioaufnahme");
         settings.add(generalSettings);
-        settings.add(generalRecordingSettings);
-        JMenuItem addStationItem = new JMenuItem("Sender hinzufügen");
+        JMenuItem addStationItem = new JMenuItem("Sender hinzufügen...");
         addStationItem.addActionListener(e -> new AddStationWindow());
         stationList.add(addStationItem);
         this.add(menuBar);

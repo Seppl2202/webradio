@@ -13,22 +13,26 @@ import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 public class NetworkConnectivityChecker {
     private static NetworkConnectivityChecker networkConnectivityChecker = new NetworkConnectivityChecker();
     private int callCount = 0;
     private JDialog checkInfoDialog;
+    private boolean errorDialogShown = false;
 
     private NetworkConnectivityChecker() {
         showInitialCheckDialog();
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
-        ScheduledFuture scheduledFuture = scheduledExecutorService.schedule(new Callable<Object>() {
-            public Object call() throws Exception {
+        ScheduledFuture scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
                 checkNetworkConnectivity();
-                return "Executed";
             }
-        }, 5, TimeUnit.SECONDS);
+        }, 1, 10, TimeUnit.SECONDS);
 
     }
 
@@ -64,20 +68,30 @@ public class NetworkConnectivityChecker {
             netAccess = socket.isConnected();
             socket.close();
         } catch (ConnectException e) {
+            handleCheckResult(netAccess);
             e.printStackTrace();
             return false;
         } catch (IOException e) {
+            handleCheckResult(netAccess);
             e.printStackTrace();
         }
+        handleCheckResult(netAccess);
+        return netAccess;
+    }
+
+    public void handleCheckResult(boolean netAccess) {
         if (!netAccess) {
-            checkInfoDialog.dispose();
-            showErrorDialog();
-            GUIHandler.getInstance().toggleControls(false);
+            if (!errorDialogShown) {
+                checkInfoDialog.dispose();
+                showErrorDialog();
+                errorDialogShown = true;
+                GUIHandler.getInstance().toggleControls(false);
+            }
         } else {
             checkInfoDialog.dispose();
+            errorDialogShown = false;
             GUIHandler.getInstance().toggleControls(true);
         }
-        return netAccess;
     }
 
     private void showInitialCheckDialog() {
@@ -89,7 +103,7 @@ public class NetworkConnectivityChecker {
                 checkInfoDialog.setTitle("Prüfung");
                 checkInfoDialog.add(new JLabel("Prüfe Netzwerkverbindung..."));
                 checkInfoDialog.setModal(true);
-                checkInfoDialog.setSize(300,100);
+                checkInfoDialog.setSize(300, 100);
                 checkInfoDialog.setVisible(true);
                 checkInfoDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
                 checkInfoDialog.pack();
@@ -99,6 +113,7 @@ public class NetworkConnectivityChecker {
     }
 
     private void showErrorDialog() {
-        JOptionPane.showMessageDialog(Gui.getInstance(), "Es konnte keine Netzwerkverbdingung gefunden werden\r\nSie können erst Sender wiedergeben und eine Sofortaufnahme starten, wenn eine Verbindung verfügbar ist", "Netzwerkfehler", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(Gui.getInstance(), "Es konnte keine Netzwerkverbdingung gefunden werden\r\nSie können erst Sender wiedergeben und eine Sofortaufnahme starten, wenn eine Verbindung verfügbar ist"+
+                "\r\nSobald eine Verbindung besteht, werden die Steuerelemente freigegeben", "Netzwerkfehler", JOptionPane.ERROR_MESSAGE);
     }
 }
