@@ -1,7 +1,6 @@
 package de.dhbw.webradio.models;
 
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,16 +44,20 @@ public class ScheduledRecordsTableModel extends AbstractTableModel {
     }
 
     public void addRow(ScheduledRecord r) {
-        ScheduledRecord toAdd = new ScheduledRecord("Fehler", "Fehler");
-        for (Iterator<ScheduledRecord> recordIterator = scheduledRecords.iterator(); recordIterator.hasNext(); ) {
-            ScheduledRecord record = recordIterator.next();
-            if (record.equals(r)) {
-                throw new IllegalArgumentException("Scheduled Record " + r.toString() + " already exists");
-            } else {
-                toAdd = record;
+        if (!(scheduledRecords.size() == 0)) {
+            ScheduledRecord toAdd = new ScheduledRecord("Fehler", "Fehler");
+            for (Iterator<ScheduledRecord> recordIterator = scheduledRecords.iterator(); recordIterator.hasNext(); ) {
+                ScheduledRecord record = recordIterator.next();
+                if (record.equals(r)) {
+                    throw new IllegalArgumentException("Scheduled Record " + r.toString() + " already exists");
+                } else {
+                    toAdd = record;
+                }
             }
+            scheduledRecords.add(toAdd);
+        } else {
+            scheduledRecords.add(r);
         }
-        scheduledRecords.add(toAdd);
     }
 
     public void removeRow(ScheduledRecord r) {
