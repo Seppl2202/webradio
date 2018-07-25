@@ -46,7 +46,7 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable,
             }
             if (header.getKey() != null && header.getKey().toLowerCase().startsWith("icy-")) {
                 for (String s : header.getValue()) {
-                    fireEventNewMetaData(header.getKey(), s);
+                    fireNewIcyMetaData(header.getKey(), s);
                 }
             }
         }
@@ -95,12 +95,11 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable,
         }
 
         if (s.length() > 0) {
-            // TODO: s parsen
-            fireEventNewMetaData("Length:" + s.length() + ",", s.toString());
+            fireNewIcyMetaData("Length:" + s.length() + ",", s.toString());
         }
     }
 
-    private void fireEventNewMetaData(String key, String value) {
+    private void fireNewIcyMetaData(String key, String value) {
         //to do: log received metadata
         //add header key-values to map
         Logger.logInfo("New icy data: " + key + value);
@@ -116,7 +115,6 @@ public class IcyInputStreamReader extends FilterInputStream implements Runnable,
             id3Values.put(mapKey, mapValue);
             if (icyInfoContainsTitleInfo()) {
                 id3Values.put("titleInfo", mapValue);
-                System.err.println(mapValue);
             }
             GUIHandler.getInstance().notifyNewIcyData(this);
         }

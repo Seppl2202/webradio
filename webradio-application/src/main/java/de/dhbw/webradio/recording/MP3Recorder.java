@@ -17,6 +17,9 @@ import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class MP3Recorder implements Recorder, Runnable {
     private boolean recording = false;
@@ -98,7 +101,8 @@ public class MP3Recorder implements Recorder, Runnable {
 
     @Override
     public void recordByTitle(URL url, Recorder recorder) {
-        new Thread(new Runnable() {
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 ScheduledRecord matchedRecord = null;
@@ -118,8 +122,7 @@ public class MP3Recorder implements Recorder, Runnable {
                     }
                 }
             }
-        }).start();
-
+        }, 1, 1, TimeUnit.SECONDS);
 
     }
 
