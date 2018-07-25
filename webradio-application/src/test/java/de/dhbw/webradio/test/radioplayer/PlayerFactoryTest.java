@@ -53,9 +53,4 @@ public class PlayerFactoryTest {
         InformationObject info = p.getUserSelection(content, parser);
         assertEquals("bigFM DEUTSCHLAND", info.getTitleInfo());
     }
-    @Test
-    public void getPLSSelection() throws MalformedURLException {
-        //test with list size = 1
-        //test with list size > 1
-    }
 }
