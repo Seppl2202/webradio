@@ -106,20 +106,18 @@ public class MP3Recorder implements Recorder, Runnable {
             @Override
             public void run() {
                 ScheduledRecord matchedRecord = null;
-                while (true) {
-                    List<ScheduledRecord> scheduledRecords = RecorderController.getInstance().getScheduledRecordList();
-                    for (ScheduledRecord r : scheduledRecords) {
-                        if (reader.matchesScheduledRecord(r)) {
-                            if (!r.equals(matchedRecord)) {
-                                matchedRecord = r;
-                                recorder.recordNow(url);
-                                Logger.logInfo("Matched scheduled record: " + r.toString() + "in recorder: " + this.toString());
-                            }
+                List<ScheduledRecord> scheduledRecords = RecorderController.getInstance().getScheduledRecordList();
+                for (ScheduledRecord r : scheduledRecords) {
+                    if (reader.matchesScheduledRecord(r)) {
+                        if (!r.equals(matchedRecord)) {
+                            matchedRecord = r;
+                            recorder.recordNow(url);
+                            Logger.logInfo("Matched scheduled record: " + r.toString() + "in recorder: " + this.toString());
                         }
                     }
-                    if (reader.matchesScheduledRecord(matchedRecord)) {
-                        recorder.stop();
-                    }
+                }
+                if (reader.matchesScheduledRecord(matchedRecord)) {
+                    recorder.stop();
                 }
             }
         }, 1, 1, TimeUnit.SECONDS);

@@ -13,6 +13,9 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class AACRecorder implements Recorder, Runnable {
     private boolean recording = false;
@@ -64,7 +67,8 @@ public class AACRecorder implements Recorder, Runnable {
 
     @Override
     public void recordByTitle(URL url, Recorder recorder) {
-        new Thread(new Runnable() {
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(5);
+        scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 ScheduledRecord matchedRecord = null;
@@ -84,8 +88,7 @@ public class AACRecorder implements Recorder, Runnable {
                     }
                 }
             }
-        }).start();
-
+        }, 1, 1, TimeUnit.SECONDS);
     }
 
 
