@@ -4,7 +4,7 @@ import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.enumerations.FileExtension;
 import de.dhbw.webradio.gui.AddStationWindow;
 import de.dhbw.webradio.gui.Gui;
-import de.dhbw.webradio.m3uparser.FileExtensionParser;
+import de.dhbw.webradio.playlistparser.FileExtensionParser;
 import de.dhbw.webradio.models.Station;
 
 import javax.swing.*;

@@ -14,14 +14,14 @@ import java.io.IOException;
 import java.net.URL;
 
 public class AACPlayer extends AbstractPlayer implements Runnable {
-    private Thread runner = new Thread(this);
+    private Thread thread = new Thread(this);
 
     @Override
     public void play() {
         stop = false;
-        if (!runner.isAlive()) {
-            runner = new Thread(this);
-            runner.start();
+        if (!thread.isAlive()) {
+            thread = new Thread(this);
+            thread.start();
         }
     }
 

@@ -44,6 +44,7 @@ public class GeneralSettingsWindow extends JFrame {
         cancel.addActionListener(e -> this.dispose());
         buttonsPanel.add(save);
         buttonsPanel.add(cancel);
+        this.setSize(500,125);
 
     }
 

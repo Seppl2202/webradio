@@ -1,6 +1,6 @@
 package de.dhbw.webradio.test.m3uparser;
 
-import de.dhbw.webradio.m3uparser.PLSParser;
+import de.dhbw.webradio.playlistparser.PLSParser;
 import de.dhbw.webradio.models.InformationObject;
 import org.junit.Test;
 

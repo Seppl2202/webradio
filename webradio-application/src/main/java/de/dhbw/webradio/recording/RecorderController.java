@@ -4,9 +4,9 @@ import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.enumerations.FileExtension;
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.logger.Logger;
-import de.dhbw.webradio.m3uparser.FileExtensionParser;
-import de.dhbw.webradio.m3uparser.M3uParser;
-import de.dhbw.webradio.m3uparser.PLSParser;
+import de.dhbw.webradio.playlistparser.FileExtensionParser;
+import de.dhbw.webradio.playlistparser.M3uParser;
+import de.dhbw.webradio.playlistparser.PLSParser;
 import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.models.Station;
@@ -101,7 +101,7 @@ public class RecorderController {
             M3uParser m3uParser = new M3uParser();
             try {
                 String fileContent = m3uParser.parseFileFromUrlToString(s.getStationURL());
-                List<InformationObject> m3uInfos = m3uParser.parseUrlFromString(fileContent);
+                List<InformationObject> m3uInfos = m3uParser.parseURLFromString(fileContent);
                 if (m3uInfos.size() > 0) {
                     return m3uInfos.get(0).getUrl();
                 }

@@ -14,13 +14,20 @@ import java.io.File;
 public class FilePathEventHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
-        createDialogAndSaveUserSelection();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                createDialogAndSaveUserSelection();
+            }
+        }).start();
     }
 
     private void createDialogAndSaveUserSelection() {
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooser.setCurrentDirectory(WebradioPlayer.getSettings().getGeneralSettings().getRecordingDirectory());
+        chooser.setVisible(true);
         int returnValue = chooser.showOpenDialog(Gui.getInstance());
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File userSelectedDirectory = chooser.getSelectedFile();

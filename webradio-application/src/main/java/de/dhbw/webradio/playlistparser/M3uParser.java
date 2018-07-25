@@ -1,4 +1,4 @@
-package de.dhbw.webradio.m3uparser;
+package de.dhbw.webradio.playlistparser;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.models.InformationObject;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class M3uParser {
+public class M3uParser implements PlaylistParser {
     private final static String START_TOKEN = "#EXTM3U";
     private final static String INFO_TOKEN = "#EXTINF:";
     private final static String URL_TOKEN = "http://";
@@ -71,13 +71,6 @@ public class M3uParser {
         return parseFileFromUrlToString(new URL(newURL));
     }
 
-    public List<InformationObject> parseUrlFromString(String s) throws NoURLTagFoundException, UnsupportedAudioFileException, MalformedURLException {
-        if (s.contains(START_TOKEN)) {
-            return parseUrlFromEM3UString(s);
-        }
-        return parseUrlFromSM3U(s);
-    }
-
     /**
      * @param s the string to be parsed
      * @return an array of m3u informations. 0: the mp3 url, 1: the additional information of the #EXTINF
@@ -129,9 +122,18 @@ public class M3uParser {
     /**
      * Change the redirect limit
      * ATTENTION: Long waiting and/or endless loops may result!
+     *
      * @param redirectCount the new redirect limit
      */
     public void setRedirectCount(int redirectCount) {
         this.redirectCount = redirectCount;
+    }
+
+    @Override
+    public List<InformationObject> parseURLFromString(String fileContent) throws NoURLTagFoundException, UnsupportedAudioFileException, MalformedURLException {
+        if (fileContent.contains(START_TOKEN)) {
+            return parseUrlFromEM3UString(fileContent);
+        }
+        return parseUrlFromSM3U(fileContent);
     }
 }

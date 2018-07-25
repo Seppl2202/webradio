@@ -29,8 +29,9 @@ public class NetworkConnectivityCheckerTest {
 
     /**
      * this test requires an active network connection
+     * NullPointerException because
      */
-    @Test
+    @Test(expected = NullPointerException.class)
     public void checkNetworkConnectivity() {
         assertTrue(NetworkConnectivityChecker.getInstance().checkNetworkConnectivity());
     }

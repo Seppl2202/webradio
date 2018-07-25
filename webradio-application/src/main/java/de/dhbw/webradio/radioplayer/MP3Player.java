@@ -8,9 +8,9 @@ import java.io.IOException;
 import java.net.URL;
 
 public class MP3Player extends AbstractPlayer implements Runnable {
-    private static int BufferSize = 1024; // Anzahl der Daten, die aufeinmal an die Soundkarte geschickt werden.
-    private static byte[] buffer = new byte[BufferSize];
-    private Thread runner = new Thread(this); //AbspielThread
+    private static int bufferSize = 1024; // Number of bytes to be send to the audio card at once
+    private static byte[] buffer = new byte[bufferSize];
+    private Thread thread = new Thread(this);
     private AudioFormat audioFormat;
 
 
@@ -19,8 +19,8 @@ public class MP3Player extends AbstractPlayer implements Runnable {
      */
     public void play() {
         stop = false;
-        if (!runner.isAlive()) {
-            runner.start();
+        if (!thread.isAlive()) {
+            thread.start();
         }
     }
 
@@ -182,8 +182,8 @@ public class MP3Player extends AbstractPlayer implements Runnable {
         } catch (LineUnavailableException e) {
             System.out.println("Soundkartenfehler");
         }
-        BufferSize = bitRate / 8 * 1000 / 10; // Buffergröße auf Anzahl der benötigten Bytes pro 1/10s
-        buffer = new byte[BufferSize];
+        bufferSize = bitRate / 8 * 1000 / 10; // Buffergröße auf Anzahl der benötigten Bytes pro 1/10s
+        buffer = new byte[bufferSize];
 
     }
 

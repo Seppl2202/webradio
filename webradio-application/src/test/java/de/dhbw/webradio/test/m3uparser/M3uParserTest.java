@@ -2,7 +2,7 @@ package de.dhbw.webradio.test.m3uparser;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.gui.SelectMultipleItemsDialog;
-import de.dhbw.webradio.m3uparser.M3uParser;
+import de.dhbw.webradio.playlistparser.M3uParser;
 import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
@@ -14,7 +14,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
@@ -48,7 +47,7 @@ public class M3uParserTest {
     public void parseUrlFromString() {
         List<InformationObject> info = new ArrayList<>();
         try {
-            info = m3uParser.parseUrlFromString(m3uParser.parseFileToString(success));
+            info = m3uParser.parseURLFromString(m3uParser.parseFileToString(success));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (UnsupportedAudioFileException uafe) {
@@ -67,7 +66,7 @@ public class M3uParserTest {
     public void parseURLFromString() throws IOException, UnsupportedAudioFileException, NoURLTagFoundException {
         List<InformationObject> info = new ArrayList<>();
         expectedException.expect(NoURLTagFoundException.class);
-        info = m3uParser.parseUrlFromString(m3uParser.parseFileToString(fail));
+        info = m3uParser.parseURLFromString(m3uParser.parseFileToString(fail));
     }
 
     @Test
@@ -99,7 +98,7 @@ public class M3uParserTest {
 
         List<InformationObject> info = new ArrayList<>();
         try {
-            info = m3uParser.parseUrlFromString(s);
+            info = m3uParser.parseURLFromString(s);
         } catch (UnsupportedAudioFileException uafe) {
             uafe.printStackTrace();
         } catch (NoURLTagFoundException nufe) {
@@ -122,7 +121,7 @@ public class M3uParserTest {
             e.printStackTrace();
         }
         try {
-            info = m3uParser.parseUrlFromString(parsedFile);
+            info = m3uParser.parseURLFromString(parsedFile);
         } catch (UnsupportedAudioFileException e) {
         } catch (NoURLTagFoundException e) {
             e.printStackTrace();
@@ -153,7 +152,7 @@ public class M3uParserTest {
             e.printStackTrace();
         }
         try {
-            info = m3uParser.parseUrlFromString(parsedFile);
+            info = m3uParser.parseURLFromString(parsedFile);
         } catch (UnsupportedAudioFileException e) {
         } catch (NoURLTagFoundException e) {
             e.printStackTrace();
@@ -186,7 +185,7 @@ public class M3uParserTest {
             e.printStackTrace();
         }
         try {
-            info = m3uParser.parseUrlFromString(parsedFile);
+            info = m3uParser.parseURLFromString(parsedFile);
         } catch (UnsupportedAudioFileException e) {
         } catch (NoURLTagFoundException e) {
             e.printStackTrace();

@@ -1,12 +1,9 @@
 package de.dhbw.webradio.test.m3uparser;
 
 import de.dhbw.webradio.enumerations.FileExtension;
-import de.dhbw.webradio.m3uparser.FileExtensionParser;
+import de.dhbw.webradio.playlistparser.FileExtensionParser;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 

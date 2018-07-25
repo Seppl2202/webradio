@@ -26,7 +26,6 @@ public class NetworkConnectivityChecker {
 
     private NetworkConnectivityChecker() {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
-        showInitialCheckDialog();
         ScheduledFuture scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -62,6 +61,7 @@ public class NetworkConnectivityChecker {
         Socket socket = null;
         boolean netAccess = false;
         try {
+            showInitialCheckDialog();
             Logger.logInfo("checking network connection for the " + (callCount + 1) + " time");
             callCount++;
             socket = new Socket("www.google.com", 80);

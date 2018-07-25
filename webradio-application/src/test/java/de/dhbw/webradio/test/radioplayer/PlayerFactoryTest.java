@@ -1,9 +1,8 @@
 package de.dhbw.webradio.test.radioplayer;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
-import de.dhbw.webradio.m3uparser.M3uParser;
+import de.dhbw.webradio.playlistparser.M3uParser;
 import de.dhbw.webradio.models.InformationObject;
-import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AACPlayer;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;

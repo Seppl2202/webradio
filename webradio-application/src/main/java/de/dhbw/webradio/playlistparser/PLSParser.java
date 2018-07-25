@@ -1,14 +1,17 @@
-package de.dhbw.webradio.m3uparser;
+package de.dhbw.webradio.playlistparser;
 
+import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.PLSInfo;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PLSParser {
+public class PLSParser implements PlaylistParser {
     private List<InformationObject> plsEntries;
 
     public PLSParser() {
@@ -25,9 +28,12 @@ public class PLSParser {
             e.printStackTrace();
         }
         String[] splittedLines = fileContent.split("\r\n");
-        if (!(splittedLines[0].contains("playlist"))) {
-            throw new IllegalArgumentException("File did not contain a valid PLS syntax");
-        }
+        checkForValidTag(splittedLines[0]);
+        splitStringInLines(splittedLines);
+        return plsEntries;
+    }
+
+    private void splitStringInLines(String[] splittedLines) {
         for (String s : splittedLines
                 ) {
             String[] keyValue = s.split("=");
@@ -35,6 +41,16 @@ public class PLSParser {
                 plsEntries.add(new PLSInfo(keyValue[1]));
             }
         }
-        return plsEntries;
+    }
+
+    private void checkForValidTag(String splittedLine) {
+        if (!(splittedLine.contains("playlist"))) {
+            throw new IllegalArgumentException("File did not contain a valid PLS syntax");
+        }
+    }
+
+    @Override
+    public List<InformationObject> parseURLFromString(String fileContent) throws NoURLTagFoundException, UnsupportedAudioFileException, MalformedURLException {
+        return parsePLS(new URL(fileContent));
     }
 }

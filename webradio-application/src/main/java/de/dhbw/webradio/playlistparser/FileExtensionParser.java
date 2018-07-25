@@ -1,4 +1,4 @@
-package de.dhbw.webradio.m3uparser;
+package de.dhbw.webradio.playlistparser;
 
 import de.dhbw.webradio.enumerations.FileExtension;
 

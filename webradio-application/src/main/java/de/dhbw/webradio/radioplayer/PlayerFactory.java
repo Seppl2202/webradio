@@ -6,12 +6,13 @@ import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.gui.GUIHandler;
 import de.dhbw.webradio.gui.SelectMultipleItemsDialog;
 import de.dhbw.webradio.logger.Logger;
-import de.dhbw.webradio.m3uparser.FileExtensionParser;
-import de.dhbw.webradio.m3uparser.M3uParser;
-import de.dhbw.webradio.m3uparser.PLSParser;
+import de.dhbw.webradio.playlistparser.FileExtensionParser;
+import de.dhbw.webradio.playlistparser.M3uParser;
+import de.dhbw.webradio.playlistparser.PLSParser;
 import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.models.Station;
+import de.dhbw.webradio.playlistparser.PlaylistParser;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -27,12 +28,12 @@ public class PlayerFactory implements Factory {
         return factory;
     }
 
-    public AbstractPlayer get(Station s) {
-        if (s == null) {
+    public AbstractPlayer get(Station station) {
+        if (station == null) {
             throw new IllegalArgumentException("No station was passed. \r\n PlayerFactory needs a station to determine file extension");
         }
         FileExtensionParser fileExtensionParser = new FileExtensionParser();
-        URL stationURL = s.getStationURL();
+        URL stationURL = station.getStationURL();
         FileExtension urlExtension = fileExtensionParser.parseFileExtension(stationURL);
         if (urlExtension.equals(FileExtension.MP3)) {
             AbstractPlayer player = new MP3Player();
@@ -114,9 +115,9 @@ public class PlayerFactory implements Factory {
      * @throws NoURLTagFoundException        if an EM3U file does not contain a valid syntax
      * @throws MalformedURLException         if the URLs of the M3U file are incorrect
      */
-    public InformationObject getUserSelection(String m3uFileContent, M3uParser m3uParser) throws UnsupportedAudioFileException, NoURLTagFoundException, MalformedURLException {
+    public InformationObject getUserSelection(String m3uFileContent, PlaylistParser m3uParser) throws UnsupportedAudioFileException, NoURLTagFoundException, MalformedURLException {
 
-        List<InformationObject> m3uStreamInformation = m3uParser.parseUrlFromString(m3uFileContent);
+        List<InformationObject> m3uStreamInformation = m3uParser.parseURLFromString(m3uFileContent);
         if (m3uStreamInformation.size() == 1) {
             return m3uStreamInformation.get(0);
         } else {
