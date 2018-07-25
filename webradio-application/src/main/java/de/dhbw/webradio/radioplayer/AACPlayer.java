@@ -3,9 +3,7 @@ package de.dhbw.webradio.radioplayer;
 
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.gui.GUIHandler;
-import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.logger.Logger;
-import de.dhbw.webradio.recording.AACRecorder;
 import net.sourceforge.jaad.aac.AACException;
 import net.sourceforge.jaad.aac.Decoder;
 import net.sourceforge.jaad.aac.SampleBuffer;
@@ -34,7 +32,6 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
 
     @Override
     public void run() {
-        gainPercent = 90;
         decodeAndPlayAAC();
     }
 
@@ -46,11 +43,11 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
             final ADTSDemultiplexer adts = new ADTSDemultiplexer(url.openStream());
             final Decoder dec = new Decoder(adts.getDecoderSpecificInfo());
             final SampleBuffer buf = new SampleBuffer();
+                FloatControl gainControl = null;
             while (!stop) {
                 b = adts.readNextFrame();
                 //here the AACException for unexpected profile is thrown
                 dec.decodeFrame(b, buf);
-                FloatControl gainControl = null;
 
                 if (line == null) {
                     final AudioFormat audioFormat = new AudioFormat(buf.getSampleRate(), buf.getBitsPerSample(), buf.getChannels(), true, true);
@@ -63,9 +60,8 @@ public class AACPlayer extends AbstractPlayer implements Runnable {
                 b = buf.getData();
                 line.write(b, 0, b.length);
 
-//                float range = gainControl.getMaximum() - gainControl.getMinimum();
-//                float gain = (range * (gainPercent/100)) + gainControl.getMinimum();
-//                gainControl.setValue(gain);
+                int gainLevel = (int) ((int) gainControl.getMinimum() + ((gainControl.getMaximum() - gainControl.getMinimum()) / 100 * gainPercent));
+                gainControl.setValue(gainLevel);
 
             }
         } catch (LineUnavailableException e) {

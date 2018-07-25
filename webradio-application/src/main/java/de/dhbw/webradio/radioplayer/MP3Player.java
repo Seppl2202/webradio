@@ -176,7 +176,7 @@ public class MP3Player extends AbstractPlayer implements Runnable {
             line.close();
             in.close();
         } catch (UnsupportedAudioFileException e) {
-            System.out.println("nicht unterstütztes Format");
+            System.out.println("Nicht unterstütztes Format");
         } catch (IOException e) {
             System.out.println("Datei nicht gefunden" + e);
         } catch (LineUnavailableException e) {

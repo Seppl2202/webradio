@@ -25,11 +25,11 @@ public class NetworkConnectivityChecker {
     private boolean errorDialogShown = false;
 
     private NetworkConnectivityChecker() {
-        showInitialCheckDialog();
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
         ScheduledFuture scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
+                showInitialCheckDialog();
                 checkNetworkConnectivity();
             }
         }, 1, 10, TimeUnit.SECONDS);
@@ -98,22 +98,24 @@ public class NetworkConnectivityChecker {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                checkInfoDialog = new JDialog();
-                checkInfoDialog.setLocationRelativeTo(Gui.getInstance());
-                checkInfoDialog.setTitle("Prüfung");
-                checkInfoDialog.add(new JLabel("Prüfe Netzwerkverbindung..."));
-                checkInfoDialog.setModal(true);
-                checkInfoDialog.setSize(300, 100);
-                checkInfoDialog.setVisible(true);
-                checkInfoDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-                checkInfoDialog.pack();
+                if (callCount == 0) {
+                    checkInfoDialog = new JDialog();
+                    checkInfoDialog.setLocationRelativeTo(Gui.getInstance());
+                    checkInfoDialog.setTitle("Prüfung");
+                    checkInfoDialog.add(new JLabel("Prüfe Netzwerkverbindung..."));
+                    checkInfoDialog.setModal(true);
+                    checkInfoDialog.setSize(300, 100);
+                    checkInfoDialog.setVisible(true);
+                    checkInfoDialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+                    checkInfoDialog.pack();
+                }
             }
         }).start();
 
     }
 
     private void showErrorDialog() {
-        JOptionPane.showMessageDialog(Gui.getInstance(), "Es konnte keine Netzwerkverbdingung gefunden werden\r\nSie können erst Sender wiedergeben und eine Sofortaufnahme starten, wenn eine Verbindung verfügbar ist"+
+        JOptionPane.showMessageDialog(Gui.getInstance(), "Es konnte keine Netzwerkverbdingung gefunden werden\r\nSie können erst Sender wiedergeben und eine Sofortaufnahme starten, wenn eine Verbindung verfügbar ist" +
                 "\r\nSobald eine Verbindung besteht, werden die Steuerelemente freigegeben", "Netzwerkfehler", JOptionPane.ERROR_MESSAGE);
     }
 }
