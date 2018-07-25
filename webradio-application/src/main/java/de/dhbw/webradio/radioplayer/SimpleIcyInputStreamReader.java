@@ -1,5 +1,6 @@
 package de.dhbw.webradio.radioplayer;
 
+import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.models.ScheduledRecord;
 
 import java.io.FilterInputStream;

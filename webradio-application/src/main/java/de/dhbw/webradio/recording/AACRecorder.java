@@ -2,20 +2,17 @@ package de.dhbw.webradio.recording;
 
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.logger.Logger;
+import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.radioplayer.MetainformationReader;
 import de.dhbw.webradio.utilities.FileUtilitie;
-import net.sourceforge.jaad.aac.SampleBuffer;
-import net.sourceforge.jaad.util.wav.WaveFileWriter;
-import org.joda.time.DateTime;
 
-import javax.sound.sampled.LineUnavailableException;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.WeakHashMap;
+import java.util.List;
 
 public class AACRecorder implements Recorder, Runnable {
     private boolean recording = false;
@@ -58,6 +55,7 @@ public class AACRecorder implements Recorder, Runnable {
             }
         }).start();
     }
+
     private String generateFileName() {
         //remove everything but characters and numbers
         return FileUtilitie.generateFileNameForRecording();
@@ -65,7 +63,28 @@ public class AACRecorder implements Recorder, Runnable {
 
 
     @Override
-    public void recordByTitle(URL url) {
+    public void recordByTitle(URL url, Recorder recorder) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ScheduledRecord matchedRecord = null;
+                while (true) {
+                    List<ScheduledRecord> scheduledRecords = RecorderController.getInstance().getScheduledRecordList();
+                    for (ScheduledRecord r : scheduledRecords) {
+                        if (reader.matchesScheduledRecord(r)) {
+                            if (!r.equals(matchedRecord)) {
+                                matchedRecord = r;
+                                recorder.recordNow(url);
+                                Logger.logInfo("Matched scheduled record: " + r.toString() + "in recorder: " + this.toString());
+                            }
+                        }
+                    }
+                    if (reader.matchesScheduledRecord(matchedRecord)) {
+                        recorder.stop();
+                    }
+                }
+            }
+        }).start();
 
     }
 
@@ -88,5 +107,10 @@ public class AACRecorder implements Recorder, Runnable {
     @Override
     public void setMetaInformationReader(MetainformationReader r) {
         this.reader = r;
+    }
+
+    @Override
+    public String toString() {
+        return "Recorder for: " + reader.getStationUrl();
     }
 }

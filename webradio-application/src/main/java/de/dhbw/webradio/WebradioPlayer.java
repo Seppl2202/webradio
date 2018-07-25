@@ -22,7 +22,7 @@ import java.util.List;
 
 public class WebradioPlayer {
 
-    public static File settingsDirectory = new File("C:\\repository\\webradio\\webradio-application\\src\\main\\java\\de\\dhbw\\webradio\\general.yaml").getAbsoluteFile();
+    public static File settingsDirectory = new File("C:\\repository\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml").getAbsoluteFile();
     private static Gui gui;
     private static AbstractPlayer player;
     private static List<Station> stationList = new ArrayList<>();
@@ -35,6 +35,7 @@ public class WebradioPlayer {
         parseSettings(settingsParser);
         gui = Gui.getInstance();
         NetworkConnectivityChecker n = NetworkConnectivityChecker.getInstance();
+        RecorderController.getInstance();
     }
 
     public static void parseSettings(SettingsParser settingsParser) {

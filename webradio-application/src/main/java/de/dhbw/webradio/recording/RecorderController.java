@@ -2,14 +2,20 @@ package de.dhbw.webradio.recording;
 
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.enumerations.FileExtension;
+import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
+import de.dhbw.webradio.m3uparser.M3uParser;
+import de.dhbw.webradio.m3uparser.PLSParser;
+import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.MetainformationReader;
 import de.dhbw.webradio.radioplayer.SimpleIcyInputStreamReader;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,9 +55,15 @@ public class RecorderController {
                 int i = 0;
                 while (scheduledRecordList.size() <= maximumRecords && i < WebradioPlayer.getStationList().size()) {
                     Station s = WebradioPlayer.getStationList().get(i);
+                    URL stationUrlString = null;
+                    try {
+                        stationUrlString = getStationURL(s);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
                     MetainformationReader r = null;
                     try {
-                        r = new SimpleIcyInputStreamReader(s.getStationURL());
+                        r = new SimpleIcyInputStreamReader(stationUrlString);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -59,13 +71,14 @@ public class RecorderController {
                     t.start();
                     waitToFetchIcy();
                     if (!(r.getActualMusicTitle().equalsIgnoreCase("keine informationen verfügbar"))) {
-                        Recorder recorder = RecorderController.getInstance().recordNow(s.getStationURL());
+                        Logger.logError("entered if");
+                        Recorder recorder = RecorderController.getInstance().recordNow(stationUrlString);
                         recorder.setMetaInformationReader(r);
                         listeningRecorders.add(recorder);
-                        recorder.recordNow(s.getStationURL());
-                        Logger.logInfo("Added new listening recorder: " + recorder.toString());
+                        recorder.recordByTitle(stationUrlString, recorder);
+                        Logger.logInfo("Added new listenig recorder: " + recorder.toString());
+                        i++;
                     }
-                    i++;
                 }
             }
         }).start();
@@ -78,6 +91,34 @@ public class RecorderController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private URL getStationURL(Station s) throws MalformedURLException {
+        FileExtensionParser fileExtensionParser = new FileExtensionParser();
+        if (fileExtensionParser.parseFileExtension(s.getStationURL()).equals(FileExtension.AAC) || fileExtensionParser.parseFileExtension(s.getStationURL()).equals(FileExtension.MP3)) {
+            return s.getStationURL();
+        } else if (fileExtensionParser.parseFileExtension(s.getStationURL()).equals(FileExtension.M3U)) {
+            M3uParser m3uParser = new M3uParser();
+            try {
+                String fileContent = m3uParser.parseFileFromUrlToString(s.getStationURL());
+                List<M3UInfo> m3uInfos = m3uParser.parseUrlFromString(fileContent);
+                if (m3uInfos.size() > 0) {
+                    return m3uInfos.get(0).getUrl();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (UnsupportedAudioFileException e) {
+                e.printStackTrace();
+            } catch (NoURLTagFoundException e) {
+                e.printStackTrace();
+            }
+        } else if (fileExtensionParser.parseFileExtension(s.getStationURL()).equals(FileExtension.PLS)) {
+            PLSParser plsParser = new PLSParser();
+            List<String> plsInfos = plsParser.parsePLS(s.getStationURL());
+
+            return new URL(plsInfos.get(0));
+        }
+        return new URL("http://notreachable.com");
     }
 
     public Recorder getActualRecordNowRecorder() {

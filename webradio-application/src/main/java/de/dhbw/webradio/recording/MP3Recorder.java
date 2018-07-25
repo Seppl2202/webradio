@@ -97,22 +97,29 @@ public class MP3Recorder implements Recorder, Runnable {
     }
 
     @Override
-    public void recordByTitle(URL url) {
-        ScheduledRecord matchedRecord = null;
-        while (true) {
-            List<ScheduledRecord> scheduledRecords = RecorderController.getInstance().getScheduledRecordList();
-            for (ScheduledRecord r : scheduledRecords) {
-                if (reader.matchesScheduledRecord(r)) {
-                    if (!r.equals(matchedRecord)) {
-                        matchedRecord = r;
-                        this.recordNow(url);
+    public void recordByTitle(URL url, Recorder recorder) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ScheduledRecord matchedRecord = null;
+                while (true) {
+                    List<ScheduledRecord> scheduledRecords = RecorderController.getInstance().getScheduledRecordList();
+                    for (ScheduledRecord r : scheduledRecords) {
+                        if (reader.matchesScheduledRecord(r)) {
+                            if (!r.equals(matchedRecord)) {
+                                matchedRecord = r;
+                                recorder.recordNow(url);
+                                Logger.logInfo("Matched scheduled record: " + r.toString() + "in recorder: " + this.toString());
+                            }
+                        }
+                    }
+                    if (reader.matchesScheduledRecord(matchedRecord)) {
+                        recorder.stop();
                     }
                 }
             }
-            if (!reader.matchesScheduledRecord(matchedRecord)) {
-                this.stop();
-            }
-        }
+        }).start();
+
 
     }
 
@@ -135,5 +142,10 @@ public class MP3Recorder implements Recorder, Runnable {
     @Override
     public void setMetaInformationReader(MetainformationReader r) {
         this.reader = r;
+    }
+
+    @Override
+    public String toString() {
+        return "Recorder for: " + reader.getStationUrl();
     }
 }

@@ -11,7 +11,7 @@ public interface Recorder {
     public void recordNow(URL url);
 
 
-    public void recordByTitle(URL url);
+    public void recordByTitle(URL url, Recorder recorder);
 
     public void stop();
 
