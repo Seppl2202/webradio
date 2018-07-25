@@ -72,7 +72,6 @@ public class RecorderController {
                     t.start();
                     waitToFetchIcy();
                     if (!(r.getActualMusicTitle().equalsIgnoreCase("keine informationen verfügbar"))) {
-                        Logger.logError("entered if");
                         Recorder recorder = RecorderController.getInstance().recordNow(stationUrlString);
                         recorder.setMetaInformationReader(r);
                         listeningRecorders.add(recorder);

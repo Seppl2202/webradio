@@ -9,17 +9,24 @@ import de.dhbw.webradio.settings.SettingsParser;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.io.File;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class RecorderControllerTest {
 
     public RecorderController r = RecorderController.getInstance();
 
     @Before
-    public void init() {
+    public void init() throws NoSuchFieldException, IllegalAccessException {
+        Field f = WebradioPlayer.class.getDeclaredField("settingsDirectory");
+        f.setAccessible(true);
+        String currentPath = new File("").getAbsolutePath();
+        File currentPathFile = new File(currentPath.concat("\\src\\main\\resources\\settings\\general.yaml"));
+        f.set(WebradioPlayer.class, currentPathFile);
         WebradioPlayer.parseSettings(new SettingsParser());
     }
 

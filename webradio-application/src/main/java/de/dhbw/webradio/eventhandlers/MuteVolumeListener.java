@@ -1,6 +1,7 @@
 package de.dhbw.webradio.eventhandlers;
 
 import de.dhbw.webradio.gui.GUIHandler;
+import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.radioplayer.AbstractPlayer;
 import de.dhbw.webradio.WebradioPlayer;
 
@@ -17,6 +18,6 @@ public class MuteVolumeListener implements ActionListener {
             player.setMute(false);
             GUIHandler.getInstance().updatePlayerVolume(player);
         }
-        WebradioPlayer.getGui().getPlayerControlPanel().toggleMuteVolumeButton();
+        Gui.getInstance().getPlayerControlPanel().toggleMuteVolumeButton();
     }
 }

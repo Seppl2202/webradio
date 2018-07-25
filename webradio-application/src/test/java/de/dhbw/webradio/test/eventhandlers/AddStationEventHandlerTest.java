@@ -93,6 +93,9 @@ public class AddStationEventHandlerTest {
         ActionListener listener = saveButton.getActionListeners()[0];
         Method m = listener.getClass().getDeclaredMethod("saveStation");
         m.setAccessible(true);
+        //if the station that is tested to add is in the list, this is needed to assure no double stations are added
+        //default: FFH is not in the list
+        //expectedException.expect(InvocationTargetException.class);
         m.invoke(listener);
         assertTrue(WebradioPlayer.getStationList().contains(s));
     }

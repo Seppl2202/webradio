@@ -24,7 +24,6 @@ public class WebradioPlayer {
 
     public static String workingDirectory = new File("").getAbsolutePath();
     public static File settingsDirectory = new File(workingDirectory.concat("\\webradio-application\\src\\main\\resources\\settings\\general.yaml"));
-    private static Gui gui;
     private static AbstractPlayer player;
     private static List<Station> stationList = new ArrayList<>();
     private static List<ScheduledRecord> scheduledRecords = new ArrayList<>();
@@ -33,9 +32,8 @@ public class WebradioPlayer {
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         InitializeH2Database.initialiteDatabase();
-        SettingsParser settingsParser = new SettingsParser();
-        parseSettings(settingsParser);
-        gui = Gui.getInstance();
+        parseSettings(new SettingsParser());
+        Gui.getInstance();
         NetworkConnectivityChecker n = NetworkConnectivityChecker.getInstance();
         RecorderController.getInstance();
     }
@@ -77,9 +75,6 @@ public class WebradioPlayer {
         Gui.getInstance().getStationsTableModel().fireTableDataChanged();
     }
 
-    public static Gui getGui() {
-        return gui;
-    }
 
     public static AbstractPlayer getPlayer() {
         return player;
@@ -123,6 +118,8 @@ public class WebradioPlayer {
 
     public static synchronized boolean deleteScheduledRecord(ScheduledRecord toDelete) {
         RecorderController.getInstance().removeScheduledRecord(toDelete);
+        Gui.getInstance().getRecorderTab().getScheduledRecordsWindow().getTable().getScheduledRecordsTableModel().removeRow(toDelete);
+        Gui.getInstance().getRecorderTab().getScheduledRecordsWindow().getTable().getScheduledRecordsTableModel().fireTableDataChanged();
         databaseConnector.deleteScheduledRecord(toDelete);
         return true;
     }
