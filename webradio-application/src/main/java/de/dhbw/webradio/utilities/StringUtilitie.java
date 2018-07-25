@@ -5,6 +5,11 @@ import java.io.UnsupportedEncodingException;
 public class StringUtilitie {
     private static final String DEFAULT_CHARSET = "ISO-8859-1";
 
+    /**
+     *
+     * @param toTrim the string to be trimmed
+     * @return a new string without any illegal characters
+     */
     public static String trimStringRightEnd(String toTrim) {
         int endingPosition = toTrim.length() - 1;
         char endingChar;

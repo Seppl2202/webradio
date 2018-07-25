@@ -22,10 +22,12 @@ import java.util.List;
 
 public class WebradioPlayer {
 
-    public static File settingsDirectory = new File("C:\\repository\\webradio\\webradio-application\\src\\main\\resources\\settings\\general.yaml").getAbsoluteFile();
+    public static String workingDirectory = new File("").getAbsolutePath();
+    public static File settingsDirectory = new File(workingDirectory.concat("\\webradio-application\\src\\main\\resources\\settings\\general.yaml"));
     private static Gui gui;
     private static AbstractPlayer player;
     private static List<Station> stationList = new ArrayList<>();
+    private static List<ScheduledRecord> scheduledRecords = new ArrayList<>();
     private static Settings settings;
     private static DatabaseConnector databaseConnector = H2DatabaseConnector.getInstance();
 
@@ -107,8 +109,14 @@ public class WebradioPlayer {
         WebradioPlayer.settings = settings;
     }
 
+    public static List<ScheduledRecord> getScheduledRecords() {
+        return databaseConnector.getRecords();
+    }
+
     public static synchronized boolean addScheduledRecord(ScheduledRecord record) {
         RecorderController.getInstance().addScheduledRecord(record);
+        Gui.getInstance().getRecorderTab().getScheduledRecordsWindow().getTable().getScheduledRecordsTableModel().addRow(record);
+        Gui.getInstance().getRecorderTab().getScheduledRecordsWindow().getTable().getScheduledRecordsTableModel().fireTableDataChanged();
         databaseConnector.addScheduledRecord(record);
         return true;
     }

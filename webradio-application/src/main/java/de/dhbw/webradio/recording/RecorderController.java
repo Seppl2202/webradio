@@ -3,6 +3,7 @@ package de.dhbw.webradio.recording;
 import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.enumerations.FileExtension;
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
+import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.playlistparser.FileExtensionParser;
 import de.dhbw.webradio.playlistparser.M3uParser;

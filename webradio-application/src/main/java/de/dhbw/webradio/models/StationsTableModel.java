@@ -44,6 +44,7 @@ public class StationsTableModel extends AbstractTableModel {
 
     public synchronized void addRow(Station s) {
         Station toAdd = null;
+        if(stationList.size() == 0){ stationList.add(s);}
         for (Iterator<Station> it = stationList.iterator(); it.hasNext(); ) {
             Station station = it.next();
             if (station.equals(s)) {

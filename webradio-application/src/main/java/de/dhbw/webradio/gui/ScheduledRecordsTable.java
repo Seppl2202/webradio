@@ -1,5 +1,6 @@
 package de.dhbw.webradio.gui;
 
+import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.eventhandlers.DeleteScheduledRecordHandler;
 import de.dhbw.webradio.models.ScheduledRecordsTableModel;
 import de.dhbw.webradio.recording.RecorderController;
@@ -24,7 +25,7 @@ public class ScheduledRecordsTable extends JPanel {
         this.setLayout(new BorderLayout());
         searchField = new JTextField("Suche...");
         this.add(searchField, BorderLayout.NORTH);
-        scheduledRecordsTableModel = new ScheduledRecordsTableModel(RecorderController.getInstance().getScheduledRecordList());
+        scheduledRecordsTableModel = new ScheduledRecordsTableModel(WebradioPlayer.getScheduledRecords());
         recordsTable = new JTable();
         recordsTable.setModel(scheduledRecordsTableModel);
         this.add(new JScrollPane(recordsTable), BorderLayout.CENTER);

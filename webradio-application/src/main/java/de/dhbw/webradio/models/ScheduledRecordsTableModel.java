@@ -1,6 +1,8 @@
 package de.dhbw.webradio.models;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ScheduledRecordsTableModel extends AbstractTableModel {
@@ -35,21 +37,29 @@ public class ScheduledRecordsTableModel extends AbstractTableModel {
                 return r.getActor();
             case 1:
                 return r.getTitle();
-                default:return null;
+            default:
+                return null;
         }
 
 
     }
 
     public void addRow(ScheduledRecord r) {
-        for (ScheduledRecord record : scheduledRecords) {
+        ScheduledRecord toAdd = new ScheduledRecord("Fehler", "Fehler");
+        for (Iterator<ScheduledRecord> recordIterator = scheduledRecords.iterator(); recordIterator.hasNext(); ) {
+            ScheduledRecord record = recordIterator.next();
             if (record.equals(r)) {
                 throw new IllegalArgumentException("Scheduled Record " + r.toString() + " already exists");
             } else {
-                scheduledRecords.add(r);
-                fireTableDataChanged();
+                toAdd = record;
             }
         }
+        scheduledRecords.add(toAdd);
+    }
+
+    public void removeRow(ScheduledRecord r) {
+        scheduledRecords.remove(r);
+        fireTableDataChanged();
     }
 
     public ScheduledRecord getScheduledRecordFromIndex(int index) {

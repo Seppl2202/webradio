@@ -2,9 +2,9 @@ package de.dhbw.webradio.test.m3uparser;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.gui.SelectMultipleItemsDialog;
-import de.dhbw.webradio.playlistparser.M3uParser;
 import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.M3UInfo;
+import de.dhbw.webradio.playlistparser.M3uParser;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,8 +25,12 @@ import static org.junit.Assert.assertEquals;
 
 public class M3uParserTest {
 
-    File success = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_success.m3u");
-    File fail = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testm3uparsing_fail.m3u");
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
+    String workingDirectoty = new File("").getAbsolutePath();
+    String testfileDirecttory = workingDirectoty.concat("\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\");
+    File success = new File(testfileDirecttory.concat("testm3uparsing_success.m3u"));
+    File fail = new File(testfileDirecttory.concat("testm3uparsing_fail.m3u"));
     M3uParser m3uParser = new M3uParser();
     String expectedText = "#EXTM3U\r\n" +
             "#EXTINF:-1,SWR1 Baden-Württemberg\r\n" +
@@ -58,9 +62,6 @@ public class M3uParserTest {
         //test m3u with valid EXTINF tag and corresponding URL
         assertEquals("http://swr-swr1-bw.cast.addradio.de/swr/swr1/bw/mp3/128/stream.mp3", info.get(0).getUrl().toString());
     }
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void parseURLFromString() throws IOException, UnsupportedAudioFileException, NoURLTagFoundException {
@@ -112,7 +113,7 @@ public class M3uParserTest {
 
     @Test
     public void testMultipleM3uInfo() throws MalformedURLException {
-        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\bigfmWebradio.m3u8");
+        File f = new File(testfileDirecttory.concat("bigfmWebradio.m3u8"));
         String parsedFile = null;
         List<InformationObject> info = null;
         try {
@@ -131,7 +132,7 @@ public class M3uParserTest {
         assertEquals(23, info.size());
         //test multiple stream selection window
         JList list = new JList<>(info.toArray());
-        SelectMultipleItemsDialog dialog = new SelectMultipleItemsDialog("Bitte wählen Sie einen Stream aus", "Bitte wählen:", list, ListSelectionModel.SINGLE_SELECTION);
+        SelectMultipleItemsDialog dialog = new SelectMultipleItemsDialog("Bitte wählen Sie den ersten Stream aus", "Bitte wählen:", list, ListSelectionModel.SINGLE_SELECTION);
         M3UInfo testInfo = new M3UInfo(new URL("http://streams.bigfm.de/bigfm-deutschland-128-aac?usid=0-0-H-A-D-30"), "bigFM DEUTSCHLAND");
         dialog.setOnOk(e -> assertEquals(testInfo, (M3UInfo) dialog.getSelectedItem().get(0)));
         dialog.show();
@@ -142,7 +143,7 @@ public class M3uParserTest {
      * Tests the multiple stream selection
      */
     public void testMultipleStreamPlayerCreation() {
-        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testMultiple.m3u");
+        File f = new File(testfileDirecttory.concat("testMultiple.m3u"));
         String parsedFile = null;
         List<InformationObject> info = null;
         InformationObject selected = null;
@@ -175,7 +176,7 @@ public class M3uParserTest {
 
     @Test
     public void testSM3UParsing() {
-        File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\youfm_2.m3u");
+        File f = new File(testfileDirecttory.concat("youfm_2.m3u"));
         String parsedFile = null;
         List<InformationObject> info = null;
         InformationObject selected = null;

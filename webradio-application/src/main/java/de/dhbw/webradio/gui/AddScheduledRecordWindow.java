@@ -1,5 +1,6 @@
 package de.dhbw.webradio.gui;
 
+import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.recording.RecorderController;
 
@@ -40,8 +41,7 @@ public class AddScheduledRecordWindow extends JFrame {
 
     private void saveScheduledRecord() {
         if (checkInputValues()) {
-            RecorderController.getInstance().addScheduledRecord(new ScheduledRecord(titleField.getText(), artistField.getText()));
-            Gui.getInstance().getRecorderTab().getScheduledRecordsWindow().getTable().getScheduledRecordsTableModel().fireTableDataChanged();
+            WebradioPlayer.addScheduledRecord(new ScheduledRecord(titleField.getText(), artistField.getText()));
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Bitte geben Sie einen gültigen Interpret und/oder Titel ein", "Ungültige Eingabe", JOptionPane.ERROR_MESSAGE);

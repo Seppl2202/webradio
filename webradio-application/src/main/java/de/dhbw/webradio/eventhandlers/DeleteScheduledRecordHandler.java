@@ -1,5 +1,6 @@
 package de.dhbw.webradio.eventhandlers;
 
+import de.dhbw.webradio.WebradioPlayer;
 import de.dhbw.webradio.gui.Gui;
 import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.recording.RecorderController;
@@ -28,8 +29,8 @@ public class DeleteScheduledRecordHandler implements KeyListener {
 
     private void deleteScheduledRecord() {
         ScheduledRecord r = getSelectedRecord();
-        RecorderController.getInstance().removeScheduledRecord(r);
         Gui.getInstance().getRecorderTab().getScheduledRecordsWindow().getTable().getScheduledRecordsTableModel().fireTableDataChanged();
+        WebradioPlayer.deleteScheduledRecord(r);
         Logger.logInfo("Deleted scheduled record: " + r.toString());
     }
 
