@@ -33,6 +33,7 @@ public class AddStationWindow extends JFrame {
         buttonsPanel.add(cancel);
         mainPanel.add(buttonsPanel, BorderLayout.SOUTH);
         this.setTitle("Sender hinzufügen");
+        this.setSize(800,150);
         this.add(mainPanel);
     }
 

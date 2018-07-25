@@ -9,6 +9,7 @@ import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
 import de.dhbw.webradio.m3uparser.M3uParser;
 import de.dhbw.webradio.m3uparser.PLSParser;
+import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.models.Station;
 
@@ -22,7 +23,10 @@ import java.util.List;
 public class PlayerFactory implements Factory {
     private static Factory factory = new PlayerFactory();
 
-    public static Factory getInstance() { return factory; }
+    public static Factory getInstance() {
+        return factory;
+    }
+
     public AbstractPlayer get(Station s) {
         if (s == null) {
             throw new IllegalArgumentException("No station was passed. \r\n PlayerFactory needs a station to determine file extension");
@@ -44,7 +48,7 @@ public class PlayerFactory implements Factory {
             try {
                 M3uParser m3uParser = new M3uParser();
                 m3uFileContent = m3uParser.parseFileFromUrlToString(stationURL);
-                M3UInfo userSelectedStream = getUserSelection(m3uFileContent, m3uParser);
+                InformationObject userSelectedStream = getUserSelection(m3uFileContent, m3uParser);
                 AbstractPlayer player = parseMP3orAAC(fileExtensionParser, userSelectedStream.getUrl());
                 return player;
             } catch (IOException e) {
@@ -62,7 +66,7 @@ public class PlayerFactory implements Factory {
             }
         } else if (urlExtension.equals(FileExtension.PLS)) {
             PLSParser plsParser = new PLSParser();
-            List<String> plsEntries = plsParser.parsePLS(stationURL);
+            List<InformationObject> plsEntries = plsParser.parsePLS(stationURL);
             try {
                 String userSelectedURL = getPLSSelection(plsEntries);
                 AbstractPlayer player = parseMP3orAAC(fileExtensionParser, new URL(userSelectedURL));
@@ -88,16 +92,17 @@ public class PlayerFactory implements Factory {
         return null;
     }
 
-    private String getPLSSelection(List<String> plsEntries) throws MalformedURLException {
+    private String getPLSSelection(List<InformationObject> plsEntries) throws MalformedURLException {
         if (plsEntries.size() == 1) {
-            return plsEntries.get(0);
+            return plsEntries.get(0).getUrl().toString();
         } else {
-            final String[] selectoin = new String[1];
+            final Object[] selection = new String[1];
             JList list = new JList<>(plsEntries.toArray());
-            SelectMultipleItemsDialog dialog = new SelectMultipleItemsDialog<M3UInfo>("Bitte wählen Sie einen Stream aus", "Bitte wählen:", list, ListSelectionModel.SINGLE_SELECTION);
-            dialog.setOnOk(e -> selectoin[0] = (String) dialog.getSelectedItem().get(0));
+            SelectMultipleItemsDialog dialog = new SelectMultipleItemsDialog<InformationObject>("Bitte wählen Sie einen Stream aus", "Bitte wählen:", list, ListSelectionModel.SINGLE_SELECTION);
+            dialog.setOnOk(e -> selection[0] = (String) dialog.getSelectedItem().get(0));
             dialog.show();
-            return selectoin[0];
+            InformationObject[] object = (InformationObject[]) selection;
+            return object[0].getUrl().toString();
         }
     }
 
@@ -109,9 +114,9 @@ public class PlayerFactory implements Factory {
      * @throws NoURLTagFoundException        if an EM3U file does not contain a valid syntax
      * @throws MalformedURLException         if the URLs of the M3U file are incorrect
      */
-    public M3UInfo getUserSelection(String m3uFileContent, M3uParser m3uParser) throws UnsupportedAudioFileException, NoURLTagFoundException, MalformedURLException {
+    public InformationObject getUserSelection(String m3uFileContent, M3uParser m3uParser) throws UnsupportedAudioFileException, NoURLTagFoundException, MalformedURLException {
 
-        List<M3UInfo> m3uStreamInformation = m3uParser.parseUrlFromString(m3uFileContent);
+        List<InformationObject> m3uStreamInformation = m3uParser.parseUrlFromString(m3uFileContent);
         if (m3uStreamInformation.size() == 1) {
             return m3uStreamInformation.get(0);
         } else {

@@ -1,6 +1,7 @@
 package de.dhbw.webradio.test.m3uparser;
 
 import de.dhbw.webradio.m3uparser.PLSParser;
+import de.dhbw.webradio.models.InformationObject;
 import org.junit.Test;
 
 import java.net.MalformedURLException;
@@ -14,8 +15,8 @@ public class PLSParserTest {
     public void parsePLS() throws MalformedURLException {
         URL url = new URL("http://main-aacp.rautemusik.fm/listen.pls");
         PLSParser p = new PLSParser();
-        List<String> plsEntries = p.parsePLS(url);
+        List<InformationObject> plsEntries = p.parsePLS(url);
         assertEquals(1, plsEntries.size());
-        assertEquals("http://main-aacp.rautemusik.fm", plsEntries.get(0));
+        assertEquals("http://main-aacp.rautemusik.fm", plsEntries.get(0).getUrl().toString());
     }
 }

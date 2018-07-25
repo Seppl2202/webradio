@@ -26,10 +26,10 @@ public class NetworkConnectivityChecker {
 
     private NetworkConnectivityChecker() {
         ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(2);
+        showInitialCheckDialog();
         ScheduledFuture scheduledFuture = scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                showInitialCheckDialog();
                 checkNetworkConnectivity();
             }
         }, 1, 10, TimeUnit.SECONDS);

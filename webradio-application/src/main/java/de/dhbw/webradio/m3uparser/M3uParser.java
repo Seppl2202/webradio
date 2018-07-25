@@ -1,6 +1,7 @@
 package de.dhbw.webradio.m3uparser;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
+import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.M3UInfo;
 import org.apache.commons.io.FileUtils;
 
@@ -70,7 +71,7 @@ public class M3uParser {
         return parseFileFromUrlToString(new URL(newURL));
     }
 
-    public List<M3UInfo> parseUrlFromString(String s) throws NoURLTagFoundException, UnsupportedAudioFileException, MalformedURLException {
+    public List<InformationObject> parseUrlFromString(String s) throws NoURLTagFoundException, UnsupportedAudioFileException, MalformedURLException {
         if (s.contains(START_TOKEN)) {
             return parseUrlFromEM3UString(s);
         }
@@ -83,9 +84,9 @@ public class M3uParser {
      * @throws UnsupportedAudioFileException if the passed string does not match the specified extended m3u syntax.
      *                                       See @https://de.wikipedia.org/wiki/M3U#Erweiterte_M3U for further information
      */
-    private List<M3UInfo> parseUrlFromEM3UString(String s) throws UnsupportedAudioFileException, NoURLTagFoundException {
+    private List<InformationObject> parseUrlFromEM3UString(String s) throws UnsupportedAudioFileException, NoURLTagFoundException {
         String[] splittedLines = s.split("\r\n");
-        List<M3UInfo> m3UInfos = new ArrayList<>();
+        List<InformationObject> m3UInfos = new ArrayList<>();
         int urlLine = 0;
         if (!(splittedLines[0].contains(START_TOKEN))) {
             throw new UnsupportedAudioFileException("File did not contain a valid extended M3U syntax");
@@ -108,8 +109,8 @@ public class M3uParser {
         return m3UInfos;
     }
 
-    private List<M3UInfo> parseUrlFromSM3U(String s) throws MalformedURLException, NoURLTagFoundException {
-        List<M3UInfo> m3uInfos = new ArrayList<>();
+    private List<InformationObject> parseUrlFromSM3U(String s) throws MalformedURLException, NoURLTagFoundException {
+        List<InformationObject> m3uInfos = new ArrayList<>();
         String[] splittedLines = s.split("\r\n");
         for (int i = 0; i < splittedLines.length; i++) {
             M3UInfo info = new M3UInfo(new URL(splittedLines[i]), "Nicht verfügbar");

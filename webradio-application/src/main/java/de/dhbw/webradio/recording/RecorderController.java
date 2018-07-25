@@ -7,7 +7,7 @@ import de.dhbw.webradio.logger.Logger;
 import de.dhbw.webradio.m3uparser.FileExtensionParser;
 import de.dhbw.webradio.m3uparser.M3uParser;
 import de.dhbw.webradio.m3uparser.PLSParser;
-import de.dhbw.webradio.models.M3UInfo;
+import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.ScheduledRecord;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.MetainformationReader;
@@ -101,7 +101,7 @@ public class RecorderController {
             M3uParser m3uParser = new M3uParser();
             try {
                 String fileContent = m3uParser.parseFileFromUrlToString(s.getStationURL());
-                List<M3UInfo> m3uInfos = m3uParser.parseUrlFromString(fileContent);
+                List<InformationObject> m3uInfos = m3uParser.parseUrlFromString(fileContent);
                 if (m3uInfos.size() > 0) {
                     return m3uInfos.get(0).getUrl();
                 }
@@ -114,9 +114,9 @@ public class RecorderController {
             }
         } else if (fileExtensionParser.parseFileExtension(s.getStationURL()).equals(FileExtension.PLS)) {
             PLSParser plsParser = new PLSParser();
-            List<String> plsInfos = plsParser.parsePLS(s.getStationURL());
+            List<InformationObject> plsInfos = plsParser.parsePLS(s.getStationURL());
 
-            return new URL(plsInfos.get(0));
+            return plsInfos.get(0).getUrl();
         }
         return new URL("http://notreachable.com");
     }

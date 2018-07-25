@@ -50,7 +50,6 @@ public class RecorderTab extends JPanel {
     }
 
     private void stopRecording() {
-        System.err.println("stopped recording");
         RecorderController.getInstance().getActualRecordNowRecorder().stop();
     }
 

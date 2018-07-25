@@ -1,20 +1,21 @@
 package de.dhbw.webradio.m3uparser;
 
+import de.dhbw.webradio.models.InformationObject;
+import de.dhbw.webradio.models.PLSInfo;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PLSParser {
-    private List<String> plsEntries;
+    private List<InformationObject> plsEntries;
 
     public PLSParser() {
 
     }
 
-    public List<String> parsePLS(URL fileUrl) {
+    public List<InformationObject> parsePLS(URL fileUrl) {
         M3uParser p = new M3uParser();
         plsEntries = new ArrayList<>();
         String fileContent = null;
@@ -31,7 +32,7 @@ public class PLSParser {
                 ) {
             String[] keyValue = s.split("=");
             if (keyValue[0].contains("File")) {
-                plsEntries.add(keyValue[1]);
+                plsEntries.add(new PLSInfo(keyValue[1]));
             }
         }
         return plsEntries;

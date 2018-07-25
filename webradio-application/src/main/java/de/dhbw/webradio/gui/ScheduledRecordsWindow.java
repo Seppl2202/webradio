@@ -20,6 +20,7 @@ public class ScheduledRecordsWindow extends JFrame {
         this.add(add, BorderLayout.SOUTH);
         add.addActionListener(e-> new AddScheduledRecordWindow());
         this.setVisible(true);
+        this.setSize(800,350);
     }
 
     public ScheduledRecordsTable getTable() {

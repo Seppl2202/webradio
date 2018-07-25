@@ -2,6 +2,7 @@ package de.dhbw.webradio.test.radioplayer;
 
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.m3uparser.M3uParser;
+import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.models.Station;
 import de.dhbw.webradio.radioplayer.AACPlayer;
@@ -50,7 +51,7 @@ public class PlayerFactoryTest {
         PlayerFactory p = new PlayerFactory();
         M3uParser parser = new M3uParser();
         String content = parser.parseFileFromUrlToString(s.getStationURL());
-        M3UInfo info = p.getUserSelection(content, parser);
+        InformationObject info = p.getUserSelection(content, parser);
         assertEquals("bigFM DEUTSCHLAND", info.getTitleInfo());
     }
     @Test

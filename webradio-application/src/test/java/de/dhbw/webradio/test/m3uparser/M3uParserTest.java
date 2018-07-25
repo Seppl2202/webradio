@@ -3,6 +3,7 @@ package de.dhbw.webradio.test.m3uparser;
 import de.dhbw.webradio.exceptions.NoURLTagFoundException;
 import de.dhbw.webradio.gui.SelectMultipleItemsDialog;
 import de.dhbw.webradio.m3uparser.M3uParser;
+import de.dhbw.webradio.models.InformationObject;
 import de.dhbw.webradio.models.M3UInfo;
 import de.dhbw.webradio.radioplayer.PlayerFactory;
 import org.junit.Rule;
@@ -45,7 +46,7 @@ public class M3uParserTest {
 
     @Test
     public void parseUrlFromString() {
-        List<M3UInfo> info = new ArrayList<>();
+        List<InformationObject> info = new ArrayList<>();
         try {
             info = m3uParser.parseUrlFromString(m3uParser.parseFileToString(success));
         } catch (IOException e) {
@@ -64,7 +65,7 @@ public class M3uParserTest {
 
     @Test
     public void parseURLFromString() throws IOException, UnsupportedAudioFileException, NoURLTagFoundException {
-        List<M3UInfo> info = new ArrayList<>();
+        List<InformationObject> info = new ArrayList<>();
         expectedException.expect(NoURLTagFoundException.class);
         info = m3uParser.parseUrlFromString(m3uParser.parseFileToString(fail));
     }
@@ -96,7 +97,7 @@ public class M3uParserTest {
             ex.printStackTrace();
         }
 
-        List<M3UInfo> info = new ArrayList<>();
+        List<InformationObject> info = new ArrayList<>();
         try {
             info = m3uParser.parseUrlFromString(s);
         } catch (UnsupportedAudioFileException uafe) {
@@ -114,7 +115,7 @@ public class M3uParserTest {
     public void testMultipleM3uInfo() throws MalformedURLException {
         File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\bigfmWebradio.m3u8");
         String parsedFile = null;
-        List<M3UInfo> info = null;
+        List<InformationObject> info = null;
         try {
             parsedFile = m3uParser.parseFileToString(f);
         } catch (IOException e) {
@@ -144,8 +145,8 @@ public class M3uParserTest {
     public void testMultipleStreamPlayerCreation() {
         File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\testMultiple.m3u");
         String parsedFile = null;
-        List<M3UInfo> info = null;
-        M3UInfo selected = null;
+        List<InformationObject> info = null;
+        InformationObject selected = null;
         try {
             parsedFile = m3uParser.parseFileToString(f);
         } catch (IOException e) {
@@ -177,8 +178,8 @@ public class M3uParserTest {
     public void testSM3UParsing() {
         File f = new File("C:\\repository\\webradio\\webradio-application\\src\\test\\java\\de\\dhbw\\webradio\\test\\testfiles\\youfm_2.m3u");
         String parsedFile = null;
-        List<M3UInfo> info = null;
-        M3UInfo selected = null;
+        List<InformationObject> info = null;
+        InformationObject selected = null;
         try {
             parsedFile = m3uParser.parseFileToString(f);
         } catch (IOException e) {

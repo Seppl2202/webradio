@@ -34,6 +34,7 @@ public class AddScheduledRecordWindow extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setVisible(true);
         this.pack();
+        this.setSize(500,150);
 
     }
 

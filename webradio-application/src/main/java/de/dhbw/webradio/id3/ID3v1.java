@@ -41,7 +41,7 @@ public class ID3v1 implements ID3 {
 
     //!! Hier ist mir im Designdokument leider ein Fehler unterlaufen.
     //Damit das Builder-Pattern korrekt umgesetzt werden kann, muss diese Klasse natürlich einen
-    //KOnstruktor mit allen Paramtern bereitstellen
+    //KOnstruktor mit allen Parametern bereitstellen
     public ID3v1(String title, String artist, String track, String album, String year, int genre, String comment) {
         this.track = track;
         this.artist = artist;
