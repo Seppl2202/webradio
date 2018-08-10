@@ -1,0 +1,24 @@
+2018-07-23 10:45:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "STATION" nicht gefunden
+Table "STATION" not found; SQL statement:
+INSERT INTO STATION(name, url) values(?,?) [42102-197]
+2018-07-23 10:45:41 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "STATION" nicht gefunden
+Table "STATION" not found; SQL statement:
+SELECT * FROM station [42102-197]
+2018-07-23 10:45:41 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "STATION" nicht gefunden
+Table "STATION" not found; SQL statement:
+DELETE FROM STATION WHERE (name=? AND url=?) [42102-197]
+2018-07-23 10:47:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "STATION" nicht gefunden
+Table "STATION" not found; SQL statement:
+INSERT INTO STATION(name, url) values(?,?) [42102-197]
+2018-07-23 10:47:30 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "STATION" nicht gefunden
+Table "STATION" not found; SQL statement:
+SELECT * FROM station [42102-197]
+2018-07-23 10:47:30 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Tabelle "STATION" nicht gefunden
+Table "STATION" not found; SQL statement:
+DELETE FROM STATION WHERE (name=? AND url=?) [42102-197]

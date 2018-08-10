@@ -1,0 +1,47 @@
+#EXTM3U
+#EXTINF:-1,bigFM DEUTSCHLAND
+http://streams.bigfm.de/bigfm-deutschland-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM CHARTS
+http://streams.bigfm.de/bigfm-charts-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM HIP-HOP
+http://streams.bigfm.de/bigfm-hiphop-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM DEUTSCHRAP
+http://streams.bigfm.de/bigfm-deutschrap-128-aac?usid=0-0-H-A-D-30s
+#EXTINF:-1,bigFM US RAP & HIP-HOP
+http://streams.bigfm.de/bigfm-usrap-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM OLDSCHOOL RAP & HIP-HOP
+http://streams.bigfm.de/bigfm-oldschool-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM DANCE
+http://streams.bigfm.de/bigfm-dance-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM MASHUP
+http://streams.bigfm.de/bigfm-mashup-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM SUNSET LOUNGE
+http://streams.bigfm.de/bigfm-sunsetlounge-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM REGGAE VIBEZ
+http://streams.bigfm.de/bigfm-reggaevibes-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM LATIN BEATS
+http://streams.bigfm.de/bigfm-latinbeats-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM GROOVENIGHT (HIP-HOP DJ-MIX)
+http://streams.bigfm.de/bigfm-groovenight-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM URBAN CLUB BEATS (DJ-MIX)
+http://streams.bigfm.de/bigfm-urbanclubbeats-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM EDM & PROGRESSIVE (nitroX DJ-MIX)
+http://streams.bigfm.de/bigfm-nitroxedm-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM DEEP & TECH HOUSE (nitroX DJ-MIX)
+http://streams.bigfm.de/bigfm-nitroxdeep-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM WORLDBEATS
+http://streams.bigfm.de/bigfm-worldbeats-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigSES (TÜRKÇE WEB RADYOSU)
+http://streams.bigfm.de/bigfm-turkey-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigBALKAN
+http://streams.bigfm.de/bigfm-balkan-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigORIENT
+http://streams.bigfm.de/bigfm-orient-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigRUSSIA
+http://217.151.152.244/russlandstream
+#EXTINF:-1,bigFM BADEN WÜRTTEMBERG
+http://streams.bigfm.de/bigfm-bw-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM RHEINLAND-PFALZ
+http://streams.bigfm.de/bigfm-rlp-128-aac?usid=0-0-H-A-D-30
+#EXTINF:-1,bigFM SAARLAND
+http://188.94.98.59:80/stream1

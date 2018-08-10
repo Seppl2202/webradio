@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jaad-0.8.41">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/external/jaad-0.8.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/external/mp3plugin.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
